@@ -1,10 +1,22 @@
-<div>
-  <a routerLink="/"><img src="/src/assets/images/logo.png" alt="Logo"></a>
-  <ul>
-    <li routerLink="/noticias">Noticias</li>
-    <li routerLink="/actividades">Actividades</li>
-    <li routerLink="/escuela">Escuela</li>
-    <li routerLink="/centros-buceo">Centros de buceo</li>
-    <li routerLink="/login">Login</li>
-  </ul>
-</div>
+<header>
+  <div class="cabecera">
+    <div routerLink="/" class="logo enlace">
+      <img
+        src="/assets/images/logo_160x120.png"
+        alt="Logo"
+        class="imagen_logo"
+      />
+      <div class="nombre_logo">
+        <div>Club de Buceo</div>
+        <div>MolaMola</div>
+      </div>
+    </div>
+    <ul class="menu">
+      <li routerLink="/noticias" class="enlace">Noticias</li>
+      <li routerLink="/actividades" class="enlace">Actividades</li>
+      <li routerLink="/escuela" class="enlace">Escuela</li>
+      <li routerLink="/centros-buceo" class="enlace">Centros de buceo</li>
+    </ul>
+    <div routerLink="/login" class="enlace">Login</div>
+  </div>
+</header>

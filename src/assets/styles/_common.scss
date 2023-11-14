@@ -1,0 +1,34 @@
+@import "/src/assets/styles/variables";
+
+body {
+  background-color: $color_blanco;
+  font-family: $fuente_comun;
+}
+
+app-root {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 100vh;
+}
+
+router-outlet + * {
+  flex: 1 0 auto;
+}
+
+
+
+
+%ancho_dispositivo {
+  width: 100%;
+  max-width: $ancho_s;
+  margin: 0 auto;
+
+  @media (min-width: $ancho_s) {
+    max-width: $ancho_l;
+  }
+
+  @media (min-width: $ancho_l) {
+    max-width: $ancho_xl;
+  }
+}

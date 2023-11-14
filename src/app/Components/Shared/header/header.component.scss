@@ -1,0 +1,66 @@
+@import "/src/assets/styles/variables";
+@import "/src/assets/styles/common";
+
+header {
+  background-color: $color_azul_3;
+//  color: $color_blanco;
+  text-align: center;
+}
+
+.cabecera {
+  @extend %ancho_dispositivo;
+
+  display: flex;
+  align-items: center;
+  height: 70px;
+  justify-content: space-between;
+
+  padding: 0 2rem;
+
+  font-family: $fuente_titulo;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.imagen_logo {
+  height: 50px;
+}
+
+.nombre_logo {
+  margin-left: 0.5rem;
+  text-align: center;
+  font-size: 1rem;
+
+  & div:nth-of-type(2) {
+    margin-top: 0.25rem;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  gap: 0 30px;
+  align-items: center;
+}
+
+.enlace {
+  color: $color_blanco;
+  cursor: pointer;
+
+  &:hover {
+    color: $color_amarillo;
+  }
+
+  @media (min-width: $ancho_m) {
+    font-size: 1.2rem;
+  }
+
+  @media (min-width: $ancho_l) {
+    font-size: 1.5rem;
+  }
+}
