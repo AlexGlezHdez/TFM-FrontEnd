@@ -1,6 +1,12 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
 
+:host {
+  width: 100vw;
+  position: fixed;
+  top: 0;
+}
+
 header {
   background-color: $color_azul_3;
 //  color: $color_blanco;

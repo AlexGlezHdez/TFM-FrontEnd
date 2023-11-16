@@ -1,0 +1,45 @@
+@import "/src/assets/styles/variables";
+@import "/src/assets/styles/common";
+
+
+:host {
+  display: flex;
+}
+
+main {
+  display: flex;
+  width: 100%;
+
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 50px;
+
+  font-family: $fuente_titulo;
+  text-align: center;
+  color: $color_blanco;
+
+  background-image: url(/assets/images/portada.webp);
+  background-position: center;
+  background-size: cover;
+  background-color: $color_azul_3;
+
+
+  @media (min-width: $ancho_l) {
+
+  }
+
+
+}
+
+h1 {
+  font-size: 48px;
+  text-transform: uppercase;
+
+  @media (min-width: $ancho_l) {
+
+  }
+}
+
+h2 {
+  font-size: 36px;
+}
