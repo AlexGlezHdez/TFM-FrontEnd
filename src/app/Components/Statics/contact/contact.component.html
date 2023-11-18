@@ -1,1 +1,105 @@
-Formulario de contacto
+<main>
+  <form [formGroup]="msgForm" (ngSubmit)="enviarMsg()">
+    <article class="articulo">
+      <a id="contacto" class="ancla"></a>
+      <h1>Contacta con el club</h1>
+      <p>
+        Si tienes cualquier duda, consulta o quieres contarnos cuáles son tus
+        necesidades para que te ayudemos, no dudes en ponerte en contacto con
+        nosotros:
+      </p>
+      <div class="formulario">
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="nombre"
+            class="dato"
+            [class.dado]="nombre.dirty && nombre.value != ''"
+            required="required"
+          />
+          <label for="nombre" class="etiqueta">Nombre</label>
+
+          <div *ngIf="nombre.errors" class="error">
+            <span
+              style="color: red"
+              *ngIf="nombre.errors && (nombre.touched || nombre.dirty)"
+            >
+              <span *ngIf="nombre.errors['required']"
+                >El nombre es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="email"
+            [formControl]="email"
+            class="dato"
+            [class.dado]="email.dirty && email.value != ''"
+            required="required"
+          />
+          <label for="email" class="etiqueta">E-mail</label>
+
+          <div *ngIf="email.errors" class="error">
+            <span
+              style="color: red"
+              *ngIf="email.errors && (email.touched || email.dirty)"
+            >
+              <span *ngIf="email.errors['required']"
+                >El correo es necesario</span
+              >
+              <div *ngIf="email.errors['pattern']">
+                El correo no tiene el formato adecuado
+              </div>
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="asunto"
+            class="dato"
+            [class.dado]="asunto.dirty && asunto.value != ''"
+            required="required"
+          />
+          <label for="asunto" class="etiqueta">Asunto</label>
+
+          <div *ngIf="asunto.errors" class="error">
+            <span
+              style="color: red"
+              *ngIf="asunto.errors && (asunto.touched || asunto.dirty)"
+            >
+              <span *ngIf="asunto.errors['required']"
+                >El asunto es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <textarea
+            [formControl]="mensaje"
+            class="dato alto"
+            [class.dado]="mensaje.dirty && mensaje.value != ''"
+            required="required"
+          ></textarea>
+          <label for="mensaje" class="etiqueta">Mensaje</label>
+
+          <div *ngIf="mensaje.errors" class="error">
+            <span
+              style="color: red"
+              *ngIf="mensaje.errors && (mensaje.touched || mensaje.dirty)"
+            >
+              <span *ngIf="mensaje.errors['required']"
+                >El mensaje es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!msgForm.valid" class="boton">
+          Enviar
+        </button>
+      </div>
+    </article>
+  </form>
+</main>

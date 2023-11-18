@@ -5,6 +5,7 @@
   width: 100vw;
   position: fixed;
   top: 0;
+  z-index: 1000;
 }
 
 header {
@@ -92,8 +93,10 @@ header {
     color: $color_amarillo;
   }
 
-  &:first-child {
-    margin-top: 9rem;
+  @media (max-width: $ancho_m) {
+    &:first-child {
+      margin-top: 9rem;
+    }
   }
 
   @media (min-width: $ancho_m) {
