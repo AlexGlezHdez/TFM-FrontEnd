@@ -1,12 +1,6 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
 
-:host{
-  margin-top: 70px;
-}
-
-main {
-}
 
 article {
   @extend %ancho_dispositivo;

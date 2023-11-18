@@ -1,5 +1,11 @@
 <header>
   <div class="cabecera">
+    <img
+      src="/assets/images/icono_menu.svg"
+      alt="Menu"
+      class="icono_menu"
+      (click)="menu_desplegado = !menu_desplegado"
+    />
     <div routerLink="/" class="logo enlace">
       <img
         src="/assets/images/logo_160x120.png"
@@ -11,12 +17,17 @@
         <div>MolaMola</div>
       </div>
     </div>
-    <ul class="menu">
+    <ul class="menu" [class.desplegado]="menu_desplegado">
       <li routerLink="/noticias" class="enlace">Noticias</li>
       <li routerLink="/actividades" class="enlace">Actividades</li>
       <li routerLink="/escuela" class="enlace">Escuela</li>
       <li routerLink="/centros-buceo" class="enlace">Centros de buceo</li>
     </ul>
-    <div routerLink="/login" class="enlace">Login</div>
+    <img
+      src="/assets/images/icono_perfil.svg"
+      alt="Login"
+      class="icono_perfil"
+      routerLink="/login"
+    />
   </div>
 </header>

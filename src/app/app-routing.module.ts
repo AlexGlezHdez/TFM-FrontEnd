@@ -99,10 +99,19 @@ const routes: Routes = [
         (m) => m.PrivacyModule
       ),
   },
+  {
+    path: 'hazte-socio',
+    loadChildren: () =>
+      import('./Components/Statics/become-member/become-member.module').then(
+        (m) => m.BecomeMemberModule
+      ),
+  },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

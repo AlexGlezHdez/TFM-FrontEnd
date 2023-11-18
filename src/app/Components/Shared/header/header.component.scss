@@ -21,9 +21,15 @@ header {
   height: 70px;
   justify-content: space-between;
 
-  padding: 0 2rem;
+  padding: 0 1rem;
 
   font-family: $fuente_titulo;
+
+  @media (min-with: $ancho_xs) {
+    padding: 0 2rem;
+  }
+
+
 }
 
 .logo {
@@ -52,6 +58,30 @@ header {
   flex-direction: row;
   gap: 0 30px;
   align-items: center;
+
+  @media (max-width: $ancho_m) {
+    position: absolute;
+    top: $alto_menu;
+    left: 0;
+    background-color: rgba($color_azul_3, .8);
+    text-shadow: 1px 1px $color_azul_2, -1px 1px $color_azul_2, 1px -1px $color_azul_2, -1px -1px $color_azul_2;
+
+    flex-direction: column;
+    gap: 1.5rem 0;
+
+    font-size: 2rem;
+
+    width: 100vw;
+    height: 0;
+    overflow: hidden;
+
+    transition: height 0.5s;
+  }
+
+  &.desplegado {
+    height: calc(100vh - $alto_menu);
+  }
+
 }
 
 .enlace {
@@ -62,6 +92,10 @@ header {
     color: $color_amarillo;
   }
 
+  &:first-child {
+    margin-top: 9rem;
+  }
+
   @media (min-width: $ancho_m) {
     font-size: 1.2rem;
   }
@@ -69,4 +103,19 @@ header {
   @media (min-width: $ancho_l) {
     font-size: 1.5rem;
   }
+}
+
+.icono_menu {
+  height: 1.75rem;
+  cursor: pointer;
+}
+
+.icono_perfil {
+  height: 44px;
+  cursor: pointer;
+
+  @media (min-width: $ancho_l) {
+    height: 50px;
+  }
+
 }

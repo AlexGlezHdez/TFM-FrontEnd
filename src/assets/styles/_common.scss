@@ -14,10 +14,9 @@ app-root {
 
 router-outlet + * {
   flex: 1 0 auto;
+
+  margin-top: $alto_menu;
 }
-
-
-
 
 %ancho_dispositivo {
   width: 100%;
