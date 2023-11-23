@@ -1,0 +1,20 @@
+<main>
+  <article>
+    <h1>{{ actividad.actividad }}</h1>
+    <div class="imagen">
+      <img src="/assets/images/activities/{{ actividad.imagen }}" alt="" />
+    </div>
+    <div class="datos">
+      <span>Fecha {{ actividad.fecha_actividad }}</span> -
+      <span>
+        {{
+          actividad.plazas_disponibles > 0 ? "Hay plazas" : "No hay plazas"
+        }}</span
+      >
+    </div>
+    <div class="contenido">{{ actividad.descripcion }}</div>
+    <div class="contenido">{{ actividad.descripcion_extra }}</div>
+
+    <a routerLink="/noticias">Volver a la página de actividades</a>
+  </article>
+</main>

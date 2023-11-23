@@ -120,20 +120,19 @@ p {
   border-radius: 6px;
   text-transform: uppercase;
   outline: none;
-  background-color: $color_azul_4;
+  background-color: $color_azul_3;
+  color: white;
 
   align-self: center;
   // margin-top: 1rem;
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     background-color: $color_azul_2;
-    color: white;
     cursor: pointer;
   }
 
   &:active:not(:disabled) {
     background-color: $color_gris;
-    color: white;
   }
 
   &:disabled {

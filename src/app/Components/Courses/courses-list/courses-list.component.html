@@ -1,1 +1,20 @@
-Listado de los cursos impartidos por el club
+<main>
+  <article>
+    <h1>Cursos del club</h1>
+
+    <div
+      *ngFor="let curso of cursos"
+      (click)="leerNoticia(curso.idCurso)"
+      class="curso"
+    >
+      <div class="titulo">{{ curso.curso }}</div>
+      <div class="imagen">
+        <img src="/assets/images/courses/{{ curso.imagen }}" alt="" />
+      </div>
+      <div class="descripcion">{{ curso.descripcion }}</div>
+      <div class="datos">
+        <span>Comienzo: {{ curso.fecha_curso }}</span>
+      </div>
+    </div>
+  </article>
+</main>

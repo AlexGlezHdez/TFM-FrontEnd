@@ -1,0 +1,34 @@
+[
+  {
+    "idCurso": 1,
+    "curso": "Curso Open Water Diver",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "curso-1.webp",
+    "fecha_curso": "01-01-2020"
+  },
+  {
+    "idCurso": 2,
+    "curso": "Curso de buceo con Nitrox",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "curso-1.webp",
+    "fecha_curso": "01-02-2020"
+  },
+  {
+    "idCurso": 3,
+    "curso": "Curso Advanced Diver",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "curso-1.webp",
+    "fecha_curso": "01-03-2020"
+  },
+  {
+    "idCurso": 4,
+    "curso": "Curso Dive Master",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "curso-1.webp",
+    "fecha_curso": "01-04-2020"
+  }
+]

@@ -17,11 +17,25 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'noticia',
+    loadChildren: () =>
+      import('./Components/News/new-detail/new-detail.module').then(
+        (m) => m.NewDetailModule
+      ),
+  },
+  {
     path: 'actividades',
     loadChildren: () =>
       import(
         './Components/Activities/activities-list/activities-list.module'
       ).then((m) => m.ActivitiesListModule),
+  },
+  {
+    path: 'actividad',
+    loadChildren: () =>
+      import(
+        './Components/Activities/activity-detail/activity-detail.module'
+      ).then((m) => m.ActivityDetailModule),
   },
   {
     path: 'escuela',

@@ -1,0 +1,15 @@
+<main>
+  <article>
+    <h1>{{ noticia.titulo }}</h1>
+    <div class="imagen">
+      <img src="/assets/images/news/{{ noticia.imagen }}" alt="" />
+    </div>
+    <div class="datos">
+      <span>Por {{ noticia.nombreAutor }}</span> -
+      <span> {{ noticia.fecha_publicacion }}</span>
+    </div>
+    <div class="contenido">{{ noticia.descripcion }}</div>
+
+    <a routerLink="/noticias">Volver a la página de noticias</a>
+  </article>
+</main>

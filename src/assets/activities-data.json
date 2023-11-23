@@ -1,0 +1,38 @@
+[
+  {
+    "idActividad": 1,
+    "actividad": "Paseo en bici",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "actividad-1.webp",
+    "fecha_actividad": "01-01-2020",
+    "plazas_disponibles": 10
+  },
+  {
+    "idActividad": 2,
+    "actividad": "Ruta de montaña",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "actividad-1.webp",
+    "fecha_actividad": "01-02-2020",
+    "plazas_disponibles": 0
+  },
+  {
+    "idActividad": 3,
+    "actividad": "Sky en los Alpes",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "actividad-1.webp",
+    "fecha_actividad": "01-03-2020",
+    "plazas_disponibles": 5
+  },
+  {
+    "idActividad": 4,
+    "actividad": "Cabalgata de los Reyes Magos",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "descripcion_extra": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "actividad-1.webp",
+    "fecha_actividad": "01-04-2020",
+    "plazas_disponibles": 10
+  }
+]

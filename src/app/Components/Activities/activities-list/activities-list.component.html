@@ -1,1 +1,25 @@
-Listado de actividades del club
+<main>
+  <article>
+    <h1>Actividades del Club</h1>
+
+    <div
+      *ngFor="let actividad of actividades"
+      (click)="leerActividad(actividad.idActividad)"
+      class="actividad"
+    >
+      <div class="titulo">{{ actividad.actividad }}</div>
+      <div class="imagen">
+        <img src="/assets/images/activities/{{ actividad.imagen }}" alt="" />
+      </div>
+      <div class="descripcion">{{ actividad.descripcion }}</div>
+      <div class="datos">
+        <span>Fecha: {{ actividad.fecha_actividad }}</span> -
+        <span>
+          {{
+            actividad.plazas_disponibles > 0 ? "Hay plazas" : "No hay plazas"
+          }}</span
+        >
+      </div>
+    </div>
+  </article>
+</main>

@@ -26,7 +26,7 @@ header {
 
   font-family: $fuente_titulo;
 
-  @media (min-with: $ancho_xs) {
+  @media (min-width: $ancho_xs) {
     padding: 0 2rem;
   }
 

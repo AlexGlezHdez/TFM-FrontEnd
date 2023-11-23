@@ -1,0 +1,52 @@
+[
+  {
+    "idNoticia": 1,
+    "titulo": "Primera noticia",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "noticia-1.webp",
+    "idAutor": 1,
+    "nombreAutor": "Pepe Potamo",
+    "fecha_publicacion": "01-01-2020",
+    "categorias": ["cat-1"]
+  },
+  {
+    "idNoticia": 2,
+    "titulo": "Segunda noticia",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "noticia-1.webp",
+    "idAutor": 1,
+    "nombreAutor": "Pepe Potamo",
+    "fecha_publicacion": "03-05-2020",
+    "categorias": ["cat-2"]
+  },
+  {
+    "idNoticia": 3,
+    "titulo": "Tercera noticia",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "noticia-1.webp",
+    "idAutor": 2,
+    "nombreAutor": "Luisa Pientisima",
+    "fecha_publicacion": "01-11-2021",
+    "categorias": ["cat-1"]
+  },
+  {
+    "idNoticia": 4,
+    "titulo": "Cuarta noticia",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "noticia-1.webp",
+    "idAutor": 3,
+    "nombreAutor": "Teo Dulfo",
+    "fecha_publicacion": "06-08-2022",
+    "categorias": ["cat-3"]
+  },
+  {
+    "idNoticia": 5,
+    "titulo": "Quinta noticia",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ornare viverra laoreet. Aliquam euismod velit enim, at faucibus elit tincidunt nec. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Ut et augue sed justo imperdiet viverra a et mi. Aliquam ultricies vel sem nec cursus. Proin arcu ex, egestas a varius in, tempus quis elit. Vivamus libero enim, imperdiet aliquet pharetra at, posuere posuere risus. Curabitur tellus lacus, iaculis a aliquet eget, luctus id ante.",
+    "imagen": "noticia-1.webp",
+    "idAutor": 2,
+    "nombreAutor": "Luisa Pientisima",
+    "fecha_publicacion": "20-11-2023",
+    "categorias": ["cat-1", "cat-4"]
+  }
+]

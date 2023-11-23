@@ -1,1 +1,21 @@
-Listado de noticias (¿filtrable?)
+<main>
+  <article>
+    <h1>Noticias</h1>
+
+    <div
+      *ngFor="let noticia of noticias"
+      (click)="leerNoticia(noticia.idNoticia)"
+      class="noticia"
+    >
+      <div class="titulo">{{ noticia.titulo }}</div>
+      <div class="imagen">
+        <img src="/assets/images/news/{{ noticia.imagen }}" alt="" />
+      </div>
+      <div class="descripcion">{{ noticia.descripcion }}</div>
+      <div class="datos">
+        <span>Por {{ noticia.nombreAutor }}</span> -
+        <span> {{ noticia.fecha_publicacion }}</span>
+      </div>
+    </div>
+  </article>
+</main>
