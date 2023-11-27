@@ -24,14 +24,14 @@
       <li routerLink="/centros-buceo" class="enlace">Centros de buceo</li>
     </ul>
     <img
-      *ngIf="!isLoggedIn_2"
+      *ngIf="!isLoggedIn"
       src="/assets/images/icono_perfill.svg"
       alt="Login"
       class="icono_perfil"
       routerLink="/login"
     />
     <img
-      *ngIf="isLoggedIn_2"
+      *ngIf="isLoggedIn"
       src="/assets/images/icono_perfil.svg"
       alt="Perfil de usuario"
       class="icono_perfil"

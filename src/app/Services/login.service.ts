@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class LoggedService {
+export class LoginService {
   loggedInManagement: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );

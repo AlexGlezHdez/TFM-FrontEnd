@@ -9,8 +9,7 @@ import { Router } from '@angular/router';
 import { AuthDTO } from 'src/app/Models/auth.dto';
 import { AuthService } from 'src/app/Services/auth.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
-//import { SharedService } from 'src/app/Services/shared.service';
-import { LoggedService } from 'src/app/Services/login.service';
+import { LoginService } from 'src/app/Services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -26,10 +25,9 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: UntypedFormBuilder,
     private authService: AuthService,
-    //    private sharedService: SharedService,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private loginService: LoggedService
+    private loginService: LoginService
   ) {
     this.loginUser = new AuthDTO('', '', '', '');
 
