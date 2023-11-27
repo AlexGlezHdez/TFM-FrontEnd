@@ -38,6 +38,13 @@ const routes: Routes = [
       ).then((m) => m.ActivityDetailModule),
   },
   {
+    path: 'escuela/curso',
+    loadChildren: () =>
+      import('./Components/Courses/course-detail/course-detail.module').then(
+        (m) => m.CourseDetailModule
+      ),
+  },
+  {
     path: 'escuela',
     loadChildren: () =>
       import('./Components/Courses/courses-list/courses-list.module').then(

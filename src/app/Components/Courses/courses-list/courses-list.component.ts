@@ -22,7 +22,7 @@ export class CoursesListComponent {
     //        .catch((error) => this.sharedService.errorLog(error.error));
   }
 
-  leerNoticia(idCurso: number) {
-    this.router.navigateByUrl('/curso/' + idCurso);
+  verCurso(idCurso: number) {
+    this.router.navigateByUrl('/escuela/curso/' + idCurso);
   }
 }

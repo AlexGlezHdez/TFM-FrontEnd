@@ -1,0 +1,12 @@
+<main>
+  <article>
+    <h1>Menú de usuario</h1>
+    <ul>
+      <li routerLink="/miembros/datos">Datos personales</li>
+      <li routerLink="/miembros/actividades">Historial de actividades</li>
+      <li routerLink="/miembros/contrasena">Cambio de contraseña</li>
+      <li (click)="logout()">Cerrar sesión</li>
+    </ul>
+  </article>
+  <app-admin-menu></app-admin-menu>
+</main>

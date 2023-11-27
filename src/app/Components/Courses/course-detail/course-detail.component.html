@@ -1,0 +1,15 @@
+<main>
+  <article>
+    <h1>{{ curso.curso }}</h1>
+    <div class="imagen">
+      <img src="/assets/images/courses/{{ curso.imagen }}" alt="" />
+    </div>
+    <div class="datos">
+      <span>Fecha {{ curso.fecha_curso }}</span>
+    </div>
+    <div class="contenido">{{ curso.descripcion }}</div>
+    <div class="contenido">{{ curso.descripcion_extra }}</div>
+
+    <a routerLink="/escuela">Volver a la página de actividades</a>
+  </article>
+</main>
