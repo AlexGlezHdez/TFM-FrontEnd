@@ -1,1 +1,23 @@
-Mapa de los centros de buceo
+<main>
+  <h1>Mapa de los centros de buceo</h1>
+  <!-- setting height and width respectively,
+  and calling our three functions -->
+  <article>
+    <google-map
+      height="400px"
+      width="100%"
+      [options]="mapOptions"
+      (mapMousemove)="move($event)"
+    >
+      <map-marker
+        *ngFor="let markerPosition of markers"
+        [position]="markerPosition.position"
+        [options]="markerOptions"
+      ></map-marker>
+    </google-map>
+  </article>
+
+  <!-- displaying real-time location -->
+  <div>Latitude: {{ display?.lat }}</div>
+  <div>Longitude: {{ display?.lng }}</div>
+</main>
