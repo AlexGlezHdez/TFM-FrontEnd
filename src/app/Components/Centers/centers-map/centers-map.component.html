@@ -4,17 +4,36 @@
   and calling our three functions -->
   <article>
     <google-map
+      #myMap="googleMap"
       height="400px"
       width="100%"
+      [zoom]="mapZoom"
       [options]="mapOptions"
       (mapMousemove)="move($event)"
     >
       <map-marker
-        *ngFor="let markerPosition of markers"
-        [position]="markerPosition.position"
+        *ngFor="let centro of centros"
+        [position]="centro.position"
         [options]="markerOptions"
-      ></map-marker>
+        [label]="centro.centro"
+        [title]="centro.direccion"
+      >
+      </map-marker>
     </google-map>
+
+    <div>
+      <div
+        *ngFor="let centro of centros"
+        (click)="centrarEnCentroBuceo(centro.position)"
+      >
+        <div>{{ centro.centro }}</div>
+        <div>{{ centro.direccion }}</div>
+        <div>{{ centro.email }}</div>
+        <div>{{ centro.telefono }}</div>
+        <div>{{ centro.esAccesible }}</div>
+        <div>{{ centro.imagen }}</div>
+      </div>
+    </div>
   </article>
 
   <!-- displaying real-time location -->

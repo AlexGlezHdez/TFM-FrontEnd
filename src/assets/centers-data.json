@@ -1,0 +1,67 @@
+[
+  {
+    "idCentro": 1,
+    "centro": "Centro de buceo Denia",
+    "direccion": "Direccion 1",
+    "imagen": "logo-centro-1.png",
+    "email": "info@centro-1.com",
+    "telefono": "678 954 321",
+    "position": {
+      "lat": 40.416775,
+      "lng": -3.70379
+    },
+    "esAccesible": true
+  },
+  {
+    "idCentro": 2,
+    "centro": "Centro de buceo Xabea",
+    "direccion": "Direccion 2",
+    "imagen": "logo-centro-1.png",
+    "email": "info@centro-2.com",
+    "telefono": "678 954 322",
+    "position": {
+      "lat": 40.916775,
+      "lng": -3.30379
+    },
+    "esAccesible": true
+  },
+  {
+    "idCentro": 3,
+    "centro": "Centro de buceo Calabardina",
+    "direccion": "Direccion 3",
+    "imagen": "logo-centro-1.png",
+    "email": "info@centro-3.com",
+    "telefono": "678 954 323",
+    "position": {
+      "lat": 39.916775,
+      "lng": -3.80379
+    },
+    "esAccesible": true
+  },
+  {
+    "idCentro": 4,
+    "centro": "Centro de buceo La Manga",
+    "direccion": "Direccion 4",
+    "imagen": "logo-centro-1.png",
+    "email": "info@centro-4.com",
+    "telefono": "678 954 324",
+    "position": {
+      "lat": 40.316775,
+      "lng": -3.50379
+    },
+    "esAccesible": true
+  },
+  {
+    "idCentro": 5,
+    "centro": "Centro de buceo Cies",
+    "direccion": "Direccion 5",
+    "imagen": "logo-centro-1.png",
+    "email": "info@centro-5.com",
+    "telefono": "678 954 325",
+    "position": {
+      "lat": 40.816775,
+      "lng": -3.90379
+    },
+    "esAccesible": true
+  }
+]
