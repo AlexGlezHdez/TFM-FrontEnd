@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -16,7 +16,7 @@ import { LoginService } from 'src/app/Services/login.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   loginUser: AuthDTO;
   email: UntypedFormControl;
   password: UntypedFormControl;
@@ -47,8 +47,6 @@ export class LoginComponent implements OnInit {
       password: this.password,
     });
   }
-
-  ngOnInit(): void {}
 
   async login(): Promise<void> {
     this.loginUser.email = this.email.value;

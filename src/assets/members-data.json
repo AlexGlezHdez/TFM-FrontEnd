@@ -1,0 +1,26 @@
+[
+  {
+    "idUsuario": 1,
+    "nombre": "Pepito de los Palotes",
+    "direccion": "Potomac 43",
+    "codigoPostal": "08080",
+    "ciudad": "Barcelona",
+    "telefono": "987654321"
+  },
+  {
+    "idUsuario": 2,
+    "nombre": "Sara Connor",
+    "direccion": "c/ del Día del Juicio Final",
+    "codigoPostal": "T1000",
+    "ciudad": "Los Angeles",
+    "telefono": "800100800"
+  },
+  {
+    "idUsuario": 3,
+    "nombre": "Romualdo Constantinoplo",
+    "direccion": "Unacualquiera s/n",
+    "codigoPostal": "11111",
+    "ciudad": "Ciudad sin Ley",
+    "telefono": "123456789"
+  }
+]

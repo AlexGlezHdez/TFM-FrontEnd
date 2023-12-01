@@ -26,7 +26,7 @@ header {
 
   font-family: $fuente_titulo;
 
-  @media (min-width: $ancho_xs) {
+  @media (min-width: $ancho_l) {
     padding: 0 2rem;
   }
 
@@ -39,7 +39,7 @@ header {
 }
 
 .imagen_logo {
-  height: 50px;
+  width: 65px;
 }
 
 .nombre_logo {
@@ -111,14 +111,22 @@ header {
 .icono_menu {
   height: 1.75rem;
   cursor: pointer;
+
+  @media (min-width: $ancho_m) {
+    display: none;
+  }
+
+
 }
 
 .icono_perfil {
   height: 44px;
+  width: 44px;
   cursor: pointer;
 
   @media (min-width: $ancho_l) {
     height: 50px;
+    width: 50px;
   }
 
 }

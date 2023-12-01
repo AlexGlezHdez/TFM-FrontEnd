@@ -11,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'datos',
+    data: { idM: '2' },
     loadChildren: () =>
       import('./member-info/member-info.module').then(
         (m) => m.MemberInfoModule

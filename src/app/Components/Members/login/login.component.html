@@ -1,44 +1,51 @@
-<div style="margin-left: auto; margin-right: auto">
-  <p id="loginFeedback"></p>
-</div>
-<div>
-  <h1>Login</h1>
+<main>
   <form [formGroup]="loginForm" (ngSubmit)="login()">
-    <div>
-      <label for="email">Email: </label>
-      <input type="email" [formControl]="email" />
-    </div>
+    <article>
+      <h1>Iniciar sesión</h1>
+      <div class="formulario">
+        <div class="campo ancho">
+          <input
+            type="email"
+            [formControl]="email"
+            class="dato"
+            [class.dado]="email.value != ''"
+          />
+          <label class="etiqueta" for="email">Email: </label>
 
-    <div>
-      <label for="password">Password: </label>
-      <input type="password" [formControl]="password" />
-    </div>
+          <div
+            *ngIf="email.errors && (email.touched || email.dirty)"
+            class="error"
+          >
+            <div *ngIf="email.errors['required']">El correo es necesario</div>
+            <div *ngIf="email.errors['pattern']">
+              El correo no tiene el formato adecuado
+            </div>
+          </div>
+        </div>
 
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+        <div class="campo ancho">
+          <input
+            type="password"
+            [formControl]="password"
+            class="dato"
+            [class.dado]="password.value != ''"
+          />
+          <label class="etiqueta" for="password">Password: </label>
+
+          <div
+            *ngIf="password.errors && (password.touched || password.dirty)"
+            class="error"
+          >
+            <span *ngIf="password.errors['required']"
+              >La contraseña es obligatoria</span
+            >
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!loginForm.valid" class="boton">
+          Iniciar sesión
+        </button>
+      </div>
+    </article>
   </form>
-</div>
-
-<div *ngIf="email.errors">
-  <span
-    style="color: red"
-    *ngIf="email.errors && (email.touched || email.dirty)"
-  >
-    <span *ngIf="email.errors['required']">Email is required</span>
-    <div *ngIf="email.errors['pattern']">Email not a valid format.</div>
-  </span>
-</div>
-
-<div *ngIf="password.errors">
-  <span
-    style="color: red"
-    *ngIf="password.errors && (password.touched || password.dirty)"
-  >
-    <span *ngIf="password.errors['required']">Password is required</span>
-    <span *ngIf="password.errors['minlength']"
-      >Password must be greater tha 8 characters</span
-    >
-    <span *ngIf="password.errors['maxlength']"
-      >Password can be max 16 characters long</span
-    >
-  </span>
-</div>
+</main>

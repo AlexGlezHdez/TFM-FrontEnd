@@ -10,7 +10,7 @@ import { Location } from '@angular/common';
   templateUrl: './new-detail.component.html',
   styleUrls: ['./new-detail.component.scss'],
 })
-export class NewDetailComponent {
+export class NewDetailComponent implements OnInit {
   noticia: NewDTO;
 
   private idNoticia: string;
