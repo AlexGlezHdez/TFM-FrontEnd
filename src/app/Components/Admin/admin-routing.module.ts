@@ -17,8 +17,15 @@ const routes: Routes = [
   {
     path: 'noticias',
     loadChildren: () =>
-      import('./news-manage/news-manage.module').then(
+      import('../News/news-manage/news-manage.module').then(
         (m) => m.NewsManageModule
+      ),
+  },
+  {
+    path: 'noticia',
+    loadChildren: () =>
+      import('../News/new-update/new-update.module').then(
+        (m) => m.NewUpdateModule
       ),
   },
   {

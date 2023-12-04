@@ -1,0 +1,23 @@
+<main>
+  <article>
+    <h1>Gestión de noticias</h1>
+
+    <div class="campo corto">
+      <input type="text" class="dato" id="tituloNoticia" />
+      <label for="tituloNoticia" class="etiqueta"
+        >Buscar noticia por título</label
+      >
+    </div>
+
+    <button routerLink="../noticia" class="boton">Nueva noticia</button>
+
+    <div *ngFor="let noticia of noticias" class="noticia">
+      <app-list-element
+        [id]="noticia.idNoticia"
+        [titulo]="noticia.titulo"
+        [updateFunction]="actualizarNoticia"
+        [deleteFunction]="borrarNoticia"
+      ></app-list-element>
+    </div>
+  </article>
+</main>

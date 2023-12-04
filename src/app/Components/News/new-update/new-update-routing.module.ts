@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { NewsListComponent } from './news-list.component';
-import { NewUpdateComponent } from '../new-update/new-update.component';
+import { NewUpdateComponent } from './new-update.component';
 const routes: Routes = [
   {
     path: '',
-    component: NewsListComponent,
+    component: NewUpdateComponent,
+  },
+  {
+    path: ':id',
+    component: NewUpdateComponent,
   },
 ];
 
@@ -14,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class NewsListRoutingModule {}
+export class NewUpdateRoutingModule {}

@@ -1,1 +1,37 @@
-<p>member-activities works!</p>
+<main>
+  <article>
+    <h1>Historial de Actividades</h1>
+
+    <p>
+      Aquí podrás encontrar el listado de las actividades en las que te has
+      inscrito y borrarte de aquellas en las que ya no quieras participar.
+    </p>
+
+    <div class="listado-actividades">
+      <div *ngFor="let actividad of actividades" class="actividad">
+        <div
+          class="imagen"
+          [routerLink]="['/actividad/', actividad.idActividad]"
+        >
+          <img src="/assets/images/activities/{{ actividad.imagen }}" alt="" />
+        </div>
+        <div
+          class="titulo"
+          [routerLink]="['/actividad/', actividad.idActividad]"
+        >
+          {{ actividad.actividad }}
+        </div>
+        <div class="datos">Fecha: {{ actividad.fecha_actividad }}</div>
+        <div class="">
+          <button
+            class=""
+            *ngIf="!actividadPasada(actividad.fecha_actividad)"
+            (click)="borrarDeActividad(actividad.idActividad)"
+          >
+            Borrarse
+          </button>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>

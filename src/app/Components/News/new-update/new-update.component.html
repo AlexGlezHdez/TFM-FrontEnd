@@ -1,0 +1,115 @@
+<main>
+  <form [formGroup]="newForm" (ngSubmit)="enviarDatos()">
+    <article class="articulo">
+      <h1 *ngIf="!idNoticia">Nueva noticia</h1>
+      <h1 *ngIf="idNoticia">Actualizar noticia</h1>
+      <div class="formulario">
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="titulo"
+            class="dato"
+            [class.dado]="titulo.value != ''"
+            required="required"
+          />
+          <label for="titulo" class="etiqueta">Título</label>
+
+          <div *ngIf="titulo.errors" class="error">
+            <span *ngIf="titulo.errors && (titulo.touched || titulo.dirty)">
+              <span *ngIf="titulo.errors['required']"
+                >El nombre es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="idAutor"
+            class="dato"
+            [class.dado]="idAutor.value != ''"
+            required="required"
+          />
+          <label for="idAutor" class="etiqueta">Autor</label>
+
+          <div *ngIf="idAutor.errors" class="error">
+            <span *ngIf="idAutor.errors && (idAutor.touched || idAutor.dirty)">
+              <span *ngIf="idAutor.errors['required']"
+                >La dirección es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="fecha_publicacion"
+            class="dato"
+            [class.dado]="fecha_publicacion.value != ''"
+            required="required"
+          />
+          <label for="fecha_publicacion" class="etiqueta"
+            >Fecha de publicación</label
+          >
+
+          <div *ngIf="fecha_publicacion.errors" class="error">
+            <span
+              *ngIf="
+                fecha_publicacion.errors &&
+                (fecha_publicacion.touched || fecha_publicacion.dirty)
+              "
+            >
+              <span *ngIf="fecha_publicacion.errors['required']"
+                >El codigo postal es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="imagen"
+            class="dato"
+            [class.dado]="imagen.value != ''"
+            required="required"
+          />
+          <label for="imagen" class="etiqueta">Imagen</label>
+
+          <div *ngIf="imagen.errors" class="error">
+            <span *ngIf="imagen.errors && (imagen.touched || imagen.dirty)">
+              <span *ngIf="imagen.errors['required']"
+                >La imagen es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="descripcion"
+            class="dato"
+            [class.dado]="descripcion.value != ''"
+            required="required"
+          />
+          <label for="descripcion" class="etiqueta">Cuerpo de la noticia</label>
+
+          <div *ngIf="descripcion.errors" class="error">
+            <span
+              *ngIf="
+                descripcion.errors && (descripcion.touched || descripcion.dirty)
+              "
+            >
+              <span *ngIf="descripcion.errors['required']"
+                >El cuerpo de la noticia es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!newForm.valid" class="boton">
+          Actualizar
+        </button>
+      </div>
+    </article>
+  </form>
+</main>

@@ -25,4 +25,16 @@ export class NewService {
   getNew(idNoticia: string): Promise<NewDTO[]> {
     return firstValueFrom(this.http.get<NewDTO[]>(this.mockupNewsDataFile));
   }
+
+  updateNew(noticia: NewDTO): Promise<NewDTO[]> {
+    return firstValueFrom(this.http.get<NewDTO[]>(this.mockupNewsDataFile));
+  }
+
+  createNew(noticia: NewDTO): Promise<NewDTO[]> {
+    return firstValueFrom(this.http.get<NewDTO[]>(this.mockupNewsDataFile));
+  }
+
+  deleteNew(idNoticia: number): Promise<NewDTO[]> {
+    return firstValueFrom(this.http.get<NewDTO[]>(this.mockupNewsDataFile));
+  }
 }
