@@ -53,8 +53,8 @@ export class LoginComponent {
     this.loginUser.password = this.password.value;
     try {
       const authToken = await this.authService.login(this.loginUser);
-      this.loginUser.user_id = authToken.user_id;
-      this.loginUser.access_token = authToken.access_token;
+      this.loginUser.user_id = authToken.id;
+      this.loginUser.access_token = authToken.token;
       // save token to localstorage for next requests
       this.localStorageService.set('user_id', this.loginUser.user_id);
       this.localStorageService.set('access_token', this.loginUser.access_token);

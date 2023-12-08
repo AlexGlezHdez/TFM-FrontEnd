@@ -7,16 +7,17 @@ import { LocalStorageService } from './local-storage.service';
 import { firstValueFrom } from 'rxjs';
 
 interface AuthToken {
-  user_id: string;
-  access_token: string;
+  id: string;
+  token: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private urlBlogUocApi: string;
-  private controller: string;
+  private urlApi: string;
+  private loginController: string;
+  private logoutController: string;
 
   private mockupNewsDataFile: string = '/assets/login-data.json';
 
@@ -24,21 +25,23 @@ export class AuthService {
     private http: HttpClient,
     private localStorageService: LocalStorageService
   ) {
-    this.controller = 'auth';
-    this.urlBlogUocApi = 'http://localhost:3000/' + this.controller;
+    this.urlApi = 'http://localhost:8000/api/';
+    this.loginController = 'login';
+    this.logoutController = 'logout';
   }
 
   login(auth: AuthDTO): Promise<AuthToken> {
-    //    return firstValueFrom(this.http.post<AuthToken>(this.urlBlogUocApi, auth));
     return firstValueFrom(
-      //this.http.post<AuthToken>(this.mockupNewsDataFile, auth)
-      this.http.get<AuthToken>(this.mockupNewsDataFile)
+      this.http.post<AuthToken>(this.urlApi + this.loginController, auth)
     );
   }
 
   logout(): void {
     this.localStorageService.remove('access_token');
     this.localStorageService.remove('user_id');
+    firstValueFrom(
+      this.http.post<AuthToken>(this.urlApi + this.logoutController, '')
+    );
   }
 
   isLoggedIn(): boolean {

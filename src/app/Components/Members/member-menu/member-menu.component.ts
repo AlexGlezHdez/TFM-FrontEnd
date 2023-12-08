@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/Services/auth.service';
-import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { LoginService } from 'src/app/Services/login.service';
 
 @Component({
@@ -14,13 +13,11 @@ export class MemberMenuComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private localStorageService: LocalStorageService,
     private loginService: LoginService
   ) {}
 
   logout(): void {
-    this.localStorageService.remove('user_id');
-    this.localStorageService.remove('access_token');
+    this.authService.logout();
     this.loginService.loggedInManagement.next(false);
     this.router.navigateByUrl('/');
   }
