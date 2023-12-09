@@ -24,7 +24,7 @@ h1 {
     "imagen"
     "titulo"
     "datos"
-    "descripcion";
+    "contenido";
   gap: 0.5rem;
 
   &:not(:first-of-type) {
@@ -37,7 +37,7 @@ h1 {
     grid-template-areas:
       "imagen titulo"
       "imagen datos"
-      "imagen descripcion";
+      "imagen contenido";
   }
 }
 
@@ -51,8 +51,8 @@ h1 {
   grid-area: datos;
   font-size: 0.875rem;
 }
-.descripcion {
-  grid-area: descripcion;
+.contenido {
+  grid-area: contenido;
 
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './Guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -67,7 +68,7 @@ const routes: Routes = [
   },
 
   //
-  // Enrutamiento a las paginas de los miembros
+  // Enrutamiento a las paginas de los miembros, con guarda de autenticación
   //
 
   {
@@ -76,10 +77,11 @@ const routes: Routes = [
       import('./Components/Members/members.module').then(
         (m) => m.MembersModule
       ),
+    canActivate: [AuthGuard],
   },
 
   //
-  // Enrutamiento a las paginas de administracion
+  // Enrutamiento a las paginas de administracion, con guarda de autenticación de administrador
   //
 
   {

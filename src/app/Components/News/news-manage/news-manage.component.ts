@@ -28,7 +28,7 @@ export class NewsManageComponent {
 
   private async cargarNoticias(): Promise<void> {
     await this.newService.getNews().then((noticias) => {
-      this.noticias = noticias;
+      this.noticias = noticias.data;
     });
     //        .catch((error) => this.sharedService.errorLog(error.error));
   }

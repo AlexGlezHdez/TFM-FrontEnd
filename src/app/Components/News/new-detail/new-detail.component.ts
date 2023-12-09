@@ -27,7 +27,7 @@ export class NewDetailComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.newService.getNew(this.idNoticia).then((noticia) => {
-      this.noticia = noticia[0];
+      this.noticia = noticia.data;
     });
   }
 

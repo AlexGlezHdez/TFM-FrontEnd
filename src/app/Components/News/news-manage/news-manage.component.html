@@ -13,7 +13,7 @@
 
     <div *ngFor="let noticia of noticias" class="noticia">
       <app-list-element
-        [id]="noticia.idNoticia"
+        [id]="noticia.id"
         [titulo]="noticia.titulo"
         [updateFunction]="actualizarNoticia"
         [deleteFunction]="borrarNoticia"

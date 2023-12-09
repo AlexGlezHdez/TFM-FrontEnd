@@ -22,8 +22,8 @@ export class NewUpdateComponent {
   titulo: UntypedFormControl;
   imagen: UntypedFormControl;
   idAutor: UntypedFormControl;
-  fecha_publicacion: UntypedFormControl;
-  descripcion: UntypedFormControl;
+  fechaPublicacion: UntypedFormControl;
+  contenido: UntypedFormControl;
   newForm: UntypedFormGroup;
 
   constructor(
@@ -35,16 +35,16 @@ export class NewUpdateComponent {
     this.idNoticia = this.activatedRoute.snapshot.paramMap.get('id') || '';
 
     this.titulo = new UntypedFormControl('', [Validators.required]);
-    this.descripcion = new UntypedFormControl('', [Validators.required]);
+    this.contenido = new UntypedFormControl('', [Validators.required]);
     this.idAutor = new UntypedFormControl('', [Validators.required]);
-    this.fecha_publicacion = new UntypedFormControl('', [Validators.required]);
+    this.fechaPublicacion = new UntypedFormControl('', [Validators.required]);
     this.imagen = new UntypedFormControl('', [Validators.required]);
 
     this.newForm = this.formBuilder.group({
       titulo: this.titulo,
-      descripcion: this.descripcion,
+      contenido: this.contenido,
       idAutor: this.idAutor,
-      fecha_publicacion: this.fecha_publicacion,
+      fechaPublicacion: this.fechaPublicacion,
       imagen: this.imagen,
     });
   }
@@ -52,11 +52,11 @@ export class NewUpdateComponent {
   async ngOnInit(): Promise<void> {
     if (this.idNoticia) {
       await this.newService.getNew(this.idNoticia).then((noticia) => {
-        this.noticia = noticia[0];
+        this.noticia = noticia.data;
         this.titulo.setValue(this.noticia.titulo);
-        this.descripcion.setValue(this.noticia.descripcion);
-        this.idAutor.setValue(this.noticia.idAutor);
-        this.fecha_publicacion.setValue(this.noticia.fecha_publicacion);
+        this.contenido.setValue(this.noticia.contenido);
+        this.idAutor.setValue(this.noticia.autor.id);
+        this.fechaPublicacion.setValue(this.noticia.fechaPublicacion);
         this.imagen.setValue(this.noticia.imagen);
       });
     } else {
@@ -66,17 +66,22 @@ export class NewUpdateComponent {
 
   enviarDatos(): void {
     this.noticia.titulo = this.titulo.value;
-    this.noticia.descripcion = this.descripcion.value;
-    this.noticia.idAutor = this.idAutor.value;
-    this.noticia.fecha_publicacion = this.fecha_publicacion.value;
+    this.noticia.contenido = this.contenido.value;
+    this.noticia.autor.id = this.idAutor.value;
+    this.noticia.fechaPublicacion = this.fechaPublicacion.value;
     this.noticia.imagen = this.imagen.value;
 
+    console.log('Vamos allá! ' + isNaN(Number(this.idNoticia)));
+
     // Gestionamos si se trata de una actualizacion o de una noticia nueva segun exista idNoticia
-    if (this.idNoticia && isNaN(Number(this.idNoticia))) {
+    if (this.idNoticia && !isNaN(Number(this.idNoticia))) {
       // Es una actualización
-      this.noticia.idNoticia = Number(this.idNoticia.valueOf());
+      this.noticia.id = Number(this.idNoticia.valueOf());
+      console.log('Actualizando noticia...');
+      console.log(JSON.stringify(this.noticia));
       this.newService.updateNew(this.noticia);
     } else {
+      console.log('Creando noticia...');
       this.newService.createNew(this.noticia);
     }
   }

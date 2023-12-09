@@ -4,17 +4,17 @@
 
     <div
       *ngFor="let noticia of noticias"
-      (click)="leerNoticia(noticia.idNoticia)"
+      (click)="leerNoticia(noticia.id)"
       class="noticia"
     >
       <div class="titulo">{{ noticia.titulo }}</div>
       <div class="imagen">
         <img src="/assets/images/news/{{ noticia.imagen }}" alt="" />
       </div>
-      <div class="descripcion">{{ noticia.descripcion }}</div>
+      <div class="contenido">{{ noticia.contenido }}</div>
       <div class="datos">
-        <span>Por {{ noticia.nombreAutor }}</span> -
-        <span> {{ noticia.fecha_publicacion }}</span>
+        <span>Por {{ noticia.autor.nombreAutor }}</span> -
+        <span> {{ noticia.fechaPublicacion }}</span>
       </div>
     </div>
   </article>

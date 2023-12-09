@@ -1,21 +1,23 @@
 export class NewDTO {
-  idNoticia!: number;
+  id!: number;
   titulo: string;
-  descripcion: string;
+  contenido: string;
   imagen: string;
-  idAutor!: number;
-  nombreAutor!: string;
-  fecha_publicacion: string;
+  autor!: {
+    id: number;
+    nombreAutor: string;
+  };
+  fechaPublicacion: string;
 
   constructor(
     titulo: string,
-    descripcion: string,
+    contenido: string,
     imagen: string,
-    fecha_publicacion: string
+    fechaPublicacion: string
   ) {
     this.titulo = titulo;
-    this.descripcion = descripcion;
+    this.contenido = contenido;
     this.imagen = imagen;
-    this.fecha_publicacion = fecha_publicacion;
+    this.fechaPublicacion = fechaPublicacion;
   }
 }

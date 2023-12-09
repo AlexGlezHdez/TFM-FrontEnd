@@ -43,23 +43,23 @@
         <div class="campo">
           <input
             type="text"
-            [formControl]="fecha_publicacion"
+            [formControl]="fechaPublicacion"
             class="dato"
-            [class.dado]="fecha_publicacion.value != ''"
+            [class.dado]="fechaPublicacion.value != ''"
             required="required"
           />
-          <label for="fecha_publicacion" class="etiqueta"
+          <label for="fechaPublicacion" class="etiqueta"
             >Fecha de publicación</label
           >
 
-          <div *ngIf="fecha_publicacion.errors" class="error">
+          <div *ngIf="fechaPublicacion.errors" class="error">
             <span
               *ngIf="
-                fecha_publicacion.errors &&
-                (fecha_publicacion.touched || fecha_publicacion.dirty)
+                fechaPublicacion.errors &&
+                (fechaPublicacion.touched || fechaPublicacion.dirty)
               "
             >
-              <span *ngIf="fecha_publicacion.errors['required']"
+              <span *ngIf="fechaPublicacion.errors['required']"
                 >El codigo postal es necesario</span
               >
             </span>
@@ -86,20 +86,18 @@
         <div class="campo ancho">
           <input
             type="text"
-            [formControl]="descripcion"
+            [formControl]="contenido"
             class="dato"
-            [class.dado]="descripcion.value != ''"
+            [class.dado]="contenido.value != ''"
             required="required"
           />
-          <label for="descripcion" class="etiqueta">Cuerpo de la noticia</label>
+          <label for="contenido" class="etiqueta">Cuerpo de la noticia</label>
 
-          <div *ngIf="descripcion.errors" class="error">
+          <div *ngIf="contenido.errors" class="error">
             <span
-              *ngIf="
-                descripcion.errors && (descripcion.touched || descripcion.dirty)
-              "
+              *ngIf="contenido.errors && (contenido.touched || contenido.dirty)"
             >
-              <span *ngIf="descripcion.errors['required']"
+              <span *ngIf="contenido.errors['required']"
                 >El cuerpo de la noticia es necesario</span
               >
             </span>

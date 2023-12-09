@@ -19,8 +19,6 @@ export class AuthService {
   private loginController: string;
   private logoutController: string;
 
-  private mockupNewsDataFile: string = '/assets/login-data.json';
-
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService

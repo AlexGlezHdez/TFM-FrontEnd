@@ -5,10 +5,10 @@
       <img src="/assets/images/news/{{ noticia.imagen }}" alt="" />
     </div>
     <div class="datos">
-      <span>Por {{ noticia.nombreAutor }}</span> -
-      <span> {{ noticia.fecha_publicacion }}</span>
+      <span>Por {{ noticia.autor.nombreAutor }}</span> -
+      <span> {{ noticia.fechaPublicacion }}</span>
     </div>
-    <div class="contenido">{{ noticia.descripcion }}</div>
+    <div class="contenido">{{ noticia.contenido }}</div>
 
     <a routerLink="/noticias">Volver a la página de noticias</a>
   </article>
