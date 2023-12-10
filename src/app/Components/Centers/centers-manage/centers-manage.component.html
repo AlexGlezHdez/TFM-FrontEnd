@@ -1,0 +1,23 @@
+<main>
+  <article>
+    <h1>Gestión de Centros de Buceo</h1>
+
+    <div class="campo corto">
+      <input type="text" class="dato" id="tituloNoticia" />
+      <label for="tituloNoticia" class="etiqueta"
+        >Buscar centro por nombre</label
+      >
+    </div>
+
+    <button routerLink="../centro" class="boton">Nuevo centro</button>
+
+    <div *ngFor="let centro of centros" class="noticia">
+      <app-list-element
+        [id]="centro.id"
+        [titulo]="centro.nombre"
+        [updateFunction]="actualizarCentro"
+        [deleteFunction]="borrarCentro"
+      ></app-list-element>
+    </div>
+  </article>
+</main>

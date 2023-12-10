@@ -5,12 +5,12 @@ import { NewDTO } from '../Models/new.dto';
 import { firstValueFrom } from 'rxjs';
 
 interface NoticiaAPI {
-  id: number;
-  titulo_entrada: string;
+  id?: number;
+  tituloEntrada: string;
   imagen: string;
-  fecha_publicacion: string;
+  fechaPublicacion: string;
   contenido: string;
-  id_autor: number;
+  idAutor: number;
 }
 
 @Injectable({
@@ -40,10 +40,10 @@ export class NewService {
   updateNew(noticia: NewDTO): Promise<any> {
     const noticiaAPI: NoticiaAPI = {
       id: noticia.id,
-      titulo_entrada: noticia.titulo,
+      tituloEntrada: noticia.titulo,
       contenido: noticia.contenido,
-      fecha_publicacion: noticia.fechaPublicacion,
-      id_autor: noticia.autor.id,
+      fechaPublicacion: noticia.fechaPublicacion,
+      idAutor: noticia.autor.id,
       imagen: noticia.imagen,
     };
 
@@ -52,11 +52,20 @@ export class NewService {
     );
   }
 
-  createNew(noticia: NewDTO): Promise<NewDTO[]> {
-    return firstValueFrom(this.http.get<NewDTO[]>(this.mockupNewsDataFile));
+  createNew(noticia: NewDTO): Promise<any> {
+    const noticiaAPI: NoticiaAPI = {
+      tituloEntrada: noticia.titulo,
+      contenido: noticia.contenido,
+      fechaPublicacion: noticia.fechaPublicacion,
+      idAutor: noticia.autor.id,
+      imagen: noticia.imagen,
+    };
+    console.log(noticiaAPI);
+
+    return firstValueFrom(this.http.post(this.urlApi, noticiaAPI));
   }
 
-  deleteNew(idNoticia: number): Promise<NewDTO[]> {
-    return firstValueFrom(this.http.get<NewDTO[]>(this.mockupNewsDataFile));
+  deleteNew(idNoticia: number): Promise<any> {
+    return firstValueFrom(this.http.delete(this.urlApi + '/' + idNoticia));
   }
 }

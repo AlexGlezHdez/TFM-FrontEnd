@@ -15,7 +15,7 @@
         *ngFor="let centro of centros"
         [position]="centro.position"
         [options]="markerOptions"
-        [label]="centro.centro"
+        [label]="centro.nombre"
         [title]="centro.direccion"
       >
       </map-marker>
@@ -26,11 +26,11 @@
         *ngFor="let centro of centros"
         (click)="centrarEnCentroBuceo(centro.position)"
       >
-        <div>{{ centro.centro }}</div>
+        <div>{{ centro.nombre }}</div>
         <div>{{ centro.direccion }}</div>
         <div>{{ centro.email }}</div>
         <div>{{ centro.telefono }}</div>
-        <div>{{ centro.esAccesible }}</div>
+        <div *ngIf="centro.accesible">Accesible</div>
         <div>{{ centro.imagen }}</div>
       </div>
     </div>

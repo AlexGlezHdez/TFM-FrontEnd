@@ -35,11 +35,12 @@ export class AuthService {
   }
 
   logout(): void {
-    this.localStorageService.remove('access_token');
-    this.localStorageService.remove('user_id');
     firstValueFrom(
       this.http.post<AuthToken>(this.urlApi + this.logoutController, '')
-    );
+    ).then(() => {
+      this.localStorageService.remove('access_token');
+      this.localStorageService.remove('user_id');
+    });
   }
 
   isLoggedIn(): boolean {

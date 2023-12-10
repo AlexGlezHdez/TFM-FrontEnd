@@ -45,16 +45,16 @@ export class CentersMapComponent {
 
   private async cargarCentros(): Promise<void> {
     await this.centerService.getCenters().then((centros) => {
-      this.centros = centros;
+      this.centros = centros.data.map((centro: any) => {
+        centro.position = {
+          lat: centro.latitud,
+          lng: centro.longitud,
+        };
+        return centro;
+      });
     });
     //        .catch((error) => this.sharedService.errorLog(error.error));
   }
-
-  marker1 = { position: { lat: 38.9987208, lng: -77.2538699 } };
-  marker2 = { position: { lat: 39.7, lng: -76.0 } };
-  marker3 = { position: { lat: 37.9, lng: -76.8 } };
-
-  markers = [this.marker1, this.marker2, this.marker3];
 
   move(event: google.maps.MapMouseEvent) {
     // Method to handle map click event and update the display property

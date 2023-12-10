@@ -67,11 +67,11 @@ export class NewUpdateComponent {
   enviarDatos(): void {
     this.noticia.titulo = this.titulo.value;
     this.noticia.contenido = this.contenido.value;
-    this.noticia.autor.id = this.idAutor.value;
+    this.noticia.autor = {
+      id: this.idAutor.value,
+    };
     this.noticia.fechaPublicacion = this.fechaPublicacion.value;
     this.noticia.imagen = this.imagen.value;
-
-    console.log('Vamos allá! ' + isNaN(Number(this.idNoticia)));
 
     // Gestionamos si se trata de una actualizacion o de una noticia nueva segun exista idNoticia
     if (this.idNoticia && !isNaN(Number(this.idNoticia))) {

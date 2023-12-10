@@ -38,15 +38,22 @@ const routes: Routes = [
   {
     path: 'cursos',
     loadChildren: () =>
-      import('./courses-manage/courses-manage.module').then(
+      import('../Courses/courses-manage/courses-manage.module').then(
         (m) => m.CoursesManageModule
       ),
   },
   {
     path: 'centros-buceo',
     loadChildren: () =>
-      import('./centers-manage/centers-manage.module').then(
+      import('../Centers/centers-manage/centers-manage.module').then(
         (m) => m.CentersManageModule
+      ),
+  },
+  {
+    path: 'centro-buceo',
+    loadChildren: () =>
+      import('../Centers/center-update/center-update.module').then(
+        (m) => m.CenterUpdateModule
       ),
   },
 ];

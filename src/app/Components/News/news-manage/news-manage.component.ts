@@ -41,8 +41,11 @@ export class NewsManageComponent {
     this.router.navigateByUrl('/admin/noticia/' + idNoticia);
   };
 
-  borrarNoticia = (idNoticia: number): void => {
+  borrarNoticia = async (idNoticia: number): Promise<void> => {
     // Acción de eliminar una noticia
-    this.router.navigateByUrl('/admin/noticia/' + idNoticia);
+    //this.router.navigateByUrl('/admin/noticia/' + idNoticia);
+    await this.newService.deleteNew(idNoticia).then(() => {
+      this.cargarNoticias;
+    });
   };
 }

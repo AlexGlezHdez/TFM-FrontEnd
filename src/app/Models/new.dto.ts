@@ -5,7 +5,7 @@ export class NewDTO {
   imagen: string;
   autor!: {
     id: number;
-    nombreAutor: string;
+    nombreAutor?: string;
   };
   fechaPublicacion: string;
 
