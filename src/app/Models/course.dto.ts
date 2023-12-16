@@ -1,22 +1,14 @@
 export class CourseDTO {
-  idCurso!: number;
-  curso: string;
+  id!: number;
+  titulo: string;
   descripcion: string;
-  descripcion_extra: string;
   imagen: string;
-  fecha_curso: string;
+  duracion: number;
 
-  constructor(
-    curso: string,
-    descripcion: string,
-    descripcion_extra: string,
-    imagen: string,
-    fecha_curso: string
-  ) {
-    this.curso = curso;
-    this.descripcion = descripcion;
-    this.descripcion_extra = descripcion_extra;
-    this.imagen = imagen;
-    this.fecha_curso = fecha_curso;
+  constructor() {
+    this.titulo = '';
+    this.descripcion = '';
+    this.imagen = '';
+    this.duracion = 0;
   }
 }

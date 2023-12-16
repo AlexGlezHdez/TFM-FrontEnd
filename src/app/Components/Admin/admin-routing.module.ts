@@ -31,15 +31,57 @@ const routes: Routes = [
   {
     path: 'actividades',
     loadChildren: () =>
-      import('./activities-manage/activities-manage.module').then(
+      import('../Activities/activities-manage/activities-manage.module').then(
         (m) => m.ActivitiesManageModule
       ),
+  },
+  {
+    path: 'actividad',
+    loadChildren: () =>
+      import('../Activities/activity-update/activity-update.module').then(
+        (m) => m.ActivityUpdateModule
+      ),
+  },
+  {
+    path: 'calendario-actividades',
+    loadChildren: () =>
+      import(
+        '../Activities/activity-schedule-manage/activity-schedule-manage.module'
+      ).then((m) => m.ActivityScheduleManageModule),
+  },
+  {
+    path: 'actividad-calendario',
+    loadChildren: () =>
+      import(
+        '../Activities/activity-schedule-update/activity-schedule-update.module'
+      ).then((m) => m.ActivityScheduleUpdateModule),
+  },
+  {
+    path: 'calendario-cursos',
+    loadChildren: () =>
+      import(
+        '../Courses/course-schedule-manage/course-schedule-manage.module'
+      ).then((m) => m.CourseScheduleManageModule),
+  },
+  {
+    path: 'calendario-curso',
+    loadChildren: () =>
+      import(
+        '../Courses/course-schedule-update/course-schedule-update.module'
+      ).then((m) => m.CourseScheduleUpdateModule),
   },
   {
     path: 'cursos',
     loadChildren: () =>
       import('../Courses/courses-manage/courses-manage.module').then(
         (m) => m.CoursesManageModule
+      ),
+  },
+  {
+    path: 'curso',
+    loadChildren: () =>
+      import('../Courses/course-update/course-update.module').then(
+        (m) => m.CourseUpdateModule
       ),
   },
   {

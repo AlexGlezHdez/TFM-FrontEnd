@@ -3,17 +3,20 @@
     <h1>Cursos del club</h1>
 
     <div
-      *ngFor="let curso of cursos"
-      (click)="verCurso(curso.idCurso)"
+      *ngFor="let cursoAgendado of cursos"
+      (click)="verCurso(cursoAgendado.id)"
       class="curso"
     >
-      <div class="titulo">{{ curso.curso }}</div>
+      <div class="titulo">{{ cursoAgendado.curso.titulo }}</div>
       <div class="imagen">
-        <img src="/assets/images/courses/{{ curso.imagen }}" alt="" />
+        <img
+          src="/assets/images/courses/{{ cursoAgendado.curso.imagen }}"
+          alt=""
+        />
       </div>
-      <div class="descripcion">{{ curso.descripcion }}</div>
+      <div class="descripcion">{{ cursoAgendado.curso.descripcion }}</div>
       <div class="datos">
-        <span>Comienzo: {{ curso.fecha_curso }}</span>
+        <span>Comienzo: {{ cursoAgendado.fecha }}</span>
       </div>
     </div>
   </article>

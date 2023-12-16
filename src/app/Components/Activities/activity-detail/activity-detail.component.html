@@ -1,19 +1,18 @@
 <main>
   <article>
-    <h1>{{ actividad.actividad }}</h1>
+    <h1>{{ actividadAgendada.actividad.titulo }}</h1>
     <div class="imagen">
-      <img src="/assets/images/activities/{{ actividad.imagen }}" alt="" />
+      <img
+        src="/assets/images/activities/{{ actividadAgendada.actividad.imagen }}"
+        alt=""
+      />
     </div>
     <div class="datos">
-      <span>Fecha {{ actividad.fecha_actividad }}</span> -
-      <span>
-        {{
-          actividad.plazas_disponibles > 0 ? "Hay plazas" : "No hay plazas"
-        }}</span
-      >
+      <span>Fecha {{ actividadAgendada.fecha }}</span> -
+      <span>Plazas: {{ actividadAgendada.plazas }}</span>
     </div>
-    <div class="contenido">{{ actividad.descripcion }}</div>
-    <div class="contenido">{{ actividad.descripcion_extra }}</div>
+    <div class="contenido">{{ actividadAgendada.actividad.descripcion }}</div>
+    <div class="contenido">{{ actividadAgendada.detalles }}</div>
 
     <a routerLink="/noticias">Volver a la página de actividades</a>
   </article>

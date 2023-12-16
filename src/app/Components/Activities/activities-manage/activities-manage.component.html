@@ -1,0 +1,30 @@
+<main>
+  <article>
+    <h1>Gestión de actividades del club</h1>
+
+    <div class="campo corto">
+      <input
+        type="text"
+        class="dato"
+        id="tituloActividad"
+        [formControl]="tituloActividad"
+      />
+      <label for="tituloActividad" class="etiqueta"
+        >Filtrar actividades por título</label
+      >
+    </div>
+
+    <button routerLink="../actividad" class="boton">Nueva actividad</button>
+
+    <h2>Actividades disponibles:</h2>
+    <div *ngFor="let actividad of actividades" class="noticia">
+      <div class="elemento">
+        <div class="titulo">{{ actividad.titulo }}</div>
+        <div class="acciones">
+          <button (click)="actualizarCurso(actividad.id)">Actualizar</button>
+          <button (click)="borrarCurso(actividad.id)">Borrar</button>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>

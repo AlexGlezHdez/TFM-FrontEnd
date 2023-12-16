@@ -1,0 +1,70 @@
+<main>
+  <form [formGroup]="courseForm" (ngSubmit)="enviarDatos()">
+    <article class="articulo">
+      <h1 *ngIf="!idCursoAgendado">Agendar nuevo curso</h1>
+      <h1 *ngIf="idCursoAgendado">Actualizar curso agendado</h1>
+      <div class="formulario">
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="idCurso"
+            class="dato"
+            [class.dado]="idCurso.value != ''"
+            required="required"
+          />
+          <label for="idCurso" class="etiqueta">Curso a impartir</label>
+
+          <div *ngIf="idCurso.errors" class="error">
+            <span *ngIf="idCurso.errors && (idCurso.touched || idCurso.dirty)">
+              <span *ngIf="idCurso.errors['required']"
+                >El curso a impartir es obligatorio</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="detalles"
+            class="dato"
+            [class.dado]="detalles.value != ''"
+            required="required"
+          />
+          <label for="detalles" class="etiqueta">Detalles del curso</label>
+
+          <div *ngIf="detalles.errors" class="error">
+            <span
+              *ngIf="detalles.errors && (detalles.touched || detalles.dirty)"
+            >
+              <span *ngIf="detalles.errors['required']"
+                >Los detalles del curso son necesarios</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="fecha"
+            class="dato"
+            [class.dado]="fecha.value != ''"
+            required="required"
+          />
+          <label for="fecha" class="etiqueta">Fecha de comienzo</label>
+
+          <div *ngIf="fecha.errors" class="error">
+            <span *ngIf="fecha.errors && (fecha.touched || fecha.dirty)">
+              <span *ngIf="fecha.errors['required']"
+                >La descripción del curso es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!courseForm.valid" class="boton">
+          {{ idCursoAgendado ? "Actualizar" : "Crear" }}
+        </button>
+      </div>
+    </article>
+  </form>
+</main>

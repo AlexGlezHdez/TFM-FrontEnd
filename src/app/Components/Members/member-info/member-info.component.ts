@@ -9,6 +9,7 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
+import { LocalStorageService } from 'src/app/Services/local-storage.service';
 
 @Component({
   selector: 'app-member-info',
@@ -26,17 +27,22 @@ export class MemberInfoComponent implements OnInit {
   telefono: UntypedFormControl;
   userInfoForm: UntypedFormGroup;
 
-  @Input({ transform: numberAttribute }) idMiembro = 0;
+  //@Input({ transform: numberAttribute }) idMiembro = 0;
+  @Input({ required: true }) idMiembro: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private memberService: MemberService,
+    private localStorageService: LocalStorageService,
     private formBuilder: UntypedFormBuilder //    private contacto: ContactoService
   ) {
     // Falseamos el id del miembro de momento
-    this.idMiembro = 1;
+    //this.idMiembro = 1;
 
-    // this.idMiembro = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    //this.idMiembro = Number(this.activatedRoute.snapshot.paramMap.get('id'));
+
+    // Recuperamos el identificador de la sesión actual
+    this.idMiembro = Number(this.localStorageService.get('user_id'));
 
     this.nombre = new UntypedFormControl('', [Validators.required]);
     this.direccion = new UntypedFormControl('', [Validators.required]);
@@ -56,7 +62,8 @@ export class MemberInfoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if (this.idMiembro) {
       await this.memberService.getMember(this.idMiembro).then((miembro) => {
-        this.miembro = miembro[0];
+        console.log(miembro);
+        this.miembro = miembro.data;
         this.nombre.setValue(this.miembro.nombre);
         this.direccion.setValue(this.miembro.direccion);
         this.codigoPostal.setValue(this.miembro.codigoPostal);
@@ -67,15 +74,13 @@ export class MemberInfoComponent implements OnInit {
   }
 
   actualizarDatos(): void {
+    this.miembro.id = this.idMiembro;
     this.miembro.nombre = this.nombre.value;
     this.miembro.direccion = this.direccion.value;
     this.miembro.codigoPostal = this.codigoPostal.value;
     this.miembro.ciudad = this.ciudad.value;
     this.miembro.telefono = this.telefono.value;
-    /*
-    this.servicioContacto
-      .enviarMensaje2(this.contacto)
-      .subscribe((resp) => console.log(resp));
-      */
+
+    this.memberService.updateMember(this.miembro);
   }
 }

@@ -8,25 +8,30 @@
     </p>
 
     <div class="listado-actividades">
-      <div *ngFor="let actividad of actividades" class="actividad">
+      <div *ngFor="let actividadAgendada of actividades" class="actividad">
         <div
           class="imagen"
-          [routerLink]="['/actividad/', actividad.idActividad]"
+          [routerLink]="['/actividad/', actividadAgendada.id]"
         >
-          <img src="/assets/images/activities/{{ actividad.imagen }}" alt="" />
+          <img
+            src="/assets/images/activities/{{
+              actividadAgendada.actividad.imagen
+            }}"
+            alt=""
+          />
         </div>
         <div
           class="titulo"
-          [routerLink]="['/actividad/', actividad.idActividad]"
+          [routerLink]="['/actividad/', actividadAgendada.id]"
         >
-          {{ actividad.actividad }}
+          {{ actividadAgendada.actividad }}
         </div>
-        <div class="datos">Fecha: {{ actividad.fecha_actividad }}</div>
+        <div class="datos">Fecha: {{ actividadAgendada.fecha }}</div>
         <div class="">
           <button
             class=""
-            *ngIf="!actividadPasada(actividad.fecha_actividad)"
-            (click)="borrarDeActividad(actividad.idActividad)"
+            *ngIf="!actividadPasada(actividadAgendada.fecha)"
+            (click)="borrarDeActividad(actividadAgendada.id)"
           >
             Borrarse
           </button>

@@ -1,0 +1,96 @@
+<main>
+  <form [formGroup]="courseForm" (ngSubmit)="enviarDatos()">
+    <article class="articulo">
+      <h1 *ngIf="!idCurso">Nuevo curso</h1>
+      <h1 *ngIf="idCurso">Actualizar curso</h1>
+      <div class="formulario">
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="titulo"
+            class="dato"
+            [class.dado]="titulo.value != ''"
+            required="required"
+          />
+          <label for="titulo" class="etiqueta">Título</label>
+
+          <div *ngIf="titulo.errors" class="error">
+            <span *ngIf="titulo.errors && (titulo.touched || titulo.dirty)">
+              <span *ngIf="titulo.errors['required']"
+                >El título es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="descripcion"
+            class="dato"
+            [class.dado]="descripcion.value != ''"
+            required="required"
+          />
+          <label for="descripcion" class="etiqueta"
+            >Descripción del curso</label
+          >
+
+          <div *ngIf="descripcion.errors" class="error">
+            <span
+              *ngIf="
+                descripcion.errors && (descripcion.touched || descripcion.dirty)
+              "
+            >
+              <span *ngIf="descripcion.errors['required']"
+                >La descripción del curso es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="imagen"
+            class="dato"
+            [class.dado]="imagen.value != ''"
+            required="required"
+          />
+          <label for="imagen" class="etiqueta">Imagen</label>
+
+          <div *ngIf="imagen.errors" class="error">
+            <span *ngIf="imagen.errors && (imagen.touched || imagen.dirty)">
+              <span *ngIf="imagen.errors['required']"
+                >La imagen es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="duracion"
+            class="dato"
+            [class.dado]="duracion.value != ''"
+            required="required"
+          />
+          <label for="duracion" class="etiqueta"
+            >Duración del curso (en horas)</label
+          >
+
+          <div *ngIf="duracion.errors" class="error">
+            <span
+              *ngIf="duracion.errors && (duracion.touched || duracion.dirty)"
+            >
+              <span *ngIf="duracion.errors['required']"
+                >La duración del curso es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!courseForm.valid" class="boton">
+          Actualizar
+        </button>
+      </div>
+    </article>
+  </form>
+</main>

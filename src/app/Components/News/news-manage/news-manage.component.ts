@@ -45,7 +45,7 @@ export class NewsManageComponent {
     // Acción de eliminar una noticia
     //this.router.navigateByUrl('/admin/noticia/' + idNoticia);
     await this.newService.deleteNew(idNoticia).then(() => {
-      this.cargarNoticias;
+      this.cargarNoticias();
     });
   };
 }

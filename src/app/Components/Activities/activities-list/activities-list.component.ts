@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivityDTO } from 'src/app/Models/activity.dto';
-import { ActivityService } from 'src/app/Services/activity.service';
+import { ScheduledActivityDTO } from 'src/app/Models/scheduled-activity.dto';
+import { ScheduledActivityService } from 'src/app/Services/scheduled-activity.service';
 
 @Component({
   selector: 'app-activities-list',
@@ -9,18 +9,19 @@ import { ActivityService } from 'src/app/Services/activity.service';
   styleUrls: ['./activities-list.component.scss'],
 })
 export class ActivitiesListComponent {
-  actividades!: ActivityDTO[];
+  actividades!: ScheduledActivityDTO[];
 
   constructor(
-    private activityService: ActivityService,
+    private scheduledActivityService: ScheduledActivityService,
     private router: Router
   ) {
     this.cargarActividades();
   }
 
   private async cargarActividades(): Promise<void> {
-    await this.activityService.getActivities().then((actividades) => {
-      this.actividades = actividades;
+    await this.scheduledActivityService.getActivities().then((actividades) => {
+      console.log(actividades);
+      this.actividades = actividades.data;
     });
     //        .catch((error) => this.sharedService.errorLog(error.error));
   }

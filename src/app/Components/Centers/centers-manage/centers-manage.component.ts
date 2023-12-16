@@ -41,7 +41,7 @@ export class CentersManageComponent {
     // Acción de eliminar una noticia
     //this.router.navigateByUrl('/admin/noticia/' + idCentro);
     await this.centerService.deleteCenter(idCentro).then(() => {
-      this.cargarCentros;
+      this.cargarCentros();
     });
   };
 }

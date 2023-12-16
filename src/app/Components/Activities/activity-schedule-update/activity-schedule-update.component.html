@@ -1,0 +1,96 @@
+<main>
+  <form [formGroup]="activityForm" (ngSubmit)="enviarDatos()">
+    <article class="articulo">
+      <h1 *ngIf="!idActividadAgendada">Agendar nueva actividad</h1>
+      <h1 *ngIf="idActividadAgendada">Actualizar actividad agendada</h1>
+      <div class="formulario">
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="idActividad"
+            class="dato"
+            [class.dado]="idActividad.value != ''"
+            required="required"
+          />
+          <label for="idActividad" class="etiqueta">Actividad a agendar</label>
+
+          <div *ngIf="idActividad.errors" class="error">
+            <span
+              *ngIf="
+                idActividad.errors && (idActividad.touched || idActividad.dirty)
+              "
+            >
+              <span *ngIf="idActividad.errors['required']"
+                >La actividad a agendar es obligatoria</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="detalles"
+            class="dato"
+            [class.dado]="detalles.value != ''"
+            required="required"
+          />
+          <label for="detalles" class="etiqueta"
+            >Detalles de la actividad</label
+          >
+
+          <div *ngIf="detalles.errors" class="error">
+            <span
+              *ngIf="detalles.errors && (detalles.touched || detalles.dirty)"
+            >
+              <span *ngIf="detalles.errors['required']"
+                >Los detalles de la actividad son necesarios</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="plazas"
+            class="dato"
+            [class.dado]="plazas.value != ''"
+            required="required"
+          />
+          <label for="plazas" class="etiqueta"
+            >Plazas disponibles para la actividad</label
+          >
+
+          <div *ngIf="plazas.errors" class="error">
+            <span *ngIf="plazas.errors && (plazas.touched || plazas.dirty)">
+              <span *ngIf="plazas.errors['required']"
+                >El número de plazas para la actividad es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo ancho">
+          <input
+            type="text"
+            [formControl]="fecha"
+            class="dato"
+            [class.dado]="fecha.value != ''"
+            required="required"
+          />
+          <label for="fecha" class="etiqueta">Fecha de la actividad</label>
+
+          <div *ngIf="fecha.errors" class="error">
+            <span *ngIf="fecha.errors && (fecha.touched || fecha.dirty)">
+              <span *ngIf="fecha.errors['required']"
+                >La fecha de la actividad es obligatoria</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <button type="submit" [disabled]="!activityForm.valid" class="boton">
+          {{ idActividadAgendada ? "Actualizar" : "Crear" }}
+        </button>
+      </div>
+    </article>
+  </form>
+</main>

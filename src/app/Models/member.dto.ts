@@ -1,5 +1,5 @@
 export class MemberDTO {
-  idUsuario!: number;
+  id!: number;
   nombre: string;
   direccion: string;
   codigoPostal: string;

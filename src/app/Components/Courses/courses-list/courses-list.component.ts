@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { CourseDTO } from 'src/app/Models/course.dto';
-import { CourseService } from 'src/app/Services/course.service';
+import { ScheduledCourseDTO } from 'src/app/Models/scheduled-course.dto';
+import { ScheduledCourseService } from 'src/app/Services/scheduled-course.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -9,15 +9,18 @@ import { CourseService } from 'src/app/Services/course.service';
   styleUrls: ['./courses-list.component.scss'],
 })
 export class CoursesListComponent {
-  cursos!: CourseDTO[];
+  cursos!: ScheduledCourseDTO[];
 
-  constructor(private courseService: CourseService, private router: Router) {
+  constructor(
+    private scheduledCourseService: ScheduledCourseService,
+    private router: Router
+  ) {
     this.cargarCursos();
   }
 
   private async cargarCursos(): Promise<void> {
-    await this.courseService.getCourses().then((cursos) => {
-      this.cursos = cursos;
+    await this.scheduledCourseService.getCourses().then((cursos) => {
+      this.cursos = cursos.data;
     });
     //        .catch((error) => this.sharedService.errorLog(error.error));
   }

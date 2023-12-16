@@ -54,9 +54,7 @@ export class MemberPasswordComponent {
   passwordMatchValidator(formGroup: FormGroup) {
     const password1 = formGroup.controls['passwordNueva'].value;
     const password2 = formGroup.controls['passwordRepetida'].value;
-    console.log(
-      password1 + ' --' + password2 + ' ---> ' + password1 === password2
-    );
+
     return password1 === password2
       ? null
       : { passwordNotMatch: { value: false } };
