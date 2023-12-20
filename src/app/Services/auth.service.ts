@@ -6,6 +6,8 @@ import { LocalStorageService } from './local-storage.service';
 
 import { firstValueFrom } from 'rxjs';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 interface AuthToken {
   id: string;
   token: string;
@@ -23,7 +25,7 @@ export class AuthService {
     private http: HttpClient,
     private localStorageService: LocalStorageService
   ) {
-    this.urlApi = 'http://localhost:8000/api/';
+    this.urlApi = Constantes.urlAPI;
     this.loginController = 'login';
     this.logoutController = 'logout';
   }

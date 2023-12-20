@@ -1,7 +1,14 @@
-<div class="elemento">
-  <div class="titulo">{{ titulo }}</div>
-  <div class="acciones">
-    <button (click)="updateFunction(id)">Actualizar</button>
-    <button (click)="deleteFunction(id)">Borrar</button>
-  </div>
+<div class="linea-principal" [class.extendida]="!linea_secundaria">
+  {{ linea_principal }}
+</div>
+<div *ngIf="linea_secundaria" class="linea-secundaria">
+  {{ linea_secundaria }}
+</div>
+<div class="acciones">
+  <button *ngIf="updateFunction" (click)="updateFunction(id)" class="accion">
+    <img src="/assets/images/icons/edit.svg" class="icono" alt="Editar" />
+  </button>
+  <button *ngIf="deleteFunction" (click)="deleteFunction(id)" class="accion">
+    <img src="/assets/images/icons/trash.svg" class="icono" alt="Borrar" />
+  </button>
 </div>

@@ -4,6 +4,8 @@ import { CenterDTO } from '../Models/center.dto';
 
 import { firstValueFrom } from 'rxjs';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 interface CenterAPI {
   id?: number;
   nombre: string;
@@ -24,8 +26,8 @@ export class CenterService {
   private mockupNewsDataFile: string = '/assets/centers-data.json';
 
   constructor(private http: HttpClient) {
-    this.centersController = 'centros';
-    this.urlApiBase = 'http://localhost:8000/api/v1/';
+    this.centersController = 'v1/centros';
+    this.urlApiBase = Constantes.urlAPI;
     this.urlApi = this.urlApiBase + this.centersController;
   }
 

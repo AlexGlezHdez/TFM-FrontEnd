@@ -7,7 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class ListElementComponent {
   @Input({ required: true }) id!: number;
-  @Input({ required: true }) titulo!: string;
-  @Input() updateFunction: any;
-  @Input() deleteFunction: any;
+  @Input({ required: true }) linea_principal!: string;
+  @Input() linea_secundaria: string | null = '';
+  @Input() updateFunction: any = null;
+  @Input() deleteFunction: any = null;
 }

@@ -5,6 +5,8 @@ import { ScheduledCourseDTO } from '../Models/scheduled-course.dto';
 
 import { firstValueFrom } from 'rxjs';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 interface CursoAPI {
   id?: number;
   fecha: string;
@@ -21,8 +23,8 @@ export class ScheduledCourseService {
   private coursesCalendarController: string;
 
   constructor(private http: HttpClient) {
-    this.coursesCalendarController = 'calendario-cursos';
-    this.urlApiBase = 'http://localhost:8000/api/v1/';
+    this.coursesCalendarController = 'v1/calendario-cursos';
+    this.urlApiBase = Constantes.urlAPI;
     this.urlApi = this.urlApiBase + this.coursesCalendarController;
   }
 

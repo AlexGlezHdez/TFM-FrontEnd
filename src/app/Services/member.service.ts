@@ -4,6 +4,8 @@ import { MemberDTO } from '../Models/member.dto';
 
 import { firstValueFrom } from 'rxjs';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,9 +18,9 @@ export class MemberService {
   private mockupPasswordDataFile: string = '/assets/password-data.json';
 
   constructor(private http: HttpClient) {
-    this.controller = 'users';
-    this.urlApi = 'http://localhost:8000/api/v1/' + this.controller;
-    this.urlApiPassword = 'http://localhost:8000/api/v1/password';
+    this.controller = 'v1/users';
+    this.urlApi = Constantes.urlAPI + this.controller;
+    this.urlApiPassword = Constantes.urlAPI + '/v1/password';
   }
 
   getMembers(): Promise<any> {

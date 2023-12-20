@@ -2,22 +2,36 @@
   <article>
     <h1>Gestión de noticias</h1>
 
-    <div class="campo corto">
-      <input type="text" class="dato" id="tituloNoticia" />
-      <label for="tituloNoticia" class="etiqueta"
-        >Filtrar noticias por título</label
-      >
+    <div class="herramientas">
+      <div class="campo corto">
+        <input
+          type="text"
+          class="dato"
+          [class.dado]="tituloNoticia.value != ''"
+          id="tituloNoticia"
+          [formControl]="tituloNoticia"
+        />
+        <label for="tituloNoticia" class="etiqueta"
+          >Filtrar noticias por título</label
+        >
+      </div>
+      <button routerLink="../noticia" class="boton corto">Nueva</button>
     </div>
 
-    <button routerLink="../noticia" class="boton">Nueva noticia</button>
-
-    <div *ngFor="let noticia of noticias" class="noticia">
-      <app-list-element
-        [id]="noticia.id"
-        [titulo]="noticia.titulo"
-        [updateFunction]="actualizarNoticia"
-        [deleteFunction]="borrarNoticia"
-      ></app-list-element>
+    <div class="listado">
+      <div *ngFor="let noticia of noticias" class="elemento">
+        <app-list-element
+          [id]="noticia.id"
+          [linea_principal]="noticia.titulo"
+          [linea_secundaria]="
+            (noticia.autor.nombreAutor || '') +
+            ' - ' +
+            (noticia.fechaPublicacion | date : 'dd-mm-yyyy')
+          "
+          [updateFunction]="actualizarNoticia"
+          [deleteFunction]="borrarNoticia"
+        ></app-list-element>
+      </div>
     </div>
   </article>
 </main>

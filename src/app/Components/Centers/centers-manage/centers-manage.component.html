@@ -14,7 +14,7 @@
     <div *ngFor="let centro of centros" class="noticia">
       <app-list-element
         [id]="centro.id"
-        [titulo]="centro.nombre"
+        [linea_principal]="centro.nombre"
         [updateFunction]="actualizarCentro"
         [deleteFunction]="borrarCentro"
       ></app-list-element>

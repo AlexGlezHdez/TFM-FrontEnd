@@ -4,6 +4,8 @@ import { NewDTO } from '../Models/new.dto';
 
 import { firstValueFrom } from 'rxjs';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 interface NoticiaAPI {
   id?: number;
   tituloEntrada: string;
@@ -24,13 +26,19 @@ export class NewService {
   private mockupNewsDataFile: string = '/assets/news-data.json';
 
   constructor(private http: HttpClient) {
-    this.newsController = 'noticias';
-    this.urlApiBase = 'http://localhost:8000/api/v1/';
+    this.newsController = 'v1/noticias';
+    this.urlApiBase = Constantes.urlAPI;
     this.urlApi = this.urlApiBase + this.newsController;
   }
 
+  /*
   getNews(): Promise<any> {
     return firstValueFrom(this.http.get(this.urlApi));
+  }
+*/
+  getNews(filtroTitulo?: string): Promise<any> {
+    const filtro: string = filtroTitulo ? '?titulo[lk]=' + filtroTitulo : '';
+    return firstValueFrom(this.http.get(this.urlApi + filtro));
   }
 
   getNew(idNoticia: string): Promise<any> {

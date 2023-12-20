@@ -4,6 +4,8 @@ import { ActivityDTO } from '../Models/activity.dto';
 
 import { firstValueFrom } from 'rxjs';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 interface ActividadAPI {
   id?: number;
   titulo: string;
@@ -21,8 +23,8 @@ export class ActivityService {
   private mockupNewsDataFile: string = '/assets/activities-data.json';
 
   constructor(private http: HttpClient) {
-    this.activityController = 'actividades';
-    this.urlApi = 'http://localhost:8000/api/v1/' + this.activityController;
+    this.activityController = 'v1/actividades';
+    this.urlApi = Constantes.urlAPI + this.activityController;
   }
 
   // Recupera todas las actividades

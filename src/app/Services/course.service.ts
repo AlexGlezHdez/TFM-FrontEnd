@@ -4,6 +4,8 @@ import { CourseDTO } from '../Models/course.dto';
 
 import { firstValueFrom } from 'rxjs';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,8 +17,8 @@ export class CourseService {
   private mockupCoursesDataFile: string = '/assets/courses-data.json';
 
   constructor(private http: HttpClient) {
-    this.courseController = 'cursos';
-    this.urlApiBase = 'http://localhost:8000/api/v1/';
+    this.courseController = 'v1/cursos';
+    this.urlApiBase = Constantes.urlAPI;
     this.urlApi = this.urlApiBase + this.courseController;
   }
 

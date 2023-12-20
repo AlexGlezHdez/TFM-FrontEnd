@@ -1,0 +1,40 @@
+@import "/src/assets/styles/variables";
+@import "/src/assets/styles/common";
+@import "/src/assets/styles/forms";
+
+
+
+.herramientas {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+
+  max-width: $ancho_s;
+  margin: 0 auto;
+}
+
+/* Listado de elementos */
+
+.listado {
+  margin: 2rem auto 0;
+  max-width: $ancho_s;
+}
+
+.elemento {
+  border-radius: 10px;
+  padding: 0.5em;
+  box-shadow: #001d36 1px 1px 4px 0px;
+
+  &:not(:first-of-type) {
+    margin-top: 0.75rem;
+  }
+
+  @media (min-width: $ancho_m) {
+  }
+
+  &:nth-child(2n) {
+   // color: $color-blanco;
+    background-color: $color_azul_5;
+  }
+}
+

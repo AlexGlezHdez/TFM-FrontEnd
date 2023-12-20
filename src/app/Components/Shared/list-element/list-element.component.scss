@@ -1,0 +1,52 @@
+@import "/src/assets/styles/variables";
+@import "/src/assets/styles/common";
+
+:host {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "linea-principal acciones"
+    "linea-secundaria acciones";
+  gap: 6px 10px;
+
+  justify-content: space-between;
+}
+
+.linea-principal {
+  grid-area: linea-principal;
+
+  font-size: 1em;
+  font-weight: bold;
+
+  &.extendida {
+    grid-area: 1 / 1 / 3 /2;
+  }
+
+}
+
+
+
+.linea-secundaria {
+  grid-area: linea-secundaria;
+
+  padding-left: 0.5em;
+  font-size: 0.825em;
+}
+
+.acciones {
+  grid-area: acciones;
+
+  display: flex;
+  gap: 0.5em;
+}
+
+.accion {
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.icono {
+  width: 30px;
+  height: 30px;
+}

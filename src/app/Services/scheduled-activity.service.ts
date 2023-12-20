@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { ActivityDTO } from '../Models/activity.dto';
 import { ScheduledActivityDTO } from '../Models/scheduled-activity.dto';
 
+import { Constantes } from '../Components/Shared/constants/constants.component';
+
 import { firstValueFrom } from 'rxjs';
 
 interface ActividadAgendadaAPI {
@@ -21,9 +23,8 @@ export class ScheduledActivityService {
   private ativitiesCalendarController: string;
 
   constructor(private http: HttpClient) {
-    this.ativitiesCalendarController = 'calendario-actividades';
-    this.urlApi =
-      'http://localhost:8000/api/v1/' + this.ativitiesCalendarController;
+    this.ativitiesCalendarController = 'v1/calendario-actividades';
+    this.urlApi = Constantes.urlAPI + this.ativitiesCalendarController;
   }
 
   getActivities(filtroTitulo?: string): Promise<any> {

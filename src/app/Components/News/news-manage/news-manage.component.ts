@@ -1,21 +1,17 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { NewService } from 'src/app/Services/new.service';
 import { NewDTO } from 'src/app/Models/new.dto';
 import { Router } from '@angular/router';
 
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-news-manage',
   templateUrl: './news-manage.component.html',
   styleUrls: ['./news-manage.component.scss'],
 })
-export class NewsManageComponent {
+export class NewsManageComponent implements OnInit {
   noticias!: NewDTO[];
 
   tituloNoticia: UntypedFormControl;
@@ -26,9 +22,16 @@ export class NewsManageComponent {
     this.cargarNoticias();
   }
 
+  ngOnInit() {
+    this.tituloNoticia.valueChanges.subscribe(() => {
+      this.cargarNoticias();
+    });
+  }
+
   private async cargarNoticias(): Promise<void> {
-    await this.newService.getNews().then((noticias) => {
-      this.noticias = noticias.data;
+    const filtroTitulo: string = this.tituloNoticia.value;
+    await this.newService.getNews(filtroTitulo).then((noticias) => {
+      this.noticias = Object.assign([], noticias.data);
     });
     //        .catch((error) => this.sharedService.errorLog(error.error));
   }
@@ -42,8 +45,6 @@ export class NewsManageComponent {
   };
 
   borrarNoticia = async (idNoticia: number): Promise<void> => {
-    // Acción de eliminar una noticia
-    //this.router.navigateByUrl('/admin/noticia/' + idNoticia);
     await this.newService.deleteNew(idNoticia).then(() => {
       this.cargarNoticias();
     });
