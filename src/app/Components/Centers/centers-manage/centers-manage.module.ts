@@ -3,10 +3,16 @@ import { CommonModule } from '@angular/common';
 import { CentersManageRoutingModule } from './centers-manage-routing.module';
 import { CentersManageComponent } from './centers-manage.component';
 import { ListElementModule } from '../../Shared/list-element/list-element.module';
-//import { ListElementComponent } from '../../Shared/list-element/list-element.component';
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, CentersManageRoutingModule, ListElementModule],
+  imports: [
+    CommonModule,
+    CentersManageRoutingModule,
+    ListElementModule,
+    ReactiveFormsModule,
+  ],
   declarations: [CentersManageComponent],
 })
 export class CentersManageModule {}

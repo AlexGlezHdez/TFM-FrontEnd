@@ -2,28 +2,33 @@
   <article>
     <h1>Gestión de cursos impartidos</h1>
 
-    <div class="campo corto">
-      <input
-        type="text"
-        class="dato"
-        id="tituloCurso"
-        [formControl]="tituloCurso"
-      />
-      <label for="tituloCurso" class="etiqueta"
-        >Filtrar cursos por título</label
-      >
+    <div class="herramientas">
+      <div class="campo corto">
+        <input
+          type="text"
+          class="dato"
+          [class.dado]="tituloCurso.value != ''"
+          id="tituloCurso"
+          [formControl]="tituloCurso"
+        />
+        <label for="tituloCurso" class="etiqueta"
+          >Filtrar cursos por título</label
+        >
+      </div>
+      <button routerLink="../curso" class="boton corto">Nuevo curso</button>
     </div>
 
-    <button routerLink="../curso" class="boton">Nuevo curso</button>
-
     <h2>Cursos disponibles:</h2>
-    <div *ngFor="let curso of cursos" class="noticia">
-      <div class="elemento">
-        <div class="titulo">{{ curso.titulo }}</div>
-        <div class="acciones">
-          <button (click)="actualizarCurso(curso.id)">Actualizar</button>
-          <button (click)="borrarCurso(curso.id)">Borrar</button>
-        </div>
+
+    <div class="listado">
+      <div *ngFor="let curso of cursos" class="elemento">
+        <app-list-element
+          [id]="curso.id"
+          [linea_principal]="curso.titulo"
+          [linea_secundaria]="'Duración: ' + (curso.duracion || '') + ' horas '"
+          [updateFunction]="actualizarCurso"
+          [deleteFunction]="borrarCurso"
+        ></app-list-element>
       </div>
     </div>
   </article>

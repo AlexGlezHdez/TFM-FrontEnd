@@ -8,6 +8,8 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewDTO } from 'src/app/Models/new.dto';
 import { NewService } from 'src/app/Services/new.service';
+import { AuthorDTO } from 'src/app/Models/author.dto';
+import { AuthorService } from 'src/app/Services/author.service';
 
 @Component({
   selector: 'app-new-update',
@@ -26,11 +28,14 @@ export class NewUpdateComponent {
   contenido: UntypedFormControl;
   newForm: UntypedFormGroup;
 
+  autores?: AuthorDTO[];
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: UntypedFormBuilder,
-    private newService: NewService
+    private newService: NewService,
+    private authorService: AuthorService
   ) {
     this.idNoticia = this.activatedRoute.snapshot.paramMap.get('id') || '';
 
@@ -50,6 +55,7 @@ export class NewUpdateComponent {
   }
 
   async ngOnInit(): Promise<void> {
+    this.cargarAutores();
     if (this.idNoticia) {
       await this.newService.getNew(this.idNoticia).then((noticia) => {
         this.noticia = noticia.data;
@@ -62,6 +68,13 @@ export class NewUpdateComponent {
     } else {
       this.noticia = new NewDTO('', '', '', '');
     }
+  }
+
+  private async cargarAutores(): Promise<void> {
+    await this.authorService.getAuthors().then((autores) => {
+      this.autores = Object.assign([], autores.data);
+      console.log(this.autores);
+    });
   }
 
   enviarDatos(): void {

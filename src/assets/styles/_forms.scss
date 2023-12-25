@@ -1,6 +1,26 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
 
+
+
+.formulario {
+  display: flex;
+  // flex-direction: column;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+
+  margin-bottom: 4rem;
+
+  max-width: $ancho_s;
+  padding: 2rem;
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.4);
+  margin: 2rem auto;
+  border-radius: 0.5rem;
+
+  background-color: $color_azul_6;
+}
+
 .campo {
   display: flex;
   flex-direction:column;
@@ -41,6 +61,7 @@
   padding: 8px 12px;
   border-radius: 6px;
   border: 1px solid $color_azul_4;
+  background-color: white;
 
   &:hover {
     border-color: $color_azul_2;
@@ -59,7 +80,6 @@
   &.alto {
     height: 10rem;
   }
-
 }
 
 .error {

@@ -1,12 +1,11 @@
+import { AuthorDTO } from './author.dto';
+
 export class NewDTO {
   id!: number;
   titulo: string;
   contenido: string;
   imagen: string;
-  autor!: {
-    id: number;
-    nombreAutor?: string;
-  };
+  autor!: AuthorDTO;
   fechaPublicacion: string;
 
   constructor(

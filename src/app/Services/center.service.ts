@@ -31,8 +31,14 @@ export class CenterService {
     this.urlApi = this.urlApiBase + this.centersController;
   }
 
+  /*
   getCenters(): Promise<any> {
     return firstValueFrom(this.http.get(this.urlApi));
+  }
+  */
+  getCenters(filtroNombre?: string): Promise<any> {
+    const filtro: string = filtroNombre ? '?nombre[lk]=' + filtroNombre : '';
+    return firstValueFrom(this.http.get(this.urlApi + filtro));
   }
 
   getCenter(idCenter: string): Promise<any> {

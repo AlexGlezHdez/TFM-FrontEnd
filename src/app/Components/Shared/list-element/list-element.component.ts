@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list-element',
@@ -11,4 +12,6 @@ export class ListElementComponent {
   @Input() linea_secundaria: string | null = '';
   @Input() updateFunction: any = null;
   @Input() deleteFunction: any = null;
+
+  constructor(private router: Router) {}
 }

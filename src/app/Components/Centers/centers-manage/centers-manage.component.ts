@@ -1,14 +1,10 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { CenterService } from 'src/app/Services/center.service';
 import { CenterDTO } from 'src/app/Models/center.dto';
 import { Router } from '@angular/router';
 
-import {
-  UntypedFormBuilder,
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-centers-manage',
@@ -26,8 +22,15 @@ export class CentersManageComponent {
     this.cargarCentros();
   }
 
+  ngOnInit() {
+    this.nombreCentro.valueChanges.subscribe(() => {
+      this.cargarCentros();
+    });
+  }
+
   private async cargarCentros(): Promise<void> {
-    await this.centerService.getCenters().then((centros) => {
+    const filtroNombre: string = this.nombreCentro.value;
+    await this.centerService.getCenters(filtroNombre).then((centros) => {
       this.centros = centros.data;
     });
     //        .catch((error) => this.sharedService.errorLog(error.error));

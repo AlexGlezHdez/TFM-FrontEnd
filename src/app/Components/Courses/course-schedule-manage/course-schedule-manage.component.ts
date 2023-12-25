@@ -45,7 +45,7 @@ export class CourseScheduleManageComponent {
   }
 
   actualizarCurso(idCurso: number): void {
-    this.router.navigateByUrl('/admin/calendario-curso/' + idCurso);
+    this.router.navigateByUrl('../admin/calendario-curso/' + idCurso);
   }
 
   async borrarCurso(idCurso: number): Promise<void> {

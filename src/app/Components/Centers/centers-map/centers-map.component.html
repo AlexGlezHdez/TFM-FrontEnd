@@ -1,8 +1,9 @@
 <main>
-  <h1>Mapa de los centros de buceo</h1>
   <!-- setting height and width respectively,
   and calling our three functions -->
   <article>
+    <h1>Mapa de los centros de buceo</h1>
+
     <google-map
       #myMap="googleMap"
       height="400px"
@@ -21,10 +22,11 @@
       </map-marker>
     </google-map>
 
-    <div>
+    <div class="listado">
       <div
         *ngFor="let centro of centros"
         (click)="centrarEnCentroBuceo(centro.position)"
+        class="elemento"
       >
         <div>{{ centro.nombre }}</div>
         <div>{{ centro.direccion }}</div>
@@ -35,8 +37,4 @@
       </div>
     </div>
   </article>
-
-  <!-- displaying real-time location -->
-  <div>Latitude: {{ display?.lat }}</div>
-  <div>Longitude: {{ display?.lng }}</div>
 </main>

@@ -2,28 +2,41 @@
   <article>
     <h1>Gestión del calendario de cursos impartidos</h1>
 
-    <div class="campo corto">
-      <input
-        type="text"
-        class="dato"
-        id="tituloCurso"
-        [formControl]="tituloCurso"
-      />
-      <label for="tituloCurso" class="etiqueta"
-        >Filtrar cursos por título</label
-      >
+    <div class="herramientas">
+      <div class="campo corto">
+        <input
+          type="text"
+          class="dato"
+          [class.dado]="tituloCurso.value != ''"
+          id="tituloCurso"
+          [formControl]="tituloCurso"
+        />
+        <label for="tituloCurso" class="etiqueta"
+          >Filtrar cursos por título</label
+        >
+      </div>
+
+      <button routerLink="../calendario-curso" class="boton corto">
+        Nuevo
+      </button>
     </div>
 
-    <button routerLink="../calendario-curso" class="boton">Nuevo curso</button>
-
     <h2>Cursos disponibles:</h2>
-    <div *ngFor="let curso of cursos" class="noticia">
-      <div class="elemento">
-        <div class="titulo">{{ curso.curso.titulo }}</div>
-        <div class="acciones">
-          <button (click)="actualizarCurso(curso.id)">Actualizar</button>
-          <button (click)="borrarCurso(curso.id)">Borrar</button>
-        </div>
+
+    <div class="listado">
+      <div *ngFor="let cursoAgendado of cursos" class="elemento">
+        <app-list-element
+          [id]="cursoAgendado.id"
+          [linea_principal]="cursoAgendado.curso.titulo"
+          [linea_secundaria]="
+            (cursoAgendado.fecha | date : 'dd-mm-yyyy') +
+            ' - ' +
+            cursoAgendado.curso.duracion +
+            ' horas'
+          "
+          [updateFunction]="actualizarCurso"
+          [deleteFunction]="borrarCurso"
+        ></app-list-element>
       </div>
     </div>
   </article>

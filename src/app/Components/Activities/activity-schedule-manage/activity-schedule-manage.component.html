@@ -2,30 +2,41 @@
   <article>
     <h1>Gestión del calendario de actividades</h1>
 
-    <div class="campo corto">
-      <input
-        type="text"
-        class="dato"
-        id="tituloActividad"
-        [formControl]="tituloActividad"
-      />
-      <label for="tituloActividad" class="etiqueta"
-        >Filtrar actividades por título</label
-      >
+    <div class="herramientas">
+      <div class="campo corto">
+        <input
+          type="text"
+          class="dato"
+          [class.dado]="tituloActividad.value != ''"
+          id="tituloActividad"
+          [formControl]="tituloActividad"
+        />
+        <label for="tituloActividad" class="etiqueta"
+          >Filtrar actividades por título</label
+        >
+      </div>
+
+      <button routerLink="../actividad-calendario" class="boton corto">
+        Nueva
+      </button>
     </div>
 
-    <button routerLink="../actividad-calendario" class="boton">
-      Nueva actividad
-    </button>
+    <h2>Listado de actividades:</h2>
 
-    <h2>Cursos disponibles:</h2>
-    <div *ngFor="let actividad of actividades" class="noticia">
-      <div class="elemento">
-        <div class="titulo">{{ actividad.actividad.titulo }}</div>
-        <div class="acciones">
-          <button (click)="actualizarCurso(actividad.id)">Actualizar</button>
-          <button (click)="borrarCurso(actividad.id)">Borrar</button>
-        </div>
+    <div class="listado">
+      <div *ngFor="let actividadAgendada of actividades" class="elemento">
+        <app-list-element
+          [id]="actividadAgendada.id"
+          [linea_principal]="actividadAgendada.actividad.titulo"
+          [linea_secundaria]="
+            (actividadAgendada.fecha | date : 'dd-MM-yyyy') +
+            ' - ' +
+            actividadAgendada.plazas +
+            ' plazas'
+          "
+          [updateFunction]="this.actualizarActividad"
+          [deleteFunction]="this.borrarActividad"
+        ></app-list-element>
       </div>
     </div>
   </article>

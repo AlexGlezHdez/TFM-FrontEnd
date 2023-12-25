@@ -18,13 +18,15 @@
       <button routerLink="../noticia" class="boton corto">Nueva</button>
     </div>
 
+    <h2>Listado de noticias existentes:</h2>
+
     <div class="listado">
       <div *ngFor="let noticia of noticias" class="elemento">
         <app-list-element
           [id]="noticia.id"
           [linea_principal]="noticia.titulo"
           [linea_secundaria]="
-            (noticia.autor.nombreAutor || '') +
+            (noticia.autor.nombre || '') +
             ' - ' +
             (noticia.fechaPublicacion | date : 'dd-mm-yyyy')
           "

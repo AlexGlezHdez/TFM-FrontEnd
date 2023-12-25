@@ -50,7 +50,7 @@ const routes: Routes = [
       ).then((m) => m.ActivityScheduleManageModule),
   },
   {
-    path: 'actividad-calendario',
+    path: 'calendario-actividad',
     loadChildren: () =>
       import(
         '../Activities/activity-schedule-update/activity-schedule-update.module'

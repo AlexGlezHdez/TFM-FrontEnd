@@ -1,0 +1,27 @@
+@import "/src/assets/styles/variables";
+@import "/src/assets/styles/common";
+@import "/src/assets/styles/manage-forms";
+
+article {
+  @extend %ancho_dispositivo;
+
+  padding: 2rem 1rem 3rem;
+}
+
+h1 {
+  margin-bottom: 2rem;
+
+  font-size: 36px;
+  font-family: $fuente_titulo;
+
+  text-align: center;
+}
+
+h2 {
+  margin: 1rem 0;
+
+  font-size: 24px;
+  font-family: $fuente_titulo;
+
+  text-align: center;
+}

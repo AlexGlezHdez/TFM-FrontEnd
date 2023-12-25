@@ -22,14 +22,22 @@
             </span>
           </div>
         </div>
-        <div class="campo ancho">
-          <input
-            type="text"
-            [formControl]="idAutor"
+        <div class="campo">
+          <select
             class="dato"
-            [class.dado]="idAutor.value != ''"
-            required="required"
-          />
+            [class.dado]="titulo.value != ''"
+            [formControl]="idAutor"
+          >
+            <option
+              *ngFor="let autor of autores"
+              [ngValue]="autor.id"
+              [attr.selected]="
+                autor.id === noticia.autor.id ? 'selected' : null
+              "
+            >
+              {{ autor.nombre }}
+            </option>
+          </select>
           <label for="idAutor" class="etiqueta">Autor</label>
 
           <div *ngIf="idAutor.errors" class="error">

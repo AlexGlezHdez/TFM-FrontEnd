@@ -1,3 +1,4 @@
+import { OnInit, Self } from '@angular/core';
 import { Component } from '@angular/core';
 import { ScheduledActivityService } from 'src/app/Services/scheduled-activity.service';
 import { ScheduledActivityDTO } from 'src/app/Models/scheduled-activity.dto';
@@ -10,7 +11,7 @@ import { UntypedFormControl } from '@angular/forms';
   templateUrl: './activity-schedule-manage.component.html',
   styleUrls: ['./activity-schedule-manage.component.scss'],
 })
-export class ActivityScheduleManageComponent {
+export class ActivityScheduleManageComponent implements OnInit {
   actividades!: ScheduledActivityDTO[];
 
   tituloActividad: UntypedFormControl;
@@ -44,11 +45,11 @@ export class ActivityScheduleManageComponent {
     this.router.navigateByUrl('/actividad/' + idActividad);
   }
 
-  actualizarCurso(idActividad: number): void {
-    this.router.navigateByUrl('/admin/actividad-calendario/' + idActividad);
+  actualizarActividad(idActividad: number): void {
+    this.router.navigateByUrl('/admin/calendario-actividad/' + idActividad);
   }
 
-  async borrarCurso(idActividad: number): Promise<void> {
+  async borrarActividad(idActividad: number): Promise<void> {
     this.scheduledActivityService.deleteActivity(idActividad).then(() => {
       this.cargarActividades();
     });

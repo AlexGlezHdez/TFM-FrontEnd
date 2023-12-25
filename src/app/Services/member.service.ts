@@ -14,9 +14,6 @@ export class MemberService {
   private urlApiPassword: string;
   private controller: string;
 
-  private mockupMembersDataFile: string = '/assets/members-data.json';
-  private mockupPasswordDataFile: string = '/assets/password-data.json';
-
   constructor(private http: HttpClient) {
     this.controller = 'v1/users';
     this.urlApi = Constantes.urlAPI + this.controller;
