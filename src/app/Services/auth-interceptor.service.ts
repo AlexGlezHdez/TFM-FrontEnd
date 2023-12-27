@@ -22,15 +22,17 @@ export class AuthInterceptorService implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    console.log(req.url);
+
     this.access_token = this.localStorageService.get('access_token');
     if (this.access_token) {
       req = req.clone({
         setHeaders: {
-          'Content-Type': 'application/json; charset=utf-8',
-          Accept: 'application/json',
           Authorization: `Bearer ${this.access_token}`,
         },
       });
+      //      'Content-Type': 'application/json; charset=utf-8',
+      //      Accept: 'application/json',
     }
 
     return next.handle(req);

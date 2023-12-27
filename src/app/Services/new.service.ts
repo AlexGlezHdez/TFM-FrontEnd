@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NewDTO } from '../Models/new.dto';
+import { ImageService } from './image.service';
 
 import { firstValueFrom } from 'rxjs';
 
@@ -25,17 +26,12 @@ export class NewService {
 
   private mockupNewsDataFile: string = '/assets/news-data.json';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private imageService: ImageService) {
     this.newsController = 'v1/noticias';
     this.urlApiBase = Constantes.urlAPI;
     this.urlApi = this.urlApiBase + this.newsController;
   }
 
-  /*
-  getNews(): Promise<any> {
-    return firstValueFrom(this.http.get(this.urlApi));
-  }
-*/
   getNews(filtroTitulo?: string): Promise<any> {
     const filtro: string = filtroTitulo ? '?titulo[lk]=' + filtroTitulo : '';
     return firstValueFrom(this.http.get(this.urlApi + filtro));
@@ -45,7 +41,9 @@ export class NewService {
     return firstValueFrom(this.http.get(this.urlApi + '/' + idNoticia));
   }
 
-  updateNew(noticia: NewDTO): Promise<any> {
+  updateNew(noticia: NewDTO, imagen?: File): Promise<any> {
+    // Hay que subir la imagen por un lado y la noticia por otro
+
     const noticiaAPI: NoticiaAPI = {
       id: noticia.id,
       tituloEntrada: noticia.titulo,
@@ -54,6 +52,11 @@ export class NewService {
       idAutor: noticia.autor.id,
       imagen: noticia.imagen,
     };
+    console.log('Llamando a la API');
+    console.log(noticiaAPI);
+    if (imagen) {
+      this.imageService.uploadImage(imagen, 'news');
+    }
 
     return firstValueFrom(
       this.http.patch(this.urlApi + '/' + noticia.id, noticiaAPI)

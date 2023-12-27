@@ -8,15 +8,11 @@ export class NewDTO {
   autor!: AuthorDTO;
   fechaPublicacion: string;
 
-  constructor(
-    titulo: string,
-    contenido: string,
-    imagen: string,
-    fechaPublicacion: string
-  ) {
-    this.titulo = titulo;
-    this.contenido = contenido;
-    this.imagen = imagen;
-    this.fechaPublicacion = fechaPublicacion;
+  constructor() {
+    this.titulo = '';
+    this.contenido = '';
+    this.imagen = '';
+    this.fechaPublicacion = '';
+    this.autor = new AuthorDTO();
   }
 }

@@ -1,10 +1,8 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
 
-
 :host {
   display: flex;
-  margin-top: 70px;
 }
 
 main {
@@ -28,8 +26,6 @@ main {
   @media (min-width: $ancho_l) {
 
   }
-
-
 }
 
 h1 {

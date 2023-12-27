@@ -1,17 +1,13 @@
 <header>
   <div class="cabecera">
     <img
-      src="/assets/images/icono_menu.svg"
+      src="/assets/images/icons/icono_menu.svg"
       alt="Menu"
       class="icono_menu"
       (click)="menu_desplegado = !menu_desplegado"
     />
     <div routerLink="/" class="logo enlace">
-      <img
-        src="/assets/images/logo_160x120.png"
-        alt="Logo"
-        class="imagen_logo"
-      />
+      <img src="/assets/images/logo_80x60.png" alt="Logo" class="imagen_logo" />
       <div class="nombre_logo">
         <div>Club de Buceo</div>
         <div>MolaMola</div>
@@ -23,19 +19,18 @@
       <li routerLink="/escuela" class="enlace">Escuela</li>
       <li routerLink="/centros-buceo" class="enlace">Centros de buceo</li>
     </ul>
-    <img
-      *ngIf="!isLoggedIn"
-      src="/assets/images/icono_perfil.svg"
-      alt="Login"
-      class="icono_perfil"
-      routerLink="/login"
-    />
-    <img
-      *ngIf="isLoggedIn"
-      src="/assets/images/icono_perfil_logged.svg"
-      alt="Perfil de usuario"
-      class="icono_perfil"
-      routerLink="/miembros"
-    />
+    <a routerLink="/login" *ngIf="!isLoggedIn">
+      <img
+        src="/assets/images/icons/icono_perfil.min.svg"
+        alt="Login"
+        class="icono_perfil"
+        routerLink="/login"
+    /></a>
+    <a *ngIf="isLoggedIn" routerLink="/miembros">
+      <img
+        src="/assets/images/icons/icono_perfil_logged.min.svg"
+        alt="Perfil de usuario"
+        class="icono_perfil"
+    /></a>
   </div>
 </header>

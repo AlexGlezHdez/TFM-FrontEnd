@@ -75,11 +75,11 @@
         </div>
         <div class="campo">
           <input
-            type="text"
-            [formControl]="imagen"
+            type="file"
             class="dato"
             [class.dado]="imagen.value != ''"
             required="required"
+            (change)="onSelect($event)"
           />
           <label for="imagen" class="etiqueta">Imagen</label>
 

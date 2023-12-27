@@ -30,6 +30,9 @@ export class NewUpdateComponent {
 
   autores?: AuthorDTO[];
 
+  // Variable donde almacenar la posible imagen
+  ficheroImagen?: File;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
@@ -41,9 +44,9 @@ export class NewUpdateComponent {
 
     this.titulo = new UntypedFormControl('', [Validators.required]);
     this.contenido = new UntypedFormControl('', [Validators.required]);
-    this.idAutor = new UntypedFormControl('', [Validators.required]);
+    this.idAutor = new UntypedFormControl(null, [Validators.required]);
     this.fechaPublicacion = new UntypedFormControl('', [Validators.required]);
-    this.imagen = new UntypedFormControl('', [Validators.required]);
+    this.imagen = new UntypedFormControl(null, [Validators.required]);
 
     this.newForm = this.formBuilder.group({
       titulo: this.titulo,
@@ -52,28 +55,28 @@ export class NewUpdateComponent {
       fechaPublicacion: this.fechaPublicacion,
       imagen: this.imagen,
     });
+
+    this.noticia = new NewDTO();
   }
 
   async ngOnInit(): Promise<void> {
-    this.cargarAutores();
-    if (this.idNoticia) {
-      await this.newService.getNew(this.idNoticia).then((noticia) => {
-        this.noticia = noticia.data;
-        this.titulo.setValue(this.noticia.titulo);
-        this.contenido.setValue(this.noticia.contenido);
-        this.idAutor.setValue(this.noticia.autor.id);
-        this.fechaPublicacion.setValue(this.noticia.fechaPublicacion);
-        this.imagen.setValue(this.noticia.imagen);
-      });
-    } else {
-      this.noticia = new NewDTO('', '', '', '');
-    }
+    await this.cargarAutores().then(() => {
+      if (this.idNoticia) {
+        this.newService.getNew(this.idNoticia).then((noticia) => {
+          this.noticia = noticia.data;
+          this.titulo.setValue(this.noticia.titulo);
+          this.contenido.setValue(this.noticia.contenido);
+          this.idAutor.setValue(this.noticia.autor.id);
+          this.fechaPublicacion.setValue(this.noticia.fechaPublicacion);
+          //        this.imagen.setValue(this.noticia.imagen);
+        });
+      }
+    });
   }
 
   private async cargarAutores(): Promise<void> {
     await this.authorService.getAuthors().then((autores) => {
       this.autores = Object.assign([], autores.data);
-      console.log(this.autores);
     });
   }
 
@@ -84,18 +87,28 @@ export class NewUpdateComponent {
       id: this.idAutor.value,
     };
     this.noticia.fechaPublicacion = this.fechaPublicacion.value;
-    this.noticia.imagen = this.imagen.value;
+    this.noticia.imagen = this.imagen.value.name;
+
+    const formData = new FormData();
+    Object.entries(this.newForm.value).forEach(([key, value]: any[]) => {
+      formData.append(key, value);
+    });
 
     // Gestionamos si se trata de una actualizacion o de una noticia nueva segun exista idNoticia
     if (this.idNoticia && !isNaN(Number(this.idNoticia))) {
       // Es una actualización
       this.noticia.id = Number(this.idNoticia.valueOf());
       console.log('Actualizando noticia...');
-      console.log(JSON.stringify(this.noticia));
-      this.newService.updateNew(this.noticia);
+      this.newService.updateNew(this.noticia, this.ficheroImagen);
     } else {
       console.log('Creando noticia...');
       this.newService.createNew(this.noticia);
     }
+  }
+
+  onSelect(event: any): void {
+    this.ficheroImagen = event.target.files ? event.target.files[0] : null;
+    this.newForm.patchValue({ imagen: this.ficheroImagen });
+    this.newForm.get('imagen')?.updateValueAndValidity();
   }
 }

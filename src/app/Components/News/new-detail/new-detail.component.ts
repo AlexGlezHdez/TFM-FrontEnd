@@ -22,7 +22,7 @@ export class NewDetailComponent implements OnInit {
     private location: Location
   ) {
     this.idNoticia = this.activatedRoute.snapshot.paramMap.get('id') || '';
-    this.noticia = new NewDTO('', '', '', '');
+    this.noticia = new NewDTO();
   }
 
   async ngOnInit(): Promise<void> {
