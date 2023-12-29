@@ -5,16 +5,20 @@
     <div
       *ngFor="let noticia of noticias"
       (click)="leerNoticia(noticia.id)"
-      class="noticia"
+      class="listview-element"
     >
       <div class="titulo">{{ noticia.titulo }}</div>
       <div class="imagen">
-        <img src="/assets/images/news/{{ noticia.imagen }}" alt="" />
+        <img
+          src="/assets/images/news/{{ noticia.imagen }}"
+          alt=""
+          [imageMissing]
+        />
       </div>
       <div class="contenido">{{ noticia.contenido }}</div>
       <div class="datos">
         <span>Por {{ noticia.autor.nombre }}</span> -
-        <span> {{ noticia.fechaPublicacion }}</span>
+        <span> {{ noticia.fechaPublicacion | date : "dd-MM-yyyy" }}</span>
       </div>
     </div>
   </article>

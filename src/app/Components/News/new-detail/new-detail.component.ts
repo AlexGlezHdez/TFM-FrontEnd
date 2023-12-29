@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NewDTO } from 'src/app/Models/new.dto';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NewService } from 'src/app/Services/new.service';
-
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { NewDTO } from 'src/app/Models/new.dto';
+import { NewService } from 'src/app/Services/new.service';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-new-detail',
@@ -17,18 +17,26 @@ export class NewDetailComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private router: Router,
     private newService: NewService,
-    private location: Location
+    private location: Location,
+    private toastService: ToastService
   ) {
     this.idNoticia = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.noticia = new NewDTO();
   }
 
   async ngOnInit(): Promise<void> {
-    await this.newService.getNew(this.idNoticia).then((noticia) => {
-      this.noticia = noticia.data;
-    });
+    await this.newService
+      .getNew(this.idNoticia)
+      .then((noticia) => {
+        this.noticia = noticia.data;
+      })
+      .catch(() =>
+        this.toastService.mostrarMensaje(
+          'Error al cargar los detalles de la noticia',
+          false
+        )
+      );
   }
 
   back(): void {

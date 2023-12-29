@@ -23,19 +23,12 @@ export class CenterService {
   private urlApi: string;
   private centersController: string;
 
-  private mockupNewsDataFile: string = '/assets/centers-data.json';
-
   constructor(private http: HttpClient) {
     this.centersController = 'v1/centros';
     this.urlApiBase = Constantes.urlAPI;
     this.urlApi = this.urlApiBase + this.centersController;
   }
 
-  /*
-  getCenters(): Promise<any> {
-    return firstValueFrom(this.http.get(this.urlApi));
-  }
-  */
   getCenters(filtroNombre?: string): Promise<any> {
     const filtro: string = filtroNombre ? '?nombre[lk]=' + filtroNombre : '';
     return firstValueFrom(this.http.get(this.urlApi + filtro));
@@ -67,8 +60,6 @@ export class CenterService {
       latitud: centro.position.lat,
       longitud: centro.position.lng,
     };
-    console.log(centroAPI);
-
     return firstValueFrom(this.http.post(this.urlApi, centroAPI));
   }
 

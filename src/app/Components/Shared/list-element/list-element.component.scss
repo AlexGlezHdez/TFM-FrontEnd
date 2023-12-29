@@ -4,10 +4,9 @@
 :host {
   display: grid;
   grid-template-columns: auto auto;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: 1fr  auto;
   grid-template-areas:
-    "linea-principal acciones"
-    "linea-secundaria acciones";
+    "linea-principal acciones";
   gap: 6px 10px;
 
   justify-content: space-between;
@@ -26,10 +25,9 @@
 
 }
 
-
-
-.linea-secundaria {
-  grid-area: linea-secundaria;
+.linea-adicional {
+  grid-column: 1 / 2;
+  grid-row: auto;
 
   padding-left: 0.5em;
   font-size: 0.825em;
@@ -37,8 +35,10 @@
 
 .acciones {
   grid-area: acciones;
+  grid-row: 1 / last-line;
 
   display: flex;
+  align-items: center;
   gap: 0.5em;
 }
 

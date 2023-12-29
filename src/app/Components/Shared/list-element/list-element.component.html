@@ -1,10 +1,23 @@
 <div class="linea-principal" [class.extendida]="!linea_secundaria">
   {{ linea_principal }}
 </div>
-<div *ngIf="linea_secundaria" class="linea-secundaria">
+<div *ngIf="linea_secundaria" class="linea-adicional">
   {{ linea_secundaria }}
 </div>
+<div *ngIf="linea_adicional" class="linea-adicional">
+  {{ linea_adicional }}
+</div>
+
 <div class="acciones">
+  <div class="info_extra">
+    <img
+      *ngIf="info_extra === 'accesible'"
+      src="/assets/images/icons/accessible.svg"
+      class="icono"
+      alt="Centro de buceo accesible"
+      title="Centro de buceo accesible"
+    />
+  </div>
   <button *ngIf="updateFunction" (click)="updateFunction(id)" class="accion">
     <img src="/assets/images/icons/edit.svg" class="icono" alt="Editar" />
   </button>

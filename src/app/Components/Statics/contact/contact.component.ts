@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -8,6 +7,9 @@ import {
 } from '@angular/forms';
 
 import { ContactDTO } from 'src/app/Models/contact.dto';
+import { ContactService } from 'src/app/Services/contact.service';
+import { ToastService } from 'src/app/Services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -24,9 +26,11 @@ export class ContactComponent {
   msgForm: UntypedFormGroup;
 
   constructor(
-    private formBuilder: UntypedFormBuilder
-  ) //    private contacto: ContactoService
-  {
+    private contactService: ContactService,
+    private formBuilder: UntypedFormBuilder,
+    private toastService: ToastService,
+    private router: Router
+  ) {
     this.contacto = new ContactDTO();
 
     this.nombre = new UntypedFormControl('', [Validators.required]);
@@ -52,10 +56,21 @@ export class ContactComponent {
     this.contacto.email = this.email.value;
     this.contacto.asunto = this.asunto.value;
     this.contacto.mensaje = this.mensaje.value;
-    /*
-    this.servicioContacto
-      .enviarMensaje2(this.contacto)
-      .subscribe((resp) => console.log(resp));
-      */
+
+    this.contactService
+      .enviarMensaje(this.contacto)
+      .then((resp) => {
+        this.toastService
+          .mostrarMensaje('Mensaje enviado correctamente', true)
+          .then(() => {
+            this.router.navigateByUrl('/');
+          });
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje(
+          'Error al enviar el mensaje. Prueba más tarde.',
+          false
+        );
+      });
   }
 }

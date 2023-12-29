@@ -1,15 +1,19 @@
 <main>
   <article>
-    <h1>{{ noticia.titulo }}</h1>
+    <h1 class="titulo">{{ noticia.titulo }}</h1>
     <div class="imagen">
-      <img src="/assets/images/news/{{ noticia.imagen }}" alt="" />
+      <img
+        src="/assets/images/news/{{ noticia.imagen }}"
+        alt=""
+        [imageMissing]
+      />
     </div>
     <div class="datos">
       <span>Por {{ noticia.autor.nombre }}</span> -
-      <span> {{ noticia.fechaPublicacion }}</span>
+      <span> {{ noticia.fechaPublicacion | date : "dd-MM-yyyy" }}</span>
     </div>
     <div class="contenido">{{ noticia.contenido }}</div>
 
-    <a routerLink="/noticias">Volver a la página de noticias</a>
+    <div class="enlace-atras"><a routerLink="/noticias">Atrás</a></div>
   </article>
 </main>

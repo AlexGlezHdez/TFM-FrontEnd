@@ -1,19 +1,10 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
 
-article {
-  @extend %ancho_dispositivo;
-
-  padding: 2rem 1rem 3rem;
-}
-
 h1 {
   margin-bottom: 1rem;
 
   font-size: 28px;
-  font-family: $fuente_titulo;
-
-  text-align: center;
 }
 
 .imagen {

@@ -31,3 +31,40 @@ router-outlet + * {
     max-width: $ancho_xl;
   }
 }
+
+article {
+  @extend %ancho_dispositivo;
+
+  padding: 2rem 1rem 3rem;
+}
+
+h1 {
+  margin-bottom: 2rem;
+
+  font-size: 36px;
+  font-family: $fuente_titulo;
+
+  text-align: center;
+}
+
+h2 {
+  margin: 1rem 0;
+
+  font-size: 24px;
+  font-family: $fuente_titulo;
+
+  text-align: center;
+}
+
+p {
+  line-height: 1.3;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1.5rem;
+  }
+
+  &.estrecho {
+    max-width: $ancho_s;
+    margin: 0 auto;
+  }
+}

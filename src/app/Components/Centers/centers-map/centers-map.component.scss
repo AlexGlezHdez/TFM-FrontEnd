@@ -2,19 +2,32 @@
 @import "/src/assets/styles/common";
 @import "/src/assets/styles/manage-forms";
 
-article {
-  @extend %ancho_dispositivo;
-
-  padding: 2rem 1rem 3rem;
-
-
+.listado {
+  margin-top: 1em;
 }
 
-h1 {
-  margin-bottom: 2rem;
+.elemento {
+  cursor: pointer;
+}
 
-  font-size: 36px;
-  font-family: $fuente_titulo;
+.contenedor {
+  display: grid;
+  grid-template-areas:
+    "mapa"
+    "info";
+  gap: 1em;
 
-  text-align: center;
+  @media (min-width: $ancho_l) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "mapa info";
+  }
+}
+
+#mapaCentros {
+  grid-area: mapa;
+}
+
+.centros {
+  grid-area: info;
 }

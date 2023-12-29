@@ -4,36 +4,62 @@
   <article>
     <h1>Mapa de los centros de buceo</h1>
 
-    <google-map
-      #myMap="googleMap"
-      height="400px"
-      width="100%"
-      [zoom]="mapZoom"
-      [options]="mapOptions"
-      (mapMousemove)="move($event)"
-    >
-      <map-marker
-        *ngFor="let centro of centros"
-        [position]="centro.position"
-        [options]="markerOptions"
-        [label]="centro.nombre"
-        [title]="centro.direccion"
+    <div class="contenedor">
+      <google-map
+        id="mapaCentros"
+        #myMap="googleMap"
+        height="400px"
+        width="100%"
+        [zoom]="mapZoom"
+        [options]="mapOptions"
+        (mapMousemove)="move($event)"
       >
-      </map-marker>
-    </google-map>
+        <map-marker
+          *ngFor="let centro of centros"
+          [position]="centro.position"
+          [options]="markerOptions"
+          [title]="centro.nombre"
+        >
+        </map-marker>
+      </google-map>
 
-    <div class="listado">
-      <div
-        *ngFor="let centro of centros"
-        (click)="centrarEnCentroBuceo(centro.position)"
-        class="elemento"
-      >
-        <div>{{ centro.nombre }}</div>
-        <div>{{ centro.direccion }}</div>
-        <div>{{ centro.email }}</div>
-        <div>{{ centro.telefono }}</div>
-        <div *ngIf="centro.accesible">Accesible</div>
-        <div>{{ centro.imagen }}</div>
+      <div class="centros">
+        <h2>Listado de centros de buceo</h2>
+
+        <div class="herramientas">
+          <div class="campo corto">
+            <input
+              type="text"
+              class="dato"
+              [class.dado]="filtroCentro.value != ''"
+              id="filtroCentro"
+              [formControl]="filtroCentro"
+            />
+            <label for="filtroCentro" class="etiqueta"
+              >Filtrar centros por nombre</label
+            >
+          </div>
+        </div>
+
+        <div class="listado">
+          <div
+            *ngFor="let centro of centros"
+            class="elemento"
+            (click)="centrarEnCentroBuceo(centro.position)"
+          >
+            <app-list-element
+              [id]="centro.id"
+              [linea_principal]="centro.nombre"
+              [linea_secundaria]="centro.direccion"
+              [linea_adicional]="
+                centro.telefono +
+                (centro.telefono && centro.email ? ' - ' : null) +
+                centro.email
+              "
+              [info_extra]="centro.accesible ? 'accesible' : ''"
+            ></app-list-element>
+          </div>
+        </div>
       </div>
     </div>
   </article>

@@ -1,0 +1,44 @@
+.titulo {
+  margin-bottom: 1rem;
+
+  font-size: 28px;
+}
+
+.imagen {
+  overflow: hidden;
+  display:flex;
+  max-height: 250px;
+
+  & img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.datos {
+  font-size: 0.875em;
+  text-align: right;
+  margin-top: 10px;
+  margin-right: 1em;
+}
+
+.contenido {
+	line-height: 1.2;
+	margin-top: 1em;
+  font-family: $fuente_comun;
+}
+
+.enlace-atras {
+  text-align: right;
+  margin-top: 1.5em;
+
+  & a {
+    color: $color_azul_3;
+    font-weight: bold;
+  }
+
+  & a:hover {
+    cursor: pointer;
+    color: $color_amarillo;
+  }
+}

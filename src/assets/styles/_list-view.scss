@@ -1,12 +1,6 @@
 @import "/src/assets/styles/variables";
-@import "/src/assets/styles/common";
 
-.listado-actividades {
-  display: flex;
-  flex-direction: column;
-}
-
-.actividad {
+.listview-element {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: auto auto 20px auto;
@@ -14,8 +8,8 @@
     "imagen"
     "titulo"
     "datos"
-    "descripcion";
-  gap: 0.5rem;
+    "contenido";
+  gap: 1rem;
 
   &:not(:first-of-type) {
     margin-top: 2.5rem;
@@ -27,7 +21,7 @@
     grid-template-areas:
       "imagen titulo"
       "imagen datos"
-      "imagen descripcion";
+      "imagen contenido";
   }
 }
 
@@ -35,14 +29,14 @@
   grid-area: titulo;
   font-family: $fuente_titulo;
   font-size: 1.2rem;
-
+  cursor: pointer;
 }
 .datos {
   grid-area: datos;
   font-size: 0.875rem;
 }
-.descripcion {
-  grid-area: descripcion;
+.contenido {
+  grid-area: contenido;
 
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -50,10 +44,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.3;
+  cursor: pointer;
 }
 .imagen {
   grid-area: imagen;
   overflow: hidden;
+  cursor: pointer;
 
   & img {
     width: 100%;

@@ -1,7 +1,12 @@
+import { OnInit } from '@angular/core';
 import { Component, ViewChild } from '@angular/core';
 import { CenterDTO } from 'src/app/Models/center.dto';
 import { LocationDTO } from 'src/app/Models/location.dto';
 import { CenterService } from 'src/app/Services/center.service';
+import { ToastService } from 'src/app/Services/toast.service';
+import { Router } from '@angular/router';
+
+import { UntypedFormControl } from '@angular/forms';
 
 import { GoogleMap } from '@angular/google-maps';
 
@@ -10,18 +15,15 @@ import { GoogleMap } from '@angular/google-maps';
   templateUrl: './centers-map.component.html',
   styleUrls: ['./centers-map.component.scss'],
 })
-export class CentersMapComponent {
+export class CentersMapComponent implements OnInit {
   @ViewChild('myMap') map!: GoogleMap;
 
-  mapZoom = 5.5;
-
-  ngOnInit(): void {}
-  display: any; // Property to store latitude and longitude data from the map
-
   centros!: CenterDTO[];
+  filtroCentro: UntypedFormControl;
 
   // Inicializacion del componente del mapa
-
+  mapZoom = 5.5;
+  display: any; // Property to store latitude and longitude data from the map
   mapOptions: google.maps.MapOptions = {
     center: {
       // Initial center coordinates for the map
@@ -30,7 +32,6 @@ export class CentersMapComponent {
     },
     disableDefaultUI: true,
   };
-
   markerOptions: google.maps.MarkerOptions = {
     draggable: false,
   };
@@ -39,21 +40,36 @@ export class CentersMapComponent {
     if (event.latLng != null) this.markerPositions.push(event.latLng.toJSON());
   }
 
-  constructor(private centerService: CenterService) {
+  constructor(
+    private centerService: CenterService,
+    private toastService: ToastService,
+    private router: Router
+  ) {
+    this.filtroCentro = new UntypedFormControl('');
     this.cargarCentros();
   }
 
-  private async cargarCentros(): Promise<void> {
-    await this.centerService.getCenters().then((centros) => {
-      this.centros = centros.data.map((centro: any) => {
-        centro.position = {
-          lat: centro.latitud,
-          lng: centro.longitud,
-        };
-        return centro;
-      });
+  ngOnInit() {
+    this.filtroCentro.valueChanges.subscribe(() => {
+      this.cargarCentros();
     });
-    //        .catch((error) => this.sharedService.errorLog(error.error));
+  }
+
+  private async cargarCentros(): Promise<void> {
+    await this.centerService
+      .getCenters(this.filtroCentro.value)
+      .then((centros) => {
+        this.centros = centros.data.map((centro: any) => {
+          centro.position = {
+            lat: centro.latitud,
+            lng: centro.longitud,
+          };
+          return centro;
+        });
+      })
+      .catch((error) =>
+        this.toastService.mostrarMensaje('Error al cargar los centros', false)
+      );
   }
 
   move(event: google.maps.MapMouseEvent) {
@@ -65,5 +81,6 @@ export class CentersMapComponent {
 
   centrarEnCentroBuceo(posicion: LocationDTO) {
     this.map.panTo(posicion);
+    this.router.navigate([], { fragment: 'mapaCentros' });
   }
 }

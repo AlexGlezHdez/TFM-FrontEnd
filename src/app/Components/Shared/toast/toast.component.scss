@@ -1,0 +1,39 @@
+@import "/src/assets/styles/variables";
+
+#ventanaAviso {
+  display: none;
+
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  min-height: 50px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 10px;
+  border: 2px solid $color_azul_4;
+  box-shadow: 0 0 15px 0 $color_azul_4;
+  background-color: $color_azul_6;
+  padding: 1em 2em;
+  color: $color_azul_2;
+  font-weight: bold;
+  text-align: center;
+  z-index: 10000;
+
+  @media (min-width: $ancho_xs) {
+    width: max-content;
+    min-width: 300px;
+    max-width: 400px;
+  }
+
+  &.error {
+    color: $color_error;
+    border: 2px solid $color_error;
+    box-shadow: 0 0 15px 0 $color_error;
+  }
+
+  &.show {
+    display: flex;
+  }
+}

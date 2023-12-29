@@ -1,35 +1,3 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
-
-article {
-  @extend %ancho_dispositivo;
-
-  padding: 2rem 1rem 3rem;
-}
-
-h1 {
-  margin-bottom: 1rem;
-
-  font-size: 28px;
-  font-family: $fuente_titulo;
-
-  text-align: center;
-}
-
-.imagen {
-  grid-area: imagen;
-  overflow: hidden;
-
-  & img {
-    width: 100%;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-
-  }
-
-  @media (min-width: $ancho_m) {
-    max-height: 250px;
-  }
-
-}
+@import "/src/assets/styles/detail-view";

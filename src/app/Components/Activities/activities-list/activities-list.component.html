@@ -5,7 +5,7 @@
     <div
       *ngFor="let actividadAgendada of actividades"
       (click)="leerActividad(actividadAgendada.id)"
-      class="actividad"
+      class="listview-element"
     >
       <div class="titulo">{{ actividadAgendada.actividad.titulo }}</div>
       <div class="imagen">
@@ -14,14 +14,16 @@
             actividadAgendada.actividad.imagen
           }}"
           alt=""
+          [imageMissing]
         />
       </div>
-      <div class="descripcion">
+      <div class="contenido">
         {{ actividadAgendada.actividad.descripcion }}
       </div>
       <div class="datos">
-        <span>Fecha: {{ actividadAgendada.fecha }}</span> -
-        <span>Plazas: {{ actividadAgendada.plazas }}</span>
+        <span>Fecha: {{ actividadAgendada.fecha | date : "dd-MM-yyyy" }}</span>
+        -
+        <span>Plazas disponibles: {{ actividadAgendada.plazas }}</span>
       </div>
     </div>
   </article>

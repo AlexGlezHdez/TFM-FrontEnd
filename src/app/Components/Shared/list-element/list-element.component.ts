@@ -10,6 +10,8 @@ export class ListElementComponent {
   @Input({ required: true }) id!: number;
   @Input({ required: true }) linea_principal!: string;
   @Input() linea_secundaria: string | null = '';
+  @Input() linea_adicional: string | null = '';
+  @Input() info_extra: string | null = '';
   @Input() updateFunction: any = null;
   @Input() deleteFunction: any = null;
 

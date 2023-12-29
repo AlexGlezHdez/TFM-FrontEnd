@@ -10,7 +10,6 @@
 
 header {
   background-color: $color_azul_3;
-//  color: $color_blanco;
   text-align: center;
 }
 
@@ -29,8 +28,6 @@ header {
   @media (min-width: $ancho_l) {
     padding: 0 2rem;
   }
-
-
 }
 
 .logo {
@@ -115,8 +112,6 @@ header {
   @media (min-width: $ancho_m) {
     display: none;
   }
-
-
 }
 
 .icono_perfil {
@@ -128,5 +123,4 @@ header {
     height: 50px;
     width: 50px;
   }
-
 }
