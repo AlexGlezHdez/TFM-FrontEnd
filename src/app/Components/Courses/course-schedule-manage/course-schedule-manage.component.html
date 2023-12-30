@@ -3,7 +3,7 @@
     <h1>Gestión del calendario de cursos impartidos</h1>
 
     <div class="herramientas">
-      <div class="campo corto">
+      <div class="campo">
         <input
           type="text"
           class="dato"
@@ -29,7 +29,7 @@
           [id]="cursoAgendado.id"
           [linea_principal]="cursoAgendado.curso.titulo"
           [linea_secundaria]="
-            (cursoAgendado.fecha | date : 'dd-mm-yyyy') +
+            (cursoAgendado.fecha | date : 'dd-MM-yyyy') +
             ' - ' +
             cursoAgendado.curso.duracion +
             ' horas'

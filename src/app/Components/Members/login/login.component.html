@@ -3,7 +3,7 @@
     <article>
       <h1>Iniciar sesión</h1>
       <div class="formulario">
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="email"
             [formControl]="email"
@@ -23,14 +23,14 @@
           </div>
         </div>
 
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="password"
             [formControl]="password"
             class="dato"
             [class.dado]="password.value != ''"
           />
-          <label class="etiqueta" for="password">Password: </label>
+          <label class="etiqueta" for="password">Contraseña: </label>
 
           <div
             *ngIf="password.errors && (password.touched || password.dirty)"

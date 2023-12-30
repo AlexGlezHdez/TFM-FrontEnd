@@ -3,7 +3,7 @@
     <article class="articulo">
       <h1>Datos personales</h1>
       <div class="formulario">
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="text"
             [formControl]="nombre"
@@ -21,7 +21,7 @@
             </span>
           </div>
         </div>
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="text"
             [formControl]="direccion"
@@ -41,7 +41,8 @@
             </span>
           </div>
         </div>
-        <div class="campo">
+
+        <div class="campo corto">
           <input
             type="text"
             [formControl]="codigoPostal"
@@ -64,7 +65,8 @@
             </span>
           </div>
         </div>
-        <div class="campo">
+
+        <div class="campo medio">
           <input
             type="text"
             [formControl]="ciudad"
@@ -82,7 +84,7 @@
             </span>
           </div>
         </div>
-        <div class="campo ancho">
+        <div class="campo corto">
           <input
             type="text"
             [formControl]="telefono"
@@ -90,7 +92,7 @@
             [class.dado]="telefono.value != ''"
             required="required"
           />
-          <label for="telefono" class="etiqueta">Teléfono de contacto</label>
+          <label for="telefono" class="etiqueta">Teléfono</label>
 
           <div *ngIf="telefono.errors" class="error">
             <span
@@ -103,9 +105,11 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!userInfoForm.valid" class="boton">
-          Actualizar
-        </button>
+        <div class="botonera">
+          <button type="submit" [disabled]="!userInfoForm.valid" class="boton">
+            Actualizar
+          </button>
+        </div>
       </div>
     </article>
   </form>

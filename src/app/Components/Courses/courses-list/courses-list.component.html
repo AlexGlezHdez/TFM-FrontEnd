@@ -5,18 +5,19 @@
     <div
       *ngFor="let cursoAgendado of cursos"
       (click)="verCurso(cursoAgendado.id)"
-      class="curso"
+      class="listview-element"
     >
       <div class="titulo">{{ cursoAgendado.curso.titulo }}</div>
       <div class="imagen">
         <img
           src="/assets/images/courses/{{ cursoAgendado.curso.imagen }}"
           alt=""
+          [imageMissing]
         />
       </div>
-      <div class="descripcion">{{ cursoAgendado.curso.descripcion }}</div>
+      <div class="contenido">{{ cursoAgendado.curso.descripcion }}</div>
       <div class="datos">
-        <span>Comienzo: {{ cursoAgendado.fecha }}</span>
+        <span>Comienzo: {{ cursoAgendado.fecha | date : "dd-MM-yyyy" }}</span>
       </div>
     </div>
   </article>

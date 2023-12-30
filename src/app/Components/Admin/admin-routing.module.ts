@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { authAdminGuard } from 'src/app/Guards/auth.guard';
+
 const routes: Routes = [
   {
     path: '',
@@ -9,6 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'miembros',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('./members-list/members-list.module').then(
         (m) => m.MembersListModule
@@ -16,6 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'noticias',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../News/news-manage/news-manage.module').then(
         (m) => m.NewsManageModule
@@ -23,6 +27,7 @@ const routes: Routes = [
   },
   {
     path: 'noticia',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../News/new-update/new-update.module').then(
         (m) => m.NewUpdateModule
@@ -30,6 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'actividades',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../Activities/activities-manage/activities-manage.module').then(
         (m) => m.ActivitiesManageModule
@@ -37,6 +43,7 @@ const routes: Routes = [
   },
   {
     path: 'actividad',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../Activities/activity-update/activity-update.module').then(
         (m) => m.ActivityUpdateModule
@@ -44,6 +51,7 @@ const routes: Routes = [
   },
   {
     path: 'calendario-actividades',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import(
         '../Activities/activity-schedule-manage/activity-schedule-manage.module'
@@ -51,6 +59,7 @@ const routes: Routes = [
   },
   {
     path: 'calendario-actividad',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import(
         '../Activities/activity-schedule-update/activity-schedule-update.module'
@@ -58,6 +67,7 @@ const routes: Routes = [
   },
   {
     path: 'calendario-cursos',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import(
         '../Courses/course-schedule-manage/course-schedule-manage.module'
@@ -65,6 +75,7 @@ const routes: Routes = [
   },
   {
     path: 'calendario-curso',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import(
         '../Courses/course-schedule-update/course-schedule-update.module'
@@ -72,6 +83,7 @@ const routes: Routes = [
   },
   {
     path: 'cursos',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../Courses/courses-manage/courses-manage.module').then(
         (m) => m.CoursesManageModule
@@ -79,6 +91,7 @@ const routes: Routes = [
   },
   {
     path: 'curso',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../Courses/course-update/course-update.module').then(
         (m) => m.CourseUpdateModule
@@ -86,6 +99,7 @@ const routes: Routes = [
   },
   {
     path: 'centros-buceo',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../Centers/centers-manage/centers-manage.module').then(
         (m) => m.CentersManageModule
@@ -93,6 +107,7 @@ const routes: Routes = [
   },
   {
     path: 'centro-buceo',
+    canActivate: [authAdminGuard],
     loadChildren: () =>
       import('../Centers/center-update/center-update.module').then(
         (m) => m.CenterUpdateModule

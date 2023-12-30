@@ -2,7 +2,7 @@
   <form [formGroup]="actividadForm" (ngSubmit)="enviarDatos()">
     <article class="articulo">
       <h1 *ngIf="!idActividad">Nuevo actividad</h1>
-      <h1 *ngIf="idActividad">Actualizar actualizar</h1>
+      <h1 *ngIf="idActividad">Actualizar actividad</h1>
       <div class="formulario">
         <div class="campo">
           <input
@@ -23,13 +23,13 @@
           </div>
         </div>
         <div class="campo ancho">
-          <input
+          <textarea
             type="text"
             [formControl]="descripcion"
-            class="dato"
+            class="dato alto"
             [class.dado]="descripcion.value != ''"
             required="required"
-          />
+          ></textarea>
           <label for="descripcion" class="etiqueta"
             >Descripción de la actividad</label
           >
@@ -48,11 +48,12 @@
         </div>
         <div class="campo">
           <input
-            type="text"
+            type="file"
             [formControl]="imagen"
             class="dato"
             [class.dado]="imagen.value != ''"
             required="required"
+            (change)="onSelect($event)"
           />
           <label for="imagen" class="etiqueta">Imagen</label>
 
@@ -65,9 +66,11 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!actividadForm.valid" class="boton">
-          {{ idActividad ? "Actualizar" : "Crear" }}
-        </button>
+        <div class="botonera">
+          <button type="submit" [disabled]="!actividadForm.valid" class="boton">
+            {{ idActividad ? "Actualizar" : "Crear" }}
+          </button>
+        </div>
       </div>
     </article>
   </form>

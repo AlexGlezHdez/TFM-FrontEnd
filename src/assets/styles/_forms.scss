@@ -1,19 +1,16 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
 
-
-
 .formulario {
   display: flex;
-  // flex-direction: column;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 2rem 1rem;
   justify-content: center;
 
   margin-bottom: 4rem;
 
   max-width: $ancho_s;
-  padding: 2rem;
+  padding: 1.5rem;
   box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.4);
   margin: 2rem auto;
   border-radius: 0.5rem;
@@ -25,11 +22,19 @@
   display: flex;
   flex-direction:column;
   position: relative;
-  flex: auto;
+  flex: 100%;
 
-  &.ancho {
-    flex: 100%;
+  @media (min-width: $ancho_s) {
+    &.corto {
+      max-width: 140px;
+    }
+
+    &.medio {
+      flex: auto;
+      max-width: 300px;
+    }
   }
+
 }
 
 .campo .etiqueta {
@@ -62,6 +67,7 @@
   border-radius: 6px;
   border: 1px solid $color_azul_4;
   background-color: white;
+  width: 100%;
 
   &:hover {
     border-color: $color_azul_2;
@@ -73,21 +79,29 @@
     box-shadow: 0 0 4px $color_azul_2;
   }
 
-  &.corto {
-    max-width: 400px;
-  }
-
   &.alto {
     height: 10rem;
   }
 }
 
+textarea {
+  line-height: 1.4;
+  overflow-y: scroll;
+  resize: none;
+}
+
+.botonera {
+  width: 100%;
+  text-align: center;
+}
+
 .error {
   position: absolute;
   left: 1rem;
-  bottom: -1rem;
+  bottom: -30px;
   color: red;
   font-size: 14px;
+  height: 29px;
 }
 
 .boton {
@@ -100,7 +114,6 @@
   color: white;
 
   align-self: center;
-  // margin-top: 1rem;
   &:hover:not(:disabled),
   &:focus:not(:disabled) {
     background-color: $color_azul_2;

@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -10,13 +11,14 @@ import { NewDTO } from 'src/app/Models/new.dto';
 import { NewService } from 'src/app/Services/new.service';
 import { AuthorDTO } from 'src/app/Models/author.dto';
 import { AuthorService } from 'src/app/Services/author.service';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-new-update',
   templateUrl: './new-update.component.html',
   styleUrls: ['./new-update.component.scss'],
 })
-export class NewUpdateComponent {
+export class NewUpdateComponent implements OnInit {
   noticia!: NewDTO;
 
   idNoticia: string;
@@ -38,6 +40,7 @@ export class NewUpdateComponent {
     private router: Router,
     private formBuilder: UntypedFormBuilder,
     private newService: NewService,
+    private toastService: ToastService,
     private authorService: AuthorService
   ) {
     this.idNoticia = this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -67,7 +70,9 @@ export class NewUpdateComponent {
           this.titulo.setValue(this.noticia.titulo);
           this.contenido.setValue(this.noticia.contenido);
           this.idAutor.setValue(this.noticia.autor.id);
-          this.fechaPublicacion.setValue(this.noticia.fechaPublicacion);
+          this.fechaPublicacion.setValue(
+            this.noticia.fechaPublicacion.substring(0, 10)
+          );
           //        this.imagen.setValue(this.noticia.imagen);
         });
       }
@@ -75,9 +80,14 @@ export class NewUpdateComponent {
   }
 
   private async cargarAutores(): Promise<void> {
-    await this.authorService.getAuthors().then((autores) => {
-      this.autores = Object.assign([], autores.data);
-    });
+    await this.authorService
+      .getAuthors()
+      .then((autores) => {
+        this.autores = Object.assign([], autores.data);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al cargar los datos', false);
+      });
   }
 
   enviarDatos(): void {
@@ -94,15 +104,36 @@ export class NewUpdateComponent {
       formData.append(key, value);
     });
 
-    // Gestionamos si se trata de una actualizacion o de una noticia nueva segun exista idNoticia
     if (this.idNoticia && !isNaN(Number(this.idNoticia))) {
-      // Es una actualización
       this.noticia.id = Number(this.idNoticia.valueOf());
-      console.log('Actualizando noticia...');
-      this.newService.updateNew(this.noticia, this.ficheroImagen);
+      this.newService
+        .updateNew(this.noticia, this.ficheroImagen)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Noticia actualizada correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/noticias');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al actualizar la noticia',
+            false
+          );
+        });
     } else {
-      console.log('Creando noticia...');
-      this.newService.createNew(this.noticia);
+      this.newService
+        .createNew(this.noticia)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Noticia creada correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/noticias');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje('Error al crear la noticia', false);
+        });
     }
   }
 

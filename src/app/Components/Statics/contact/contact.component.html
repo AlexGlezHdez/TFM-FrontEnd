@@ -47,7 +47,7 @@
           </div>
         </div>
 
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="text"
             [formControl]="asunto"
@@ -64,7 +64,7 @@
             <div *ngIf="asunto.errors['required']">El asunto es necesario</div>
           </div>
         </div>
-        <div class="campo ancho">
+        <div class="campo">
           <textarea
             [formControl]="mensaje"
             class="dato alto"

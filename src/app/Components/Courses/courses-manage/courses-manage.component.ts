@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CourseService } from 'src/app/Services/course.service';
 import { CourseDTO } from 'src/app/Models/course.dto';
 import { Router } from '@angular/router';
-
+import { ToastService } from 'src/app/Services/toast.service';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,11 @@ export class CoursesManageComponent implements OnInit {
 
   tituloCurso: UntypedFormControl;
 
-  constructor(private courseService: CourseService, private router: Router) {
+  constructor(
+    private courseService: CourseService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
     this.tituloCurso = new UntypedFormControl('');
 
     this.cargarCursos();
@@ -30,10 +34,14 @@ export class CoursesManageComponent implements OnInit {
 
   private async cargarCursos(): Promise<void> {
     const filtroTitulo: string = this.tituloCurso.value;
-    await this.courseService.getCourses(filtroTitulo).then((cursos) => {
-      this.cursos = Object.assign([], cursos.data);
-    });
-    //        .catch((error) => this.sharedService.errorLog(error.error));
+    await this.courseService
+      .getCourses(filtroTitulo)
+      .then((cursos) => {
+        this.cursos = Object.assign([], cursos.data);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al cargar los cursos', false);
+      });
   }
 
   verCurso(idCurso: number) {
@@ -45,8 +53,14 @@ export class CoursesManageComponent implements OnInit {
   }
 
   async borrarCurso(idCurso: number): Promise<void> {
-    this.courseService.deleteCourse(idCurso).then(() => {
-      this.cargarCursos();
-    });
+    this.courseService
+      .deleteCourse(idCurso)
+      .then(() => {
+        this.cargarCursos();
+        this.toastService.mostrarMensaje('Curso borrado correctamente', true);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al borrar el curso', false);
+      });
   }
 }

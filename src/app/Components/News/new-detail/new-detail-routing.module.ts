@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 import { NewDetailComponent } from './new-detail.component';
+
 const routes: Routes = [
   {
     path: '',

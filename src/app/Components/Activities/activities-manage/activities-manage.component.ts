@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ActivityService } from 'src/app/Services/activity.service';
 import { ActivityDTO } from 'src/app/Models/activity.dto';
 import { Router } from '@angular/router';
-
+import { ToastService } from 'src/app/Services/toast.service';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
@@ -11,13 +11,14 @@ import { UntypedFormControl } from '@angular/forms';
   templateUrl: './activities-manage.component.html',
   styleUrls: ['./activities-manage.component.scss'],
 })
-export class ActivitiesManageComponent {
+export class ActivitiesManageComponent implements OnInit {
   actividades!: ActivityDTO[];
 
   tituloActividad: UntypedFormControl;
 
   constructor(
     private activityService: ActivityService,
+    private toastService: ToastService,
     private router: Router
   ) {
     this.tituloActividad = new UntypedFormControl('');
@@ -37,8 +38,13 @@ export class ActivitiesManageComponent {
       .getActivities(filtroTitulo)
       .then((actividades) => {
         this.actividades = Object.assign([], actividades.data);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje(
+          'Error al cargar las actividades',
+          false
+        );
       });
-    //        .catch((error) => this.sharedService.errorLog(error.error));
   }
 
   verCurso(idActividad: number) {
@@ -50,8 +56,17 @@ export class ActivitiesManageComponent {
   }
 
   async borrarCurso(idActividad: number): Promise<void> {
-    this.activityService.deleteActivity(idActividad).then(() => {
-      this.cargarActividades();
-    });
+    this.activityService
+      .deleteActivity(idActividad)
+      .then((resp) => {
+        this.cargarActividades();
+        this.toastService.mostrarMensaje(
+          'Actividad borrada correctamente',
+          true
+        );
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al borrar la actividad', false);
+      });
   }
 }

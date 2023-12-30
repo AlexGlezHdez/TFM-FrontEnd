@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NewService } from 'src/app/Services/new.service';
 import { NewDTO } from 'src/app/Models/new.dto';
 import { Router } from '@angular/router';
-
+import { ToastService } from 'src/app/Services/toast.service';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,11 @@ export class NewsManageComponent implements OnInit {
 
   tituloNoticia: UntypedFormControl;
 
-  constructor(private newService: NewService, private router: Router) {
+  constructor(
+    private newService: NewService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
     this.tituloNoticia = new UntypedFormControl('');
 
     this.cargarNoticias();
@@ -30,10 +34,14 @@ export class NewsManageComponent implements OnInit {
 
   private async cargarNoticias(): Promise<void> {
     const filtroTitulo: string = this.tituloNoticia.value;
-    await this.newService.getNews(filtroTitulo).then((noticias) => {
-      this.noticias = Object.assign([], noticias.data);
-    });
-    //        .catch((error) => this.sharedService.errorLog(error.error));
+    await this.newService
+      .getNews(filtroTitulo)
+      .then((noticias) => {
+        this.noticias = Object.assign([], noticias.data);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al cargar las noticias', false);
+      });
   }
 
   leerNoticia(idNoticia: number) {
@@ -45,8 +53,14 @@ export class NewsManageComponent implements OnInit {
   };
 
   borrarNoticia = async (idNoticia: number): Promise<void> => {
-    await this.newService.deleteNew(idNoticia).then(() => {
-      this.cargarNoticias();
-    });
+    await this.newService
+      .deleteNew(idNoticia)
+      .then(() => {
+        this.cargarNoticias();
+        this.toastService.mostrarMensaje('Noticia borrada correctamente', true);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al borrar la noticia', false);
+      });
   };
 }

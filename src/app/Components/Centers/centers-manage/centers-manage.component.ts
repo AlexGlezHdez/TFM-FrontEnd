@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { CenterService } from 'src/app/Services/center.service';
 import { CenterDTO } from 'src/app/Models/center.dto';
 import { Router } from '@angular/router';
-
+import { ToastService } from 'src/app/Services/toast.service';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
@@ -16,7 +16,11 @@ export class CentersManageComponent {
 
   nombreCentro!: UntypedFormControl;
 
-  constructor(private centerService: CenterService, private router: Router) {
+  constructor(
+    private centerService: CenterService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
     this.nombreCentro = new UntypedFormControl('');
 
     this.cargarCentros();
@@ -30,10 +34,14 @@ export class CentersManageComponent {
 
   private async cargarCentros(): Promise<void> {
     const filtroNombre: string = this.nombreCentro.value;
-    await this.centerService.getCenters(filtroNombre).then((centros) => {
-      this.centros = centros.data;
-    });
-    //        .catch((error) => this.sharedService.errorLog(error.error));
+    await this.centerService
+      .getCenters(filtroNombre)
+      .then((centros) => {
+        this.centros = centros.data;
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al cargar los centros', false);
+      });
   }
 
   actualizarCentro = (idCentro: number): void => {
@@ -41,10 +49,14 @@ export class CentersManageComponent {
   };
 
   borrarCentro = async (idCentro: number): Promise<void> => {
-    // Acción de eliminar una noticia
-    //this.router.navigateByUrl('/admin/noticia/' + idCentro);
-    await this.centerService.deleteCenter(idCentro).then(() => {
-      this.cargarCentros();
-    });
+    await this.centerService
+      .deleteCenter(idCentro)
+      .then(() => {
+        this.cargarCentros();
+        this.toastService.mostrarMensaje('Centro borrado correctamente', true);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al borrar el centro', false);
+      });
   };
 }

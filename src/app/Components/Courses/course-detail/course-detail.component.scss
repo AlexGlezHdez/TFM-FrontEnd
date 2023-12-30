@@ -1,26 +1,18 @@
 @import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
+@import "/src/assets/styles/detail-view";
 
-h1 {
-  margin-bottom: 1rem;
+.contenido.informacion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em 1.5em;
 
-  font-size: 28px;
+  @media(min-width: $ancho_xs) {
+    flex-direction: row;
+  }
 }
 
-.imagen {
-  grid-area: imagen;
-  overflow: hidden;
-
-  & img {
-    width: 100%;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-
-  }
-
-  @media (min-width: $ancho_m) {
-    max-height: 250px;
-  }
-
+.relevante {
+  font-weight: bold;
 }
+

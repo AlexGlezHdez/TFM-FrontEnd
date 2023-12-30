@@ -3,7 +3,7 @@
     <h1>Gestión de noticias</h1>
 
     <div class="herramientas">
-      <div class="campo corto">
+      <div class="campo">
         <input
           type="text"
           class="dato"
@@ -18,7 +18,7 @@
       <button routerLink="../noticia" class="boton corto">Nueva</button>
     </div>
 
-    <h2>Listado de noticias existentes:</h2>
+    <h2>Listado de noticias:</h2>
 
     <div class="listado">
       <div *ngFor="let noticia of noticias" class="elemento">
@@ -26,9 +26,9 @@
           [id]="noticia.id"
           [linea_principal]="noticia.titulo"
           [linea_secundaria]="
-            (noticia.autor.nombre || '') +
+            (noticia.fechaPublicacion | date : 'dd-MM-yyyy') +
             ' - ' +
-            (noticia.fechaPublicacion | date : 'dd-mm-yyyy')
+            (noticia.autor.nombre || '')
           "
           [updateFunction]="actualizarNoticia"
           [deleteFunction]="borrarNoticia"

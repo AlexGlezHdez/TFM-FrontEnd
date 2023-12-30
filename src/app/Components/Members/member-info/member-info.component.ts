@@ -1,8 +1,7 @@
 import { Component, OnInit, Input, numberAttribute } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { MemberService } from 'src/app/Services/member.service';
 import { MemberDTO } from 'src/app/Models/member.dto';
-
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -10,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-member-info',
@@ -17,8 +17,9 @@ import { LocalStorageService } from 'src/app/Services/local-storage.service';
   styleUrls: ['./member-info.component.scss'],
 })
 export class MemberInfoComponent implements OnInit {
+  @Input({ required: true }) idMiembro: number;
+
   miembro!: MemberDTO;
-  //  private idMiembro: string;
 
   nombre: UntypedFormControl;
   direccion: UntypedFormControl;
@@ -27,21 +28,13 @@ export class MemberInfoComponent implements OnInit {
   telefono: UntypedFormControl;
   userInfoForm: UntypedFormGroup;
 
-  //@Input({ transform: numberAttribute }) idMiembro = 0;
-  @Input({ required: true }) idMiembro: number;
-
   constructor(
-    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private memberService: MemberService,
     private localStorageService: LocalStorageService,
-    private formBuilder: UntypedFormBuilder //    private contacto: ContactoService
+    private toastService: ToastService,
+    private formBuilder: UntypedFormBuilder
   ) {
-    // Falseamos el id del miembro de momento
-    //this.idMiembro = 1;
-
-    //this.idMiembro = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-
-    // Recuperamos el identificador de la sesión actual
     this.idMiembro = Number(this.localStorageService.get('user_id'));
 
     this.nombre = new UntypedFormControl('', [Validators.required]);
@@ -81,6 +74,20 @@ export class MemberInfoComponent implements OnInit {
     this.miembro.ciudad = this.ciudad.value;
     this.miembro.telefono = this.telefono.value;
 
-    this.memberService.updateMember(this.miembro);
+    this.memberService
+      .updateMember(this.miembro)
+      .then((resp) => {
+        this.toastService
+          .mostrarMensaje('Datos actualizados correctamente', true)
+          .then(() => {
+            this.router.navigateByUrl('/miembros');
+          });
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje(
+          'Error al actualizar los datos',
+          false
+        );
+      });
   }
 }

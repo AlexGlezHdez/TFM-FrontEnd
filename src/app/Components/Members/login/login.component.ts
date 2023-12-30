@@ -10,6 +10,7 @@ import { AuthDTO } from 'src/app/Models/auth.dto';
 import { AuthService } from 'src/app/Services/auth.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
 import { LoginService } from 'src/app/Services/login.service';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,8 @@ export class LoginComponent {
     private authService: AuthService,
     private localStorageService: LocalStorageService,
     private router: Router,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private toastService: ToastService
   ) {
     this.loginUser = new AuthDTO('', '', '', '');
 
@@ -55,25 +57,18 @@ export class LoginComponent {
       const authToken = await this.authService.login(this.loginUser);
       this.loginUser.user_id = authToken.id;
       this.loginUser.access_token = authToken.token;
-      // save token to localstorage for next requests
+
       this.localStorageService.set('user_id', this.loginUser.user_id);
       this.localStorageService.set('access_token', this.loginUser.access_token);
 
-      //await this.sharedService.managementToast('loginFeedback', true);
-
-      // update options menu
-      //      this.headerMenusService.headerManagement.next(headerInfo);
-      this.loginService.loggedInManagement.next(true);
-      this.router.navigateByUrl('/');
+      this.toastService
+        .mostrarMensaje('Inicio de sesión correcto', true)
+        .then(() => {
+          this.loginService.loggedInManagement.next(true);
+          this.router.navigateByUrl('/');
+        });
     } catch (error: any) {
-      //      this.sharedService.errorLog(error.error);
-      /*
-      await this.sharedService.managementToast(
-        'loginFeedback',
-        false,
-        error.error
-      );
-      */
+      this.toastService.mostrarMensaje('Datos de acceso incorrectos', false);
     }
   }
 }

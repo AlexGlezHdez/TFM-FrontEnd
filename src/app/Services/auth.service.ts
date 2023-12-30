@@ -48,4 +48,12 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.localStorageService.get('access_token') ? true : false;
   }
+
+  isAdmin(): Promise<any> {
+    return firstValueFrom(
+      this.http.post<AuthToken>(this.urlApi + 'admin', '', {
+        observe: 'response',
+      })
+    );
+  }
 }

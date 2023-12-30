@@ -8,6 +8,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ActivityDTO } from 'src/app/Models/activity.dto';
 import { ActivityService } from 'src/app/Services/activity.service';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-activity-update',
@@ -24,10 +25,14 @@ export class ActivityUpdateComponent {
   descripcion: UntypedFormControl;
   actividadForm: UntypedFormGroup;
 
+  // Variable donde almacenar la posible imagen
+  ficheroImagen?: File;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: UntypedFormBuilder,
+    private toastService: ToastService,
     private activityService: ActivityService
   ) {
     this.idActividad = this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -52,6 +57,9 @@ export class ActivityUpdateComponent {
           this.titulo.setValue(this.actividad.titulo);
           this.descripcion.setValue(this.actividad.descripcion);
           this.imagen.setValue(this.actividad.imagen);
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje('Error al cargar los datos', false);
         });
     } else {
       this.actividad = new ActivityDTO();
@@ -67,11 +75,42 @@ export class ActivityUpdateComponent {
     if (this.idActividad && !isNaN(Number(this.idActividad))) {
       // Es una actualización
       this.actividad.id = Number(this.idActividad.valueOf());
-      console.log('Actualizando actividad...');
-      this.activityService.updateActivity(this.actividad);
+      this.activityService
+        .updateActivity(this.actividad)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Acividad actualizada correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/actividades');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al actualizar la actividad',
+            false
+          );
+        });
     } else {
-      console.log('Creando actividad...');
-      this.activityService.createActivity(this.actividad);
+      this.activityService
+        .createActivity(this.actividad)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Actividad creada correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/noticias');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al crear la actividad',
+            false
+          );
+        });
     }
+  }
+  onSelect(event: any): void {
+    this.ficheroImagen = event.target.files ? event.target.files[0] : null;
+    this.actividadForm.patchValue({ imagen: this.ficheroImagen });
+    this.actividadForm.get('imagen')?.updateValueAndValidity();
   }
 }

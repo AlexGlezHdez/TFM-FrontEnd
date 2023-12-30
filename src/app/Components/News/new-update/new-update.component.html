@@ -4,7 +4,7 @@
       <h1 *ngIf="!idNoticia">Nueva noticia</h1>
       <h1 *ngIf="idNoticia">Actualizar noticia</h1>
       <div class="formulario">
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="text"
             [formControl]="titulo"
@@ -50,7 +50,7 @@
         </div>
         <div class="campo">
           <input
-            type="text"
+            type="date"
             [formControl]="fechaPublicacion"
             class="dato"
             [class.dado]="fechaPublicacion.value != ''"
@@ -91,14 +91,14 @@
             </span>
           </div>
         </div>
-        <div class="campo ancho">
-          <input
+        <div class="campo">
+          <textarea
             type="text"
             [formControl]="contenido"
-            class="dato"
+            class="dato alto"
             [class.dado]="contenido.value != ''"
             required="required"
-          />
+          ></textarea>
           <label for="contenido" class="etiqueta">Cuerpo de la noticia</label>
 
           <div *ngIf="contenido.errors" class="error">

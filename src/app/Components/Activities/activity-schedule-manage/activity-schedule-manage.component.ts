@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ScheduledActivityService } from 'src/app/Services/scheduled-activity.service';
 import { ScheduledActivityDTO } from 'src/app/Models/scheduled-activity.dto';
 import { Router } from '@angular/router';
-
+import { ToastService } from 'src/app/Services/toast.service';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
@@ -18,7 +18,8 @@ export class ActivityScheduleManageComponent implements OnInit {
 
   constructor(
     private scheduledActivityService: ScheduledActivityService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.tituloActividad = new UntypedFormControl('');
 
@@ -37,8 +38,13 @@ export class ActivityScheduleManageComponent implements OnInit {
       .getActivities(filtroTitulo)
       .then((actividades) => {
         this.actividades = Object.assign([], actividades.data);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje(
+          'Error al cargar las actividades',
+          false
+        );
       });
-    //        .catch((error) => this.sharedService.errorLog(error.error));
   }
 
   verCurso(idActividad: number) {
@@ -50,8 +56,17 @@ export class ActivityScheduleManageComponent implements OnInit {
   }
 
   async borrarActividad(idActividad: number): Promise<void> {
-    this.scheduledActivityService.deleteActivity(idActividad).then(() => {
-      this.cargarActividades();
-    });
+    this.scheduledActivityService
+      .deleteActivity(idActividad)
+      .then(() => {
+        this.cargarActividades();
+        this.toastService.mostrarMensaje(
+          'Acividad borrada correctamente',
+          true
+        );
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al borrar la actividad', false);
+      });
   }
 }

@@ -5,15 +5,24 @@
       <h1 *ngIf="idActividadAgendada">Actualizar actividad agendada</h1>
       <div class="formulario">
         <div class="campo">
-          <input
-            type="text"
-            [formControl]="idActividad"
+          <select
             class="dato"
             [class.dado]="idActividad.value != ''"
-            required="required"
-          />
+            [formControl]="idActividad"
+          >
+            <option
+              *ngFor="let actividad of actividades"
+              [ngValue]="actividad.id"
+              [attr.selected]="
+                actividad.id === actividadAgendada.actividad.id
+                  ? 'selected'
+                  : null
+              "
+            >
+              {{ actividad.titulo }}
+            </option>
+          </select>
           <label for="idActividad" class="etiqueta">Actividad a agendar</label>
-
           <div *ngIf="idActividad.errors" class="error">
             <span
               *ngIf="
@@ -27,13 +36,13 @@
           </div>
         </div>
         <div class="campo">
-          <input
+          <textarea
             type="text"
             [formControl]="detalles"
-            class="dato"
+            class="dato alto"
             [class.dado]="detalles.value != ''"
             required="required"
-          />
+          ></textarea>
           <label for="detalles" class="etiqueta"
             >Detalles de la actividad</label
           >
@@ -48,7 +57,7 @@
             </span>
           </div>
         </div>
-        <div class="campo">
+        <div class="campo medio">
           <input
             type="text"
             [formControl]="plazas"
@@ -68,9 +77,9 @@
             </span>
           </div>
         </div>
-        <div class="campo ancho">
+        <div class="campo medio">
           <input
-            type="text"
+            type="date"
             [formControl]="fecha"
             class="dato"
             [class.dado]="fecha.value != ''"
@@ -87,9 +96,11 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!activityForm.valid" class="boton">
-          {{ idActividadAgendada ? "Actualizar" : "Crear" }}
-        </button>
+        <div class="botonera">
+          <button type="submit" [disabled]="!activityForm.valid" class="boton">
+            {{ idActividadAgendada ? "Actualizar" : "Crear" }}
+          </button>
+        </div>
       </div>
     </article>
   </form>

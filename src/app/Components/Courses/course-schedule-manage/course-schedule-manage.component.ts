@@ -1,8 +1,9 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ScheduledCourseService } from 'src/app/Services/scheduled-course.service';
 import { ScheduledCourseDTO } from 'src/app/Models/scheduled-course.dto';
 import { Router } from '@angular/router';
-
+import { ToastService } from 'src/app/Services/toast.service';
 import { UntypedFormControl } from '@angular/forms';
 
 @Component({
@@ -10,14 +11,15 @@ import { UntypedFormControl } from '@angular/forms';
   templateUrl: './course-schedule-manage.component.html',
   styleUrls: ['./course-schedule-manage.component.scss'],
 })
-export class CourseScheduleManageComponent {
+export class CourseScheduleManageComponent implements OnInit {
   cursos!: ScheduledCourseDTO[];
 
   tituloCurso: UntypedFormControl;
 
   constructor(
     private scheduledCourseService: ScheduledCourseService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.tituloCurso = new UntypedFormControl('');
 
@@ -36,8 +38,10 @@ export class CourseScheduleManageComponent {
       .getCourses(filtroTitulo)
       .then((cursos) => {
         this.cursos = Object.assign([], cursos.data);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al cargar los cursos', false);
       });
-    //        .catch((error) => this.sharedService.errorLog(error.error));
   }
 
   verCurso(idCurso: number) {
@@ -45,12 +49,18 @@ export class CourseScheduleManageComponent {
   }
 
   actualizarCurso(idCurso: number): void {
-    this.router.navigateByUrl('../admin/calendario-curso/' + idCurso);
+    this.router.navigateByUrl('/admin/calendario-curso/' + idCurso);
   }
 
   async borrarCurso(idCurso: number): Promise<void> {
-    this.scheduledCourseService.deleteCourse(idCurso).then(() => {
-      this.cargarCursos();
-    });
+    this.scheduledCourseService
+      .deleteCourse(idCurso)
+      .then(() => {
+        this.cargarCursos();
+        this.toastService.mostrarMensaje('curso borrado correctamente', true);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al borrar el curso', false);
+      });
   }
 }

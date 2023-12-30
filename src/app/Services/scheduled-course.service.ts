@@ -30,7 +30,7 @@ export class ScheduledCourseService {
 
   getCourses(filtroTitulo?: string): Promise<any> {
     const filtro: string = filtroTitulo ? '?titulo[lk]=' + filtroTitulo : '';
-    return firstValueFrom(this.http.get(this.urlApi));
+    return firstValueFrom(this.http.get(this.urlApi + filtro));
   }
 
   getCourse(idCurso: string): Promise<any> {

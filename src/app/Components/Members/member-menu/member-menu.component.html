@@ -1,12 +1,12 @@
 <main>
-  <article>
-    <h1>Menú de usuario</h1>
-    <ul>
-      <li routerLink="/miembros/datos">Datos personales</li>
-      <li routerLink="/miembros/actividades">Historial de actividades</li>
-      <li routerLink="/miembros/contrasena">Cambio de contraseña</li>
-      <li (click)="logout()">Cerrar sesión</li>
-    </ul>
+  <article class="menu">
+    <div class="submenu">
+      <h1>Menú de usuario</h1>
+      <a routerLink="/miembros/datos">Datos personales</a>
+      <a routerLink="/miembros/actividades">Historial de actividades</a>
+      <a routerLink="/miembros/contrasena">Cambio de contraseña</a>
+      <a (click)="logout()">Cerrar sesión</a>
+    </div>
+    <app-admin-menu *ngIf="showAdminMenu"></app-admin-menu>
   </article>
-  <app-admin-menu></app-admin-menu>
 </main>

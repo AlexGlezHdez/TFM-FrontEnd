@@ -17,7 +17,7 @@ export class MemberService {
   constructor(private http: HttpClient) {
     this.controller = 'v1/users';
     this.urlApi = Constantes.urlAPI + this.controller;
-    this.urlApiPassword = Constantes.urlAPI + '/v1/password';
+    this.urlApiPassword = Constantes.urlAPI + 'v1/password';
   }
 
   getMembers(): Promise<any> {

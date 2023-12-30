@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { inject } from '@angular/core';
+
+import { AuthService } from 'src/app/Services/auth.service';
 
 import {
   ActivatedRouteSnapshot,
@@ -38,3 +41,18 @@ export class AuthGuard implements CanActivate {
     return false;
   }
 }
+
+export const authAdminGuard = () => {
+  const router = inject(Router);
+  const authService = inject(AuthService);
+
+  const response = authService
+    .isAdmin()
+    .then((resp) => {
+      return true;
+    })
+    .catch((resp) => {
+      return router.parseUrl('/miembros');
+    });
+  return response;
+};
