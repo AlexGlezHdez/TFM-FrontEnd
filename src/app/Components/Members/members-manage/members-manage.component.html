@@ -1,0 +1,35 @@
+<main>
+  <article>
+    <h1>Gestión de miembros</h1>
+
+    <div class="herramientas">
+      <div class="campo">
+        <input
+          type="text"
+          class="dato"
+          [class.dado]="nombreMiembro.value != ''"
+          id="tituloNoticia"
+          [formControl]="nombreMiembro"
+        />
+        <label for="tituloNoticia" class="etiqueta"
+          >Filtrar miembros por nombre</label
+        >
+      </div>
+      <button routerLink="../miembro" class="boton corto">Nueva</button>
+    </div>
+
+    <h2>Listado de miembros:</h2>
+
+    <div class="listado">
+      <div *ngFor="let miembro of miembros" class="elemento">
+        <app-list-element
+          [id]="miembro.id"
+          [linea_principal]="miembro.nombre"
+          [linea_secundaria]="miembro.email"
+          [updateFunction]="actualizarMiembro"
+          [deleteFunction]="borrarMiembro"
+        ></app-list-element>
+      </div>
+    </div>
+  </article>
+</main>

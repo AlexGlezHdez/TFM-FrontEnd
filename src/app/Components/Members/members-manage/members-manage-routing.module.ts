@@ -1,15 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CenterUpdateComponent } from './center-update.component';
 
+import { MembersManageComponent } from './members-manage.component';
 const routes: Routes = [
   {
     path: '',
-    component: CenterUpdateComponent,
-  },
-  {
-    path: ':id',
-    component: CenterUpdateComponent,
+    component: MembersManageComponent,
   },
 ];
 
@@ -17,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CenterUpdateRoutingModule {}
+export class MembersManageRoutingModule {}

@@ -1,11 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthorUpdateComponent } from './author-update.component';
 
-import { MembersListComponent } from './members-list.component';
 const routes: Routes = [
   {
     path: '',
-    component: MembersListComponent,
+    component: AuthorUpdateComponent,
+  },
+  {
+    path: ':id',
+    component: AuthorUpdateComponent,
   },
 ];
 
@@ -13,4 +17,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MembersListRoutingModule {}
+export class AuthorUpdateRoutingModule {}

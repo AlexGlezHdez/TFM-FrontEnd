@@ -1,4 +1,6 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -15,7 +17,9 @@ import { ToastService } from 'src/app/Services/toast.service';
   templateUrl: './activity-update.component.html',
   styleUrls: ['./activity-update.component.scss'],
 })
-export class ActivityUpdateComponent {
+export class ActivityUpdateComponent implements OnInit {
+  @ViewChild('imagenSeleccionada') imagenSeleccionada!: ElementRef;
+
   actividad!: ActivityDTO;
 
   idActividad: string;
@@ -39,13 +43,19 @@ export class ActivityUpdateComponent {
 
     this.titulo = new UntypedFormControl('', [Validators.required]);
     this.descripcion = new UntypedFormControl('', [Validators.required]);
-    this.imagen = new UntypedFormControl('', [Validators.required]);
+    if (!this.idActividad) {
+      this.imagen = new UntypedFormControl(null, [Validators.required]);
+    } else {
+      this.imagen = new UntypedFormControl(null, []);
+    }
 
     this.actividadForm = this.formBuilder.group({
       titulo: this.titulo,
       descripcion: this.descripcion,
       imagen: this.imagen,
     });
+
+    this.actividad = new ActivityDTO();
   }
 
   async ngOnInit() {
@@ -56,27 +66,28 @@ export class ActivityUpdateComponent {
           this.actividad = actividad.data;
           this.titulo.setValue(this.actividad.titulo);
           this.descripcion.setValue(this.actividad.descripcion);
-          this.imagen.setValue(this.actividad.imagen);
+          //          this.imagen.setValue(this.actividad.imagen);
+          this.imagenSeleccionada.nativeElement.src =
+            'assets/images/activities/' + this.actividad.imagen;
         })
         .catch((resp) => {
           this.toastService.mostrarMensaje('Error al cargar los datos', false);
         });
-    } else {
-      this.actividad = new ActivityDTO();
     }
   }
 
   enviarDatos(): void {
     this.actividad.titulo = this.titulo.value;
     this.actividad.descripcion = this.descripcion.value;
-    this.actividad.imagen = this.imagen.value;
+    this.actividad.imagen = this.imagen.value.name;
 
     // Gestionamos si se trata de una actualizacion o de una actividad nueva segun exista idActividad
     if (this.idActividad && !isNaN(Number(this.idActividad))) {
       // Es una actualización
       this.actividad.id = Number(this.idActividad.valueOf());
+      console.log(this.actividad);
       this.activityService
-        .updateActivity(this.actividad)
+        .updateActivity(this.actividad, this.ficheroImagen)
         .then((resp) => {
           this.toastService
             .mostrarMensaje('Acividad actualizada correctamente', true)
@@ -92,12 +103,12 @@ export class ActivityUpdateComponent {
         });
     } else {
       this.activityService
-        .createActivity(this.actividad)
+        .createActivity(this.actividad, this.ficheroImagen)
         .then((resp) => {
           this.toastService
             .mostrarMensaje('Actividad creada correctamente', true)
             .then(() => {
-              this.router.navigateByUrl('/admin/noticias');
+              this.router.navigateByUrl('/admin/actividades');
             });
         })
         .catch((resp) => {
@@ -112,5 +123,15 @@ export class ActivityUpdateComponent {
     this.ficheroImagen = event.target.files ? event.target.files[0] : null;
     this.actividadForm.patchValue({ imagen: this.ficheroImagen });
     this.actividadForm.get('imagen')?.updateValueAndValidity();
+
+    if (this.ficheroImagen) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target) {
+          this.imagenSeleccionada.nativeElement.src = e.target.result;
+        }
+      };
+      reader.readAsDataURL(this.ficheroImagen);
+    }
   }
 }

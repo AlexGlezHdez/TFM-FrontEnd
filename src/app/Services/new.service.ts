@@ -24,8 +24,6 @@ export class NewService {
   private urlApi: string;
   private newsController: string;
 
-  private mockupNewsDataFile: string = '/assets/news-data.json';
-
   constructor(private http: HttpClient, private imageService: ImageService) {
     this.newsController = 'v1/noticias';
     this.urlApiBase = Constantes.urlAPI;
@@ -52,8 +50,6 @@ export class NewService {
       idAutor: noticia.autor.id,
       imagen: noticia.imagen,
     };
-    console.log('Llamando a la API');
-    console.log(noticiaAPI);
     if (imagen) {
       this.imageService.uploadImage(imagen, 'news');
     }
@@ -63,7 +59,7 @@ export class NewService {
     );
   }
 
-  createNew(noticia: NewDTO): Promise<any> {
+  createNew(noticia: NewDTO, imagen?: File): Promise<any> {
     const noticiaAPI: NoticiaAPI = {
       tituloEntrada: noticia.titulo,
       contenido: noticia.contenido,
@@ -71,7 +67,9 @@ export class NewService {
       idAutor: noticia.autor.id,
       imagen: noticia.imagen,
     };
-    console.log(noticiaAPI);
+    if (imagen) {
+      this.imageService.uploadImage(imagen, 'news');
+    }
 
     return firstValueFrom(this.http.post(this.urlApi, noticiaAPI));
   }

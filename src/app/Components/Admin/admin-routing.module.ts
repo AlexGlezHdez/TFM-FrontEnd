@@ -13,8 +13,16 @@ const routes: Routes = [
     path: 'miembros',
     canActivate: [authAdminGuard],
     loadChildren: () =>
-      import('./members-list/members-list.module').then(
-        (m) => m.MembersListModule
+      import('../Members/members-manage/members-manage.module').then(
+        (m) => m.MembersManageModule
+      ),
+  },
+  {
+    path: 'miembro',
+    canActivate: [authAdminGuard],
+    loadChildren: () =>
+      import('../Members/member-update/member-update.module').then(
+        (m) => m.MemberUpdateModule
       ),
   },
   {
@@ -31,6 +39,22 @@ const routes: Routes = [
     loadChildren: () =>
       import('../News/new-update/new-update.module').then(
         (m) => m.NewUpdateModule
+      ),
+  },
+  {
+    path: 'autores',
+    canActivate: [authAdminGuard],
+    loadChildren: () =>
+      import('../News/authors-manage/authors-manage.module').then(
+        (m) => m.AuthorsManageModule
+      ),
+  },
+  {
+    path: 'autor',
+    canActivate: [authAdminGuard],
+    loadChildren: () =>
+      import('../News/author-update/author-update.module').then(
+        (m) => m.AuthorUpdateModule
       ),
   },
   {

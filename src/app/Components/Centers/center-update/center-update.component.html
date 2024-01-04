@@ -4,7 +4,7 @@
       <h1 *ngIf="!idCentro">Nuevo centro de buceo</h1>
       <h1 *ngIf="idCentro">Actualizar centro de buceo</h1>
       <div class="formulario">
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="text"
             [formControl]="nombre"
@@ -23,7 +23,7 @@
           </div>
         </div>
 
-        <div class="campo ancho">
+        <div class="campo">
           <input
             type="text"
             [formControl]="direccion"
@@ -44,26 +44,7 @@
           </div>
         </div>
 
-        <div class="campo ancho">
-          <input
-            type="text"
-            [formControl]="accesible"
-            class="dato"
-            [class.dado]="accesible.value != ''"
-            required="required"
-          />
-          <label for="accesible" class="etiqueta">Autor</label>
-
-          <div *ngIf="accesible.errors" class="error">
-            <span
-              *ngIf="accesible.errors && (accesible.touched || accesible.dirty)"
-            >
-              <span *ngIf="accesible.errors['required']"></span>
-            </span>
-          </div>
-        </div>
-
-        <div>Coordenadas geográficas del centro en el mapa</div>
+        <div class="titulo">Coordenadas geográficas del centro</div>
 
         <div class="campo">
           <input
@@ -99,15 +80,27 @@
               *ngIf="longitud.errors && (longitud.touched || longitud.dirty)"
             >
               <span *ngIf="longitud.errors['required']"
-                >La imagen es necesaria</span
+                >La longitud es necesaria</span
               >
             </span>
           </div>
         </div>
 
-        <button type="submit" [disabled]="!centerForm.valid" class="boton">
-          Actualizar
-        </button>
+        <div class="campo checkbox">
+          <label for="accesible" class="">Centro de buceo accesible</label>
+          <input
+            type="checkbox"
+            [formControl]="accesible"
+            class="dato"
+            [class.dado]="accesible.value != ''"
+          />
+        </div>
+
+        <div class="botonera">
+          <button type="submit" [disabled]="!centerForm.valid" class="boton">
+            Actualizar
+          </button>
+        </div>
       </div>
     </article>
   </form>

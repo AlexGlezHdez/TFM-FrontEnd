@@ -52,8 +52,7 @@
           <input
             type="date"
             [formControl]="fechaPublicacion"
-            class="dato"
-            [class.dado]="fechaPublicacion.value != ''"
+            class="dato dado"
             required="required"
           />
           <label for="fechaPublicacion" class="etiqueta"
@@ -69,24 +68,6 @@
             >
               <span *ngIf="fechaPublicacion.errors['required']"
                 >El codigo postal es necesario</span
-              >
-            </span>
-          </div>
-        </div>
-        <div class="campo">
-          <input
-            type="file"
-            class="dato"
-            [class.dado]="imagen.value != ''"
-            required="required"
-            (change)="onSelect($event)"
-          />
-          <label for="imagen" class="etiqueta">Imagen</label>
-
-          <div *ngIf="imagen.errors" class="error">
-            <span *ngIf="imagen.errors && (imagen.touched || imagen.dirty)">
-              <span *ngIf="imagen.errors['required']"
-                >La imagen es necesaria</span
               >
             </span>
           </div>
@@ -112,8 +93,35 @@
           </div>
         </div>
 
+        <div class="campo">
+          <span class="etiqueta imagen">Imagen</span>
+          <div class="dato imagen">
+            <img #imagenSeleccionada class="preview-imagen" />
+            <label for="imagen" class="boton icono"
+              ><img src="assets/images/icons/upload.svg" class="icono" />Subir
+              Imagen</label
+            >
+          </div>
+          <input
+            id="imagen"
+            type="file"
+            class="dato oculto"
+            [class.dado]="imagen.value != ''"
+            (change)="onSelect($event)"
+            accept="image/*"
+          />
+
+          <div *ngIf="imagen.errors" class="error">
+            <span *ngIf="imagen.errors && (imagen.touched || imagen.dirty)">
+              <span *ngIf="imagen.errors['required']"
+                >La imagen es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+
         <button type="submit" [disabled]="!newForm.valid" class="boton">
-          Actualizar
+          {{ idNoticia ? "Actualizar" : "Crear" }}
         </button>
       </div>
     </article>

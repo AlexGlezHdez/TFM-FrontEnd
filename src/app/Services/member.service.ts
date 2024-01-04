@@ -20,8 +20,10 @@ export class MemberService {
     this.urlApiPassword = Constantes.urlAPI + 'v1/password';
   }
 
-  getMembers(): Promise<any> {
-    return firstValueFrom(this.http.get(this.urlApi));
+  getMembers(filtroMiembro?: string): Promise<any> {
+    const filtro: string = filtroMiembro ? '?nombre[lk]=' + filtroMiembro : '';
+
+    return firstValueFrom(this.http.get(this.urlApi + filtro));
   }
 
   getMember(idMember: number): Promise<any> {
@@ -32,6 +34,10 @@ export class MemberService {
     return firstValueFrom(
       this.http.patch(this.urlApi + '/' + miembro.id, miembro)
     );
+  }
+
+  createMember(miembro: MemberDTO): Promise<any> {
+    return firstValueFrom(this.http.post(this.urlApi, miembro));
   }
 
   updatePassword(
@@ -46,5 +52,9 @@ export class MemberService {
         password_nueva: passwordNueva,
       })
     );
+  }
+
+  deleteMember(idMiembro: number): Promise<any> {
+    return firstValueFrom(this.http.delete(this.urlApi + '/' + idMiembro));
   }
 }

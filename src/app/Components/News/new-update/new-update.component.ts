@@ -1,5 +1,6 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
 import {
   UntypedFormBuilder,
   UntypedFormControl,
@@ -19,6 +20,8 @@ import { ToastService } from 'src/app/Services/toast.service';
   styleUrls: ['./new-update.component.scss'],
 })
 export class NewUpdateComponent implements OnInit {
+  @ViewChild('imagenSeleccionada') imagenSeleccionada!: ElementRef;
+
   noticia!: NewDTO;
 
   idNoticia: string;
@@ -49,7 +52,11 @@ export class NewUpdateComponent implements OnInit {
     this.contenido = new UntypedFormControl('', [Validators.required]);
     this.idAutor = new UntypedFormControl(null, [Validators.required]);
     this.fechaPublicacion = new UntypedFormControl('', [Validators.required]);
-    this.imagen = new UntypedFormControl(null, [Validators.required]);
+    if (!this.idNoticia) {
+      this.imagen = new UntypedFormControl(null, [Validators.required]);
+    } else {
+      this.imagen = new UntypedFormControl(null, []);
+    }
 
     this.newForm = this.formBuilder.group({
       titulo: this.titulo,
@@ -74,6 +81,8 @@ export class NewUpdateComponent implements OnInit {
             this.noticia.fechaPublicacion.substring(0, 10)
           );
           //        this.imagen.setValue(this.noticia.imagen);
+          this.imagenSeleccionada.nativeElement.src =
+            'assets/images/news/' + this.noticia.imagen;
         });
       }
     });
@@ -123,7 +132,7 @@ export class NewUpdateComponent implements OnInit {
         });
     } else {
       this.newService
-        .createNew(this.noticia)
+        .createNew(this.noticia, this.ficheroImagen)
         .then((resp) => {
           this.toastService
             .mostrarMensaje('Noticia creada correctamente', true)
@@ -141,5 +150,15 @@ export class NewUpdateComponent implements OnInit {
     this.ficheroImagen = event.target.files ? event.target.files[0] : null;
     this.newForm.patchValue({ imagen: this.ficheroImagen });
     this.newForm.get('imagen')?.updateValueAndValidity();
+
+    if (this.ficheroImagen) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        if (e.target) {
+          this.imagenSeleccionada.nativeElement.src = e.target.result;
+        }
+      };
+      reader.readAsDataURL(this.ficheroImagen);
+    }
   }
 }

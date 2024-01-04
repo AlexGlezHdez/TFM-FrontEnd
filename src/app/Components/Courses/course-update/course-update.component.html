@@ -22,14 +22,14 @@
             </span>
           </div>
         </div>
-        <div class="campo ancho">
-          <input
+        <div class="campo">
+          <textarea
             type="text"
             [formControl]="descripcion"
-            class="dato"
+            class="dato alto"
             [class.dado]="descripcion.value != ''"
             required="required"
-          />
+          ></textarea>
           <label for="descripcion" class="etiqueta"
             >Descripción del curso</label
           >
@@ -47,24 +47,6 @@
           </div>
         </div>
         <div class="campo">
-          <input
-            type="text"
-            [formControl]="imagen"
-            class="dato"
-            [class.dado]="imagen.value != ''"
-            required="required"
-          />
-          <label for="imagen" class="etiqueta">Imagen</label>
-
-          <div *ngIf="imagen.errors" class="error">
-            <span *ngIf="imagen.errors && (imagen.touched || imagen.dirty)">
-              <span *ngIf="imagen.errors['required']"
-                >La imagen es necesaria</span
-              >
-            </span>
-          </div>
-        </div>
-        <div class="campo ancho">
           <input
             type="text"
             [formControl]="duracion"
@@ -87,9 +69,38 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!courseForm.valid" class="boton">
-          Actualizar
-        </button>
+        <div class="campo">
+          <span class="etiqueta imagen">Imagen</span>
+          <div class="dato imagen">
+            <img #imagenSeleccionada class="preview-imagen" />
+            <label for="imagen" class="boton icono"
+              ><img src="assets/images/icons/upload.svg" class="icono" />Subir
+              Imagen</label
+            >
+          </div>
+          <input
+            id="imagen"
+            type="file"
+            class="dato oculto"
+            [class.dado]="imagen.value != ''"
+            (change)="onSelect($event)"
+            accept="image/*"
+          />
+
+          <div *ngIf="imagen.errors" class="error">
+            <span *ngIf="imagen.errors && (imagen.touched || imagen.dirty)">
+              <span *ngIf="imagen.errors['required']"
+                >La imagen es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <div class="botonera">
+          <button type="submit" [disabled]="!courseForm.valid" class="boton">
+            Actualizar
+          </button>
+        </div>
       </div>
     </article>
   </form>

@@ -5,13 +5,21 @@
       <h1 *ngIf="idCursoAgendado">Actualizar curso agendado</h1>
       <div class="formulario">
         <div class="campo">
-          <input
-            type="text"
-            [formControl]="idCurso"
+          <select
             class="dato"
             [class.dado]="idCurso.value != ''"
-            required="required"
-          />
+            [formControl]="idCurso"
+          >
+            <option
+              *ngFor="let curso of cursos"
+              [ngValue]="curso.id"
+              [attr.selected]="
+                curso.id === cursoAgendado.curso.id ? 'selected' : null
+              "
+            >
+              {{ curso.titulo }}
+            </option>
+          </select>
           <label for="idCurso" class="etiqueta">Curso a impartir</label>
 
           <div *ngIf="idCurso.errors" class="error">
@@ -23,13 +31,13 @@
           </div>
         </div>
         <div class="campo">
-          <input
+          <textarea
             type="text"
             [formControl]="detalles"
-            class="dato"
+            class="dato alto"
             [class.dado]="detalles.value != ''"
             required="required"
-          />
+          ></textarea>
           <label for="detalles" class="etiqueta">Detalles del curso</label>
 
           <div *ngIf="detalles.errors" class="error">
@@ -44,7 +52,7 @@
         </div>
         <div class="campo ancho">
           <input
-            type="text"
+            type="date"
             [formControl]="fecha"
             class="dato"
             [class.dado]="fecha.value != ''"
@@ -61,9 +69,11 @@
           </div>
         </div>
 
-        <button type="submit" [disabled]="!courseForm.valid" class="boton">
-          {{ idCursoAgendado ? "Actualizar" : "Crear" }}
-        </button>
+        <div class="botonera">
+          <button type="submit" [disabled]="!courseForm.valid" class="boton">
+            {{ idCursoAgendado ? "Actualizar" : "Crear" }}
+          </button>
+        </div>
       </div>
     </article>
   </form>

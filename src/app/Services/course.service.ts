@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CourseDTO } from '../Models/course.dto';
+import { ImageService } from './image.service';
 
 import { firstValueFrom } from 'rxjs';
 
@@ -14,9 +15,7 @@ export class CourseService {
   private urlApi: string;
   private courseController: string;
 
-  private mockupCoursesDataFile: string = '/assets/courses-data.json';
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private imageService: ImageService) {
     this.courseController = 'v1/cursos';
     this.urlApiBase = Constantes.urlAPI;
     this.urlApi = this.urlApiBase + this.courseController;
@@ -31,11 +30,19 @@ export class CourseService {
     return firstValueFrom(this.http.get(this.urlApi + '/' + idCurso));
   }
 
-  updateCourse(curso: CourseDTO): Promise<any> {
+  updateCourse(curso: CourseDTO, imagen?: File): Promise<any> {
+    if (imagen) {
+      this.imageService.uploadImage(imagen, 'courses');
+    }
+
     return firstValueFrom(this.http.patch(this.urlApi + '/' + curso.id, curso));
   }
 
-  createCourse(curso: CourseDTO): Promise<any> {
+  createCourse(curso: CourseDTO, imagen?: File): Promise<any> {
+    if (imagen) {
+      this.imageService.uploadImage(imagen, 'courses');
+    }
+
     return firstValueFrom(this.http.post(this.urlApi, curso));
   }
 

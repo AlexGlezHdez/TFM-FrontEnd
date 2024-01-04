@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -36,7 +37,7 @@ export class CenterUpdateComponent {
 
     this.nombre = new UntypedFormControl('', [Validators.required]);
     this.direccion = new UntypedFormControl('', [Validators.required]);
-    this.accesible = new UntypedFormControl('', [Validators.required]);
+    this.accesible = new UntypedFormControl(false);
     this.latitud = new UntypedFormControl('', [Validators.required]);
     this.longitud = new UntypedFormControl('', [Validators.required]);
 

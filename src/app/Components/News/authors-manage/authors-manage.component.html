@@ -1,0 +1,34 @@
+<main>
+  <article>
+    <h1>Gestión de autores</h1>
+
+    <div class="herramientas">
+      <div class="campo">
+        <input
+          type="text"
+          class="dato"
+          [class.dado]="nombreAutor.value != ''"
+          id="nombreAutor"
+          [formControl]="nombreAutor"
+        />
+        <label for="nombreAutor" class="etiqueta"
+          >Filtrar autores por nombre</label
+        >
+      </div>
+      <button routerLink="../autor" class="boton corto">Nueva</button>
+    </div>
+
+    <h2>Listado de autores:</h2>
+
+    <div class="listado">
+      <div *ngFor="let autor of autores" class="elemento">
+        <app-list-element
+          [id]="autor.id"
+          [linea_principal]="autor.nombre || ''"
+          [updateFunction]="actualizarAutor"
+          [deleteFunction]="borrarAutor"
+        ></app-list-element>
+      </div>
+    </div>
+  </article>
+</main>

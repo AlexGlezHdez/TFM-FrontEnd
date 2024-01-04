@@ -5,18 +5,16 @@ export class MemberDTO {
   codigoPostal: string;
   ciudad: string;
   telefono: string;
+  email: string;
+  admin: boolean;
 
-  constructor(
-    nombre: string,
-    direccion: string,
-    codigoPostal: string,
-    ciudad: string,
-    telefono: string
-  ) {
-    this.nombre = nombre;
-    this.direccion = direccion;
-    this.codigoPostal = codigoPostal;
-    this.ciudad = ciudad;
-    this.telefono = telefono;
+  constructor() {
+    this.nombre = '';
+    this.direccion = '';
+    this.codigoPostal = '';
+    this.ciudad = '';
+    this.telefono = '';
+    this.email = '';
+    this.admin = false;
   }
 }

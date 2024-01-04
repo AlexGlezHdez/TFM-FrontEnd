@@ -1,0 +1,146 @@
+<main>
+  <form [formGroup]="memberForm" (ngSubmit)="enviarDatos()">
+    <article class="articulo">
+      <h1 *ngIf="!idMiembro">Nuevo miembro</h1>
+      <h1 *ngIf="idMiembro">Actualizar miembro</h1>
+      <div class="formulario">
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="nombre"
+            class="dato"
+            [class.dado]="nombre.value != ''"
+            required="required"
+          />
+          <label for="nombre" class="etiqueta">Nombre</label>
+
+          <div *ngIf="nombre.errors" class="error">
+            <span *ngIf="nombre.errors && (nombre.touched || nombre.dirty)">
+              <span *ngIf="nombre.errors['required']"
+                >El nombre es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="text"
+            [formControl]="direccion"
+            class="dato"
+            [class.dado]="direccion.value != ''"
+            required="required"
+          />
+          <label for="direccion" class="etiqueta">Direccion</label>
+
+          <div *ngIf="direccion.errors" class="error">
+            <span
+              *ngIf="direccion.errors && (direccion.touched || direccion.dirty)"
+            >
+              <span *ngIf="direccion.errors['required']"
+                >La dirección es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <div class="campo corto">
+          <input
+            type="text"
+            [formControl]="codigoPostal"
+            class="dato"
+            [class.dado]="codigoPostal.value != ''"
+            required="required"
+          />
+          <label for="codigoPostal" class="etiqueta">Codigo Postal</label>
+
+          <div *ngIf="codigoPostal.errors" class="error">
+            <span
+              *ngIf="
+                codigoPostal.errors &&
+                (codigoPostal.touched || codigoPostal.dirty)
+              "
+            >
+              <span *ngIf="codigoPostal.errors['required']"
+                >El codigo postal es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+
+        <div class="campo medio">
+          <input
+            type="text"
+            [formControl]="ciudad"
+            class="dato"
+            [class.dado]="ciudad.value != ''"
+            required="required"
+          />
+          <label for="ciudad" class="etiqueta">Ciudad</label>
+
+          <div *ngIf="ciudad.errors" class="error">
+            <span *ngIf="ciudad.errors && (ciudad.touched || ciudad.dirty)">
+              <span *ngIf="ciudad.errors['required']"
+                >La ciudad es necesaria</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo corto">
+          <input
+            type="text"
+            [formControl]="telefono"
+            class="dato"
+            [class.dado]="telefono.value != ''"
+            required="required"
+          />
+          <label for="telefono" class="etiqueta">Teléfono</label>
+
+          <div *ngIf="telefono.errors" class="error">
+            <span
+              *ngIf="telefono.errors && (telefono.touched || telefono.dirty)"
+            >
+              <span *ngIf="telefono.errors['required']"
+                >El teléfono es necesario</span
+              >
+            </span>
+          </div>
+        </div>
+        <div class="campo">
+          <input
+            type="email"
+            [formControl]="email"
+            class="dato"
+            [class.dado]="email.value != ''"
+            required="required"
+          />
+          <label for="email" class="etiqueta">E-mail</label>
+
+          <div
+            *ngIf="email.errors && (email.touched || email.dirty)"
+            class="error"
+          >
+            <div *ngIf="email.errors['required']">El correo es necesario</div>
+            <div *ngIf="email.errors['pattern']">
+              El correo no tiene el formato adecuado
+            </div>
+          </div>
+        </div>
+        <div class="campo checkbox medio">
+          <label for="admin" class="">El miembro es administrador</label>
+          <input
+            type="checkbox"
+            [formControl]="admin"
+            class="dato"
+            [class.dado]="admin.value != ''"
+          />
+        </div>
+
+        <div class="botonera">
+          <button type="submit" [disabled]="!memberForm.valid" class="boton">
+            Actualizar
+          </button>
+        </div>
+      </div>
+    </article>
+  </form>
+</main>

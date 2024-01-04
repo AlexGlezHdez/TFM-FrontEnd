@@ -25,19 +25,19 @@ export class AuthorService {
     return firstValueFrom(this.http.get(this.urlApi + filtro));
   }
 
-  getAutor(idAutor: string): Promise<any> {
+  getAuthor(idAutor: string): Promise<any> {
     return firstValueFrom(this.http.get(this.urlApi + '/' + idAutor));
   }
 
-  updateAutor(autor: AuthorDTO): Promise<any> {
+  updateAuthor(autor: AuthorDTO): Promise<any> {
     return firstValueFrom(this.http.patch(this.urlApi + '/' + autor.id, autor));
   }
 
-  createAutor(autor: AuthorDTO): Promise<any> {
+  createAuthor(autor: AuthorDTO): Promise<any> {
     return firstValueFrom(this.http.post(this.urlApi, autor));
   }
 
-  deleteAutor(idAutor: number): Promise<any> {
+  deleteAuthor(idAutor: number): Promise<any> {
     return firstValueFrom(this.http.delete(this.urlApi + '/' + idAutor));
   }
 }

@@ -46,17 +46,24 @@
             </span>
           </div>
         </div>
-        <div class="campo">
-          <input
-            type="file"
-            [formControl]="imagen"
-            class="dato"
-            [class.dado]="imagen.value != ''"
-            required="required"
-            (change)="onSelect($event)"
-          />
-          <label for="imagen" class="etiqueta">Imagen</label>
 
+        <div class="campo">
+          <span class="etiqueta imagen">Imagen</span>
+          <div class="dato imagen">
+            <img #imagenSeleccionada class="preview-imagen" />
+            <label for="imagen" class="boton icono"
+              ><img src="assets/images/icons/upload.svg" class="icono" />Subir
+              Imagen</label
+            >
+          </div>
+          <input
+            id="imagen"
+            type="file"
+            class="dato oculto"
+            [class.dado]="imagen.value != ''"
+            (change)="onSelect($event)"
+            accept="image/*"
+          />
           <div *ngIf="imagen.errors" class="error">
             <span *ngIf="imagen.errors && (imagen.touched || imagen.dirty)">
               <span *ngIf="imagen.errors['required']"

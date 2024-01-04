@@ -1,3 +1,4 @@
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import {
   UntypedFormBuilder,
@@ -8,13 +9,16 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { ScheduledCourseDTO } from 'src/app/Models/scheduled-course.dto';
 import { ScheduledCourseService } from 'src/app/Services/scheduled-course.service';
+import { CourseDTO } from 'src/app/Models/course.dto';
+import { CourseService } from 'src/app/Services/course.service';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-course-schedule-update',
   templateUrl: './course-schedule-update.component.html',
   styleUrls: ['./course-schedule-update.component.scss'],
 })
-export class CourseScheduleUpdateComponent {
+export class CourseScheduleUpdateComponent implements OnInit {
   cursoAgendado!: ScheduledCourseDTO;
 
   idCursoAgendado: string;
@@ -24,11 +28,15 @@ export class CourseScheduleUpdateComponent {
   detalles: UntypedFormControl;
   courseForm: UntypedFormGroup;
 
+  cursos?: CourseDTO[];
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: UntypedFormBuilder,
-    private scheduledCourseService: ScheduledCourseService
+    private scheduledCourseService: ScheduledCourseService,
+    private toastService: ToastService,
+    private courseService: CourseService
   ) {
     this.idCursoAgendado =
       this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -42,21 +50,34 @@ export class CourseScheduleUpdateComponent {
       fecha: this.fecha,
       detalles: this.detalles,
     });
+
+    this.cursoAgendado = new ScheduledCourseDTO();
   }
 
   async ngOnInit() {
-    if (this.idCursoAgendado) {
-      await this.scheduledCourseService
-        .getCourse(this.idCursoAgendado)
-        .then((cursoAgendado) => {
-          this.cursoAgendado = cursoAgendado.data;
-          this.idCurso.setValue(this.cursoAgendado.curso.id);
-          this.fecha.setValue(this.cursoAgendado.fecha);
-          this.detalles.setValue(this.cursoAgendado.detalles);
-        });
-    } else {
-      this.cursoAgendado = new ScheduledCourseDTO();
-    }
+    await this.cargarCursos().then(() => {
+      if (this.idCursoAgendado) {
+        this.scheduledCourseService
+          .getCourse(this.idCursoAgendado)
+          .then((cursoAgendado) => {
+            this.cursoAgendado = cursoAgendado.data;
+            this.idCurso.setValue(this.cursoAgendado.curso.id);
+            this.fecha.setValue(this.cursoAgendado.fecha.substring(0, 10));
+            this.detalles.setValue(this.cursoAgendado.detalles);
+          });
+      }
+    });
+  }
+
+  private async cargarCursos(): Promise<void> {
+    await this.courseService
+      .getCourses()
+      .then((cursos) => {
+        this.cursos = Object.assign([], cursos.data);
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje('Error al cargar los datos', false);
+      });
   }
 
   enviarDatos(): void {
@@ -68,12 +89,37 @@ export class CourseScheduleUpdateComponent {
     if (this.idCursoAgendado && !isNaN(Number(this.idCursoAgendado))) {
       // Es una actualización
       this.cursoAgendado.id = Number(this.idCursoAgendado.valueOf());
-      console.log('Actualizando cursoAgendado...');
-      console.log(JSON.stringify(this.cursoAgendado));
-      this.scheduledCourseService.updateCourse(this.cursoAgendado);
+      this.scheduledCourseService
+        .updateCourse(this.cursoAgendado)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Agenda del curso actualizada correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/calendario-cursos');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al actualizar la noticia',
+            false
+          );
+        });
     } else {
-      console.log('Creando cursoAgendado...');
-      this.scheduledCourseService.createCourse(this.cursoAgendado);
+      this.scheduledCourseService
+        .createCourse(this.cursoAgendado)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Agenda del curso creada correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/calendario-cursos');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al crear la agenda del curso',
+            false
+          );
+        });
     }
   }
 }

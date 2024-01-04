@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivityDTO } from '../Models/activity.dto';
+import { ImageService } from './image.service';
 
 import { firstValueFrom } from 'rxjs';
 
@@ -20,9 +21,7 @@ export class ActivityService {
   private urlApi: string;
   private activityController: string;
 
-  private mockupNewsDataFile: string = '/assets/activities-data.json';
-
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private imageService: ImageService) {
     this.activityController = 'v1/actividades';
     this.urlApi = Constantes.urlAPI + this.activityController;
   }
@@ -38,13 +37,21 @@ export class ActivityService {
     return firstValueFrom(this.http.get(this.urlApi + '/' + idActividad));
   }
 
-  updateActivity(actividad: ActivityDTO): Promise<any> {
+  updateActivity(actividad: ActivityDTO, imagen?: File): Promise<any> {
+    if (imagen) {
+      this.imageService.uploadImage(imagen, 'activities');
+    }
+
     return firstValueFrom(
       this.http.patch(this.urlApi + '/' + actividad.id, actividad)
     );
   }
 
-  createActivity(actividad: ActivityDTO): Promise<any> {
+  createActivity(actividad: ActivityDTO, imagen?: File): Promise<any> {
+    if (imagen) {
+      this.imageService.uploadImage(imagen, 'activities');
+    }
+
     return firstValueFrom(this.http.post(this.urlApi, actividad));
   }
 
