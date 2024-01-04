@@ -1,11 +1,10 @@
-@import "/src/assets/styles/variables";
 @import "/src/assets/styles/common";
 
 .formulario {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem 1rem;
-  justify-content: start;
+  justify-content: flex-start;
 
   margin-bottom: 4rem;
 
