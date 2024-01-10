@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ScheduledActivityDTO } from 'src/app/Models/scheduled-activity.dto';
 import { ScheduledActivityService } from 'src/app/Services/scheduled-activity.service';
 import { LocalStorageService } from 'src/app/Services/local-storage.service';
+import { Router } from '@angular/router';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-member-activities',
@@ -14,7 +16,9 @@ export class MemberActivitiesComponent {
 
   constructor(
     private scheduledActivityService: ScheduledActivityService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private router: Router,
+    private toastService: ToastService
   ) {
     this.cargarActividadesMiembro();
     this.idMiembro = this.localStorageService.get('user_id') || '';
@@ -22,7 +26,7 @@ export class MemberActivitiesComponent {
 
   private async cargarActividadesMiembro(): Promise<void> {
     await this.scheduledActivityService
-      .getMemberActivities(this.idMiembro)
+      .getMemberActivities()
       .then((actividades) => {
         this.actividades = actividades.data;
       });
@@ -37,12 +41,25 @@ export class MemberActivitiesComponent {
   }
 
   // Borra al usuario activo de una actividad dada
-  async borrarDeActividad(idActividad: number) {
-    alert('Borrando de actividad');
+  borrarDeActividad = async (idActividad: number): Promise<void> => {
     await this.scheduledActivityService
-      .deleteMemberFromActivity(this.idMiembro, idActividad)
-      .then((actividades) => {
-        this.actividades = actividades;
+      .dismissFromActivity(idActividad)
+      .then(() => {
+        this.cargarActividadesMiembro();
+        this.toastService.mostrarMensaje(
+          'Borrado de la actividad correctamente',
+          true
+        );
+      })
+      .catch((resp) => {
+        this.toastService.mostrarMensaje(
+          'Error al borrarse de la actividad',
+          false
+        );
       });
-  }
+  };
+
+  previewActividad = (idActividad: number): void => {
+    this.router.navigateByUrl('/actividad/' + idActividad);
+  };
 }

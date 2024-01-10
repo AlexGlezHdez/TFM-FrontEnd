@@ -7,35 +7,18 @@
       inscrito y borrarte de aquellas en las que ya no quieras participar.
     </p>
 
-    <div class="listado-actividades">
-      <div *ngFor="let actividadAgendada of actividades" class="actividad">
-        <div
-          class="imagen"
-          [routerLink]="['/actividad/', actividadAgendada.id]"
-        >
-          <img
-            src="/assets/images/activities/{{
-              actividadAgendada.actividad.imagen
-            }}"
-            alt=""
-          />
-        </div>
-        <div
-          class="titulo"
-          [routerLink]="['/actividad/', actividadAgendada.id]"
-        >
-          {{ actividadAgendada.actividad }}
-        </div>
-        <div class="datos">Fecha: {{ actividadAgendada.fecha }}</div>
-        <div class="">
-          <button
-            class=""
-            *ngIf="!actividadPasada(actividadAgendada.fecha)"
-            (click)="borrarDeActividad(actividadAgendada.id)"
-          >
-            Borrarse
-          </button>
-        </div>
+    <div class="listado">
+      <div *ngFor="let actividadAgendada of actividades" class="elemento">
+        <app-list-element
+          [id]="actividadAgendada.id"
+          [linea_principal]="actividadAgendada.actividad.titulo"
+          [linea_secundaria]="actividadAgendada.fecha | date : 'dd-MM-yyyy'"
+          [previewFunction]="previewActividad"
+          [updateFunction]=""
+          [deleteFunction]="
+            !actividadPasada(actividadAgendada.fecha) ? borrarDeActividad : ''
+          "
+        ></app-list-element>
       </div>
     </div>
   </article>

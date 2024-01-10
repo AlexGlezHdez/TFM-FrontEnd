@@ -12,6 +12,7 @@ export class ListElementComponent {
   @Input() linea_secundaria: string | null = '';
   @Input() linea_adicional: string | null = '';
   @Input() info_extra: string | null = '';
+  @Input() previewFunction: any = null;
   @Input() updateFunction: any = null;
   @Input() deleteFunction: any = null;
 

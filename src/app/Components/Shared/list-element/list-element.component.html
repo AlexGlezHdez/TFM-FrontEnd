@@ -18,6 +18,9 @@
       title="Centro de buceo accesible"
     />
   </div>
+  <button *ngIf="previewFunction" (click)="previewFunction(id)" class="accion">
+    <img src="/assets/images/icons/preview.svg" class="icono" alt="Editar" />
+  </button>
   <button *ngIf="updateFunction" (click)="updateFunction(id)" class="accion">
     <img src="/assets/images/icons/edit.svg" class="icono" alt="Editar" />
   </button>

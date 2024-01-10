@@ -15,6 +15,11 @@ interface ActividadAgendadaAPI {
   idActividad: number;
 }
 
+interface ActividadMiembro {
+  idActividad: number;
+  idUsuario?: number;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -70,11 +75,11 @@ export class ScheduledActivityService {
   }
 
   // Recupera todas las actividades en las que un miembro dado está apuntado
-  getMemberActivities(idMiembro: string): Promise<any> {
-    return firstValueFrom(this.http.get(this.urlApi + '/' + idMiembro));
+  getMemberActivities(): Promise<any> {
+    return firstValueFrom(this.http.get(this.urlApi + '/enroled'));
   }
 
-  // Elemina a un miembro dado de una actividad dada y devuelve las actividades en las que continua apuntado
+  // Elimina a un miembro dado de una actividad dada y devuelve las actividades en las que continua apuntado
   deleteMemberFromActivity(
     idMiembro: string,
     idActividad: number
@@ -82,5 +87,34 @@ export class ScheduledActivityService {
     return firstValueFrom(
       this.http.delete(this.urlApi + '/' + idActividad + '/' + idMiembro)
     );
+  }
+
+  enrolToActivity(idActividad: string): Promise<any> {
+    const actividad: ActividadMiembro = {
+      idActividad: Number(idActividad),
+    };
+    return firstValueFrom(this.http.post(this.urlApi + '/enrol', actividad));
+  }
+
+  dismissFromActivity(idActividad: number): Promise<any> {
+    return firstValueFrom(
+      this.http.delete(this.urlApi + '/enrol/' + idActividad)
+    );
+  }
+
+  isEnroled(idActividad: string): Promise<any> {
+    return firstValueFrom(this.http.get(this.urlApi + '/enrol/' + idActividad))
+      .then(() => true)
+      .catch(() => false);
+  }
+
+  getEnroledToActivity(idActividad: string): Promise<any> {
+    return firstValueFrom(
+      this.http.get(this.urlApi + '/enroled/' + idActividad)
+    )
+      .then((resp) => {
+        return resp;
+      })
+      .catch((resp) => console.log(resp));
   }
 }

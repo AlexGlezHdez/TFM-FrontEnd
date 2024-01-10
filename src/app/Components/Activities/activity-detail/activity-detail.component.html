@@ -10,10 +10,25 @@
     </div>
     <div class="datos">
       <span>Fecha {{ actividadAgendada.fecha }}</span> -
-      <span>Plazas: {{ actividadAgendada.plazas }}</span>
+      <span
+        >Plazas libres: {{ actividadAgendada.plazas - plazasOcupadas }} de
+        {{ actividadAgendada.plazas }}
+      </span>
     </div>
     <div class="contenido">{{ actividadAgendada.actividad.descripcion }}</div>
     <div class="contenido">{{ actividadAgendada.detalles }}</div>
+
+    <div
+      *ngIf="!usuarioInscrito && actividadAgendada.plazas > plazasOcupadas"
+      class="botonera"
+    >
+      <div>¿Te apetece venir?</div>
+      <a (click)="inscribirUsuario()" class="boton corto">¡Me apunto!</a>
+    </div>
+    <div *ngIf="usuarioInscrito" class="botonera">
+      <div>¿Te ha surgido un imprevisto?</div>
+      <a (click)="borrarUsuario()" class="boton corto">No puedo ir</a>
+    </div>
 
     <div class="enlace-atras">
       <a routerLink="/noticias"
