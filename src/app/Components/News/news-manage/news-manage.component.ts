@@ -53,14 +53,19 @@ export class NewsManageComponent implements OnInit {
   };
 
   borrarNoticia = async (idNoticia: number): Promise<void> => {
-    await this.newService
-      .deleteNew(idNoticia)
-      .then(() => {
-        this.cargarNoticias();
-        this.toastService.mostrarMensaje('Noticia borrada correctamente', true);
-      })
-      .catch((resp) => {
-        this.toastService.mostrarMensaje('Error al borrar la noticia', false);
-      });
+    if (confirm('¿Seguro que deseas borrar esta noticia?')) {
+      await this.newService
+        .deleteNew(idNoticia)
+        .then(() => {
+          this.cargarNoticias();
+          this.toastService.mostrarMensaje(
+            'Noticia borrada correctamente',
+            true
+          );
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje('Error al borrar la noticia', false);
+        });
+    }
   };
 }

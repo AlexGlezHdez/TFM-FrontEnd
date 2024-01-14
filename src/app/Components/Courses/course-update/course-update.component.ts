@@ -84,7 +84,6 @@ export class CourseUpdateComponent implements OnInit {
 
     if (this.idCurso && !isNaN(Number(this.idCurso))) {
       this.curso.id = Number(this.idCurso.valueOf());
-      console.log(JSON.stringify(this.curso));
       this.courseService
         .updateCourse(this.curso, this.ficheroImagen)
         .then((resp) => {

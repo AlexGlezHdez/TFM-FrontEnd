@@ -106,7 +106,9 @@ export class NewUpdateComponent implements OnInit {
       id: this.idAutor.value,
     };
     this.noticia.fechaPublicacion = this.fechaPublicacion.value;
-    this.noticia.imagen = this.imagen.value.name;
+    if (this.imagen.value) {
+      this.noticia.imagen = this.imagen.value.name;
+    }
 
     const formData = new FormData();
     Object.entries(this.newForm.value).forEach(([key, value]: any[]) => {

@@ -49,14 +49,19 @@ export class CentersManageComponent {
   };
 
   borrarCentro = async (idCentro: number): Promise<void> => {
-    await this.centerService
-      .deleteCenter(idCentro)
-      .then(() => {
-        this.cargarCentros();
-        this.toastService.mostrarMensaje('Centro borrado correctamente', true);
-      })
-      .catch((resp) => {
-        this.toastService.mostrarMensaje('Error al borrar el centro', false);
-      });
+    if (confirm('¿Seguro que deseas borrar este centro?')) {
+      await this.centerService
+        .deleteCenter(idCentro)
+        .then(() => {
+          this.cargarCentros();
+          this.toastService.mostrarMensaje(
+            'Centro borrado correctamente',
+            true
+          );
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje('Error al borrar el centro', false);
+        });
+    }
   };
 }

@@ -9,6 +9,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { CenterDTO } from 'src/app/Models/center.dto';
 import { CenterService } from 'src/app/Services/center.service';
+import { ToastService } from 'src/app/Services/toast.service';
 
 @Component({
   selector: 'app-center-update',
@@ -31,6 +32,8 @@ export class CenterUpdateComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private formBuilder: UntypedFormBuilder,
+    private toastService: ToastService,
+
     private centerService: CenterService
   ) {
     this.idCentro = this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -48,6 +51,8 @@ export class CenterUpdateComponent {
       latitud: this.latitud,
       longitud: this.longitud,
     });
+
+    this.centro = new CenterDTO();
   }
 
   async ngOnInit(): Promise<void> {
@@ -58,23 +63,12 @@ export class CenterUpdateComponent {
           lat: centro.data.latitud,
           lng: centro.data.longitud,
         };
-
         this.nombre.setValue(this.centro.nombre);
         this.direccion.setValue(this.centro.direccion);
         this.accesible.setValue(this.centro.accesible);
         this.latitud.setValue(this.centro.position.lat);
         this.longitud.setValue(this.centro.position.lng);
       });
-    } else {
-      this.centro = new CenterDTO(
-        '',
-        '',
-        '',
-        '',
-        '',
-        { lat: 0, lng: 0 },
-        false
-      );
     }
   }
 
@@ -89,12 +83,35 @@ export class CenterUpdateComponent {
     if (this.idCentro && !isNaN(Number(this.idCentro))) {
       // Es una actualización
       this.centro.id = Number(this.idCentro.valueOf());
-      console.log('Actualizando centro...');
-      console.log(JSON.stringify(this.centro));
-      this.centerService.updateCenter(this.centro);
+      this.centerService
+        .updateCenter(this.centro)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Centro actualizado correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/centros-buceo');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al actualizar el centro',
+            false
+          );
+        });
     } else {
-      console.log('Creando centro...');
-      this.centerService.createCenter(this.centro);
+      // Es un nuevo centro
+      this.centerService
+        .createCenter(this.centro)
+        .then((resp) => {
+          this.toastService
+            .mostrarMensaje('Centro creado correctamente', true)
+            .then(() => {
+              this.router.navigateByUrl('/admin/centros-buceo');
+            });
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje('Error al crear el centro', false);
+        });
     }
   }
 }

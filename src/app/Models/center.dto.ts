@@ -10,21 +10,13 @@ export class CenterDTO {
   position: LocationDTO;
   accesible: boolean;
 
-  constructor(
-    nombre: string,
-    direccion: string,
-    imagen: string,
-    email: string,
-    telefono: string,
-    position: LocationDTO,
-    accesible: boolean
-  ) {
-    this.nombre = nombre;
-    this.direccion = direccion;
-    this.imagen = imagen;
-    this.email = email;
-    this.telefono = telefono;
-    this.position = position;
-    this.accesible = accesible;
+  constructor() {
+    this.nombre = '';
+    this.direccion = '';
+    this.imagen = '';
+    this.email = '';
+    this.telefono = '';
+    this.position = new LocationDTO();
+    this.accesible = false;
   }
 }

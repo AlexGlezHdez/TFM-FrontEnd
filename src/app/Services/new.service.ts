@@ -10,7 +10,7 @@ import { Constantes } from '../Components/Shared/constants/constants.component';
 interface NoticiaAPI {
   id?: number;
   tituloEntrada: string;
-  imagen: string;
+  imagen?: string;
   fechaPublicacion: string;
   contenido: string;
   idAutor: number;

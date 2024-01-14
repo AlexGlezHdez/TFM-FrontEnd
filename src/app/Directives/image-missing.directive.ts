@@ -9,6 +9,6 @@ export class ImageMissingDirective {
   @HostListener('error', ['$event'])
   handleImageError(event: Event): void {
     const image = event.target as HTMLInputElement;
-    image.src = this.imageMissing ?? '/assets/images/news/not_found.webp'; // e.g. ./assets/images/default-image.png
+    image.src = this.imageMissing ?? '/assets/images/not_found.png'; // e.g. ./assets/images/default-image.png
   }
 }

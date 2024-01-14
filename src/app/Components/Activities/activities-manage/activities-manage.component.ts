@@ -47,26 +47,31 @@ export class ActivitiesManageComponent implements OnInit {
       });
   }
 
-  verCurso(idActividad: number) {
+  verActividad(idActividad: number) {
     this.router.navigateByUrl('/actividad/' + idActividad);
   }
 
-  actualizarCurso(idActividad: number): void {
+  actualizarActividad = (idActividad: number): void => {
     this.router.navigateByUrl('/admin/actividad/' + idActividad);
-  }
+  };
 
-  async borrarCurso(idActividad: number): Promise<void> {
-    this.activityService
-      .deleteActivity(idActividad)
-      .then((resp) => {
-        this.cargarActividades();
-        this.toastService.mostrarMensaje(
-          'Actividad borrada correctamente',
-          true
-        );
-      })
-      .catch((resp) => {
-        this.toastService.mostrarMensaje('Error al borrar la actividad', false);
-      });
-  }
+  borrarActividad = async (idActividad: number): Promise<void> => {
+    if (confirm('¿Seguro que deseas borrar el curso?')) {
+      this.activityService
+        .deleteActivity(idActividad)
+        .then((resp) => {
+          this.cargarActividades();
+          this.toastService.mostrarMensaje(
+            'Actividad borrada correctamente',
+            true
+          );
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al borrar la actividad',
+            false
+          );
+        });
+    }
+  };
 }

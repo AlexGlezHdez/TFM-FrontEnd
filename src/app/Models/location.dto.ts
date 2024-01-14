@@ -2,8 +2,8 @@ export class LocationDTO {
   lat: number;
   lng: number;
 
-  constructor(latitud: number, longitud: number) {
-    this.lat = latitud;
-    this.lng = longitud;
+  constructor() {
+    this.lat = 0;
+    this.lng = 0;
   }
 }

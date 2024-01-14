@@ -55,7 +55,6 @@ export class MemberInfoComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     if (this.idMiembro) {
       await this.memberService.getMember(this.idMiembro).then((miembro) => {
-        console.log(miembro);
         this.miembro = miembro.data;
         this.nombre.setValue(this.miembro.nombre);
         this.direccion.setValue(this.miembro.direccion);

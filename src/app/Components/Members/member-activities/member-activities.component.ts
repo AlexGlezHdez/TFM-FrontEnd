@@ -22,6 +22,7 @@ export class MemberActivitiesComponent {
   ) {
     this.cargarActividadesMiembro();
     this.idMiembro = this.localStorageService.get('user_id') || '';
+    this.actividades = [];
   }
 
   private async cargarActividadesMiembro(): Promise<void> {
@@ -42,21 +43,23 @@ export class MemberActivitiesComponent {
 
   // Borra al usuario activo de una actividad dada
   borrarDeActividad = async (idActividad: number): Promise<void> => {
-    await this.scheduledActivityService
-      .dismissFromActivity(idActividad)
-      .then(() => {
-        this.cargarActividadesMiembro();
-        this.toastService.mostrarMensaje(
-          'Borrado de la actividad correctamente',
-          true
-        );
-      })
-      .catch((resp) => {
-        this.toastService.mostrarMensaje(
-          'Error al borrarse de la actividad',
-          false
-        );
-      });
+    if (confirm('¿Seguro que deseas darte de baja de la actividad?')) {
+      await this.scheduledActivityService
+        .dismissFromActivity(idActividad)
+        .then(() => {
+          this.cargarActividadesMiembro();
+          this.toastService.mostrarMensaje(
+            'Borrado de la actividad correctamente',
+            true
+          );
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al borrarse de la actividad',
+            false
+          );
+        });
+    }
   };
 
   previewActividad = (idActividad: number): void => {

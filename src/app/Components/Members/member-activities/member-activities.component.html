@@ -6,8 +6,11 @@
       Aquí podrás encontrar el listado de las actividades en las que te has
       inscrito y borrarte de aquellas en las que ya no quieras participar.
     </p>
+    <div *ngIf="actividades.length == 0" class="aviso">
+      No hay actividades en tu historial.
+    </div>
 
-    <div class="listado">
+    <div class="listado" *ngIf="actividades.length > 0">
       <div *ngFor="let actividadAgendada of actividades" class="elemento">
         <app-list-element
           [id]="actividadAgendada.id"

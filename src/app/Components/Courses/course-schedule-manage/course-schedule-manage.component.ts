@@ -48,19 +48,21 @@ export class CourseScheduleManageComponent implements OnInit {
     this.router.navigateByUrl('/curso/' + idCurso);
   }
 
-  actualizarCurso(idCurso: number): void {
+  actualizarCurso = (idCurso: number): void => {
     this.router.navigateByUrl('/admin/calendario-curso/' + idCurso);
-  }
+  };
 
-  async borrarCurso(idCurso: number): Promise<void> {
-    this.scheduledCourseService
-      .deleteCourse(idCurso)
-      .then(() => {
-        this.cargarCursos();
-        this.toastService.mostrarMensaje('curso borrado correctamente', true);
-      })
-      .catch((resp) => {
-        this.toastService.mostrarMensaje('Error al borrar el curso', false);
-      });
-  }
+  borrarCurso = async (idCurso: number): Promise<void> => {
+    if (confirm('¿Seguro que deseas borrar el curso del calendario?')) {
+      this.scheduledCourseService
+        .deleteCourse(idCurso)
+        .then(() => {
+          this.cargarCursos();
+          this.toastService.mostrarMensaje('Curso borrado correctamente', true);
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje('Error al borrar el curso', false);
+        });
+    }
+  };
 }

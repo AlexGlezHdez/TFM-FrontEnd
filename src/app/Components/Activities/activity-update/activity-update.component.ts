@@ -79,13 +79,14 @@ export class ActivityUpdateComponent implements OnInit {
   enviarDatos(): void {
     this.actividad.titulo = this.titulo.value;
     this.actividad.descripcion = this.descripcion.value;
-    this.actividad.imagen = this.imagen.value.name;
+    if (this.imagen.value) {
+      this.actividad.imagen = this.imagen.value.name;
+    }
 
     // Gestionamos si se trata de una actualizacion o de una actividad nueva segun exista idActividad
     if (this.idActividad && !isNaN(Number(this.idActividad))) {
       // Es una actualización
       this.actividad.id = Number(this.idActividad.valueOf());
-      console.log(this.actividad);
       this.activityService
         .updateActivity(this.actividad, this.ficheroImagen)
         .then((resp) => {

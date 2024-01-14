@@ -49,14 +49,19 @@ export class MembersManageComponent implements OnInit {
   };
 
   borrarMiembro = async (idMiembro: number): Promise<void> => {
-    await this.memberService
-      .deleteMember(idMiembro)
-      .then(() => {
-        this.cargarMiembros();
-        this.toastService.mostrarMensaje('Miembro borrado correctamente', true);
-      })
-      .catch((resp) => {
-        this.toastService.mostrarMensaje('Error al borrar el miembro', false);
-      });
+    if (confirm('¿Seguro que deseas borrar este miembro?')) {
+      await this.memberService
+        .deleteMember(idMiembro)
+        .then(() => {
+          this.cargarMiembros();
+          this.toastService.mostrarMensaje(
+            'Miembro borrado correctamente',
+            true
+          );
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje('Error al borrar el miembro', false);
+        });
+    }
   };
 }

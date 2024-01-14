@@ -115,6 +115,8 @@ export class ScheduledActivityService {
       .then((resp) => {
         return resp;
       })
-      .catch((resp) => console.log(resp));
+      .catch((resp) => {
+        return resp;
+      });
   }
 }

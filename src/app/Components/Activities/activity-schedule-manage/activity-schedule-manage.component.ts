@@ -47,26 +47,31 @@ export class ActivityScheduleManageComponent implements OnInit {
       });
   }
 
-  verCurso(idActividad: number) {
+  verActividad(idActividad: number) {
     this.router.navigateByUrl('/actividad/' + idActividad);
   }
 
-  actualizarActividad(idActividad: number): void {
+  actualizarActividad = (idActividad: number): void => {
     this.router.navigateByUrl('/admin/calendario-actividad/' + idActividad);
-  }
+  };
 
-  async borrarActividad(idActividad: number): Promise<void> {
-    this.scheduledActivityService
-      .deleteActivity(idActividad)
-      .then(() => {
-        this.cargarActividades();
-        this.toastService.mostrarMensaje(
-          'Acividad borrada correctamente',
-          true
-        );
-      })
-      .catch((resp) => {
-        this.toastService.mostrarMensaje('Error al borrar la actividad', false);
-      });
-  }
+  borrarActividad = async (idActividad: number): Promise<void> => {
+    if (confirm('¿Seguro que deseas borrar esta actividad?')) {
+      this.scheduledActivityService
+        .deleteActivity(idActividad)
+        .then(() => {
+          this.cargarActividades();
+          this.toastService.mostrarMensaje(
+            'Acividad borrada correctamente',
+            true
+          );
+        })
+        .catch((resp) => {
+          this.toastService.mostrarMensaje(
+            'Error al borrar la actividad',
+            false
+          );
+        });
+    }
+  };
 }
